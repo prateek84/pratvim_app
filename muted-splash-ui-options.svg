@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1000" viewBox="0 0 1500 1000">
+  <defs>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="24" flood-color="#233044" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .sheet-title { font: 800 34px Inter, Arial, sans-serif; fill: #222936; }
+      .sheet-copy { font: 600 16px Inter, Arial, sans-serif; fill: #697082; }
+      .option-label { font: 800 18px Inter, Arial, sans-serif; fill: #242b39; }
+      .option-note { font: 650 12px Inter, Arial, sans-serif; fill: #737984; letter-spacing: .02em; }
+      .brand { font: 900 28px Inter, Arial, sans-serif; letter-spacing: -.02em; }
+      .body { font: 700 12px Inter, Arial, sans-serif; line-height: 1.4; }
+      .mini { font: 800 9px Inter, Arial, sans-serif; letter-spacing: .08em; }
+      .btn { font: 900 13px Inter, Arial, sans-serif; }
+      .outline { fill: none; stroke: rgba(20, 30, 45, .08); stroke-width: 1; }
+    </style>
+  </defs>
+
+  <rect width="1500" height="1000" fill="#f5f3ee"/>
+  <text x="70" y="70" class="sheet-title">Safe SearchAI muted splash screen UI options</text>
+  <text x="70" y="102" class="sheet-copy">All options avoid bright colors and keep a kid-friendly, professional, calm visual direction.</text>
+
+  <!-- Option 1 -->
+  <g transform="translate(70,150)">
+    <text x="0" y="-20" class="option-label">Option 1: Misty Sage</text>
+    <text x="0" y="2" class="option-note">Best balanced: safe, soft, parent-trustworthy</text>
+    <rect x="0" y="25" width="390" height="745" rx="46" fill="#f3f0e8" filter="url(#softShadow)"/>
+    <rect x="22" y="48" width="346" height="699" rx="36" fill="#eaf1ec"/>
+    <circle cx="88" cy="142" r="54" fill="#d9e7dd"/>
+    <circle cx="316" cy="350" r="76" fill="#d4e3dd"/>
+    <circle cx="55" cy="635" r="50" fill="#f5eadb"/>
+    <rect x="139" y="92" width="112" height="112" rx="26" fill="#ffffff" opacity=".9"/>
+    <path d="M172 151c16-25 50-25 66 0-16 25-50 25-66 0z" fill="#789185"/>
+    <circle cx="205" cy="151" r="13" fill="#f8f5ef"/>
+    <path d="M205 125v-14M184 136l-10-10M226 136l10-10" stroke="#789185" stroke-width="7" stroke-linecap="round"/>
+    <text x="195" y="260" text-anchor="middle" class="brand" fill="#29362f">Safe SearchAI</text>
+    <text x="195" y="292" text-anchor="middle" class="body" fill="#59675f">Safe voice and text chat for kids</text>
+    <text x="195" y="312" text-anchor="middle" class="body" fill="#59675f">to ask, learn, and explore with confidence.</text>
+    <text x="70" y="485" class="mini" fill="#6f7e75">FOR KIDS</text>
+    <rect x="70" y="505" width="250" height="58" rx="29" fill="#7f978a"/>
+    <text x="195" y="541" text-anchor="middle" class="btn" fill="#ffffff">Login</text>
+    <text x="70" y="598" class="mini" fill="#6f7e75">FOR PARENTS</text>
+    <rect x="70" y="618" width="150" height="48" rx="24" fill="#fffaf2" stroke="#d8d1c1"/>
+    <text x="145" y="648" text-anchor="middle" class="btn" fill="#59675f">Register</text>
+    <rect x="233" y="618" width="87" height="48" rx="24" fill="#fffaf2" stroke="#d8d1c1"/>
+    <text x="276" y="648" text-anchor="middle" class="btn" fill="#59675f">Login</text>
+  </g>
+
+  <!-- Option 2 -->
+  <g transform="translate(555,150)">
+    <text x="0" y="-20" class="option-label">Option 2: Cloud Lavender</text>
+    <text x="0" y="2" class="option-note">Soft, modern, child-friendly without strong saturation</text>
+    <rect x="0" y="25" width="390" height="745" rx="46" fill="#f1eef7" filter="url(#softShadow)"/>
+    <rect x="22" y="48" width="346" height="699" rx="36" fill="#f7f4fb"/>
+    <circle cx="88" cy="148" r="56" fill="#e4def0"/>
+    <circle cx="316" cy="352" r="76" fill="#e9e4f2"/>
+    <circle cx="62" cy="634" r="48" fill="#edf2ef"/>
+    <rect x="139" y="92" width="112" height="112" rx="26" fill="#ffffff" opacity=".92"/>
+    <path d="M170 146c15-23 50-23 65 0v30h-65z" fill="#8a82a9"/>
+    <rect x="184" y="124" width="37" height="46" rx="18" fill="#f9f6ff"/>
+    <circle cx="222" cy="168" r="14" fill="#d7d0e9"/>
+    <path d="M195 141h25" stroke="#8a82a9" stroke-width="6" stroke-linecap="round"/>
+    <text x="195" y="260" text-anchor="middle" class="brand" fill="#292639">Safe SearchAI</text>
+    <text x="195" y="292" text-anchor="middle" class="body" fill="#625d73">Safe voice and text chat for kids</text>
+    <text x="195" y="312" text-anchor="middle" class="body" fill="#625d73">to ask, learn, and explore with confidence.</text>
+    <text x="70" y="485" class="mini" fill="#7a748e">FOR KIDS</text>
+    <rect x="70" y="505" width="250" height="58" rx="29" fill="#8a82a9"/>
+    <text x="195" y="541" text-anchor="middle" class="btn" fill="#ffffff">Login</text>
+    <text x="70" y="598" class="mini" fill="#7a748e">FOR PARENTS</text>
+    <rect x="70" y="618" width="150" height="48" rx="24" fill="#ffffff" stroke="#ddd7ea"/>
+    <text x="145" y="648" text-anchor="middle" class="btn" fill="#625d73">Register</text>
+    <rect x="233" y="618" width="87" height="48" rx="24" fill="#ffffff" stroke="#ddd7ea"/>
+    <text x="276" y="648" text-anchor="middle" class="btn" fill="#625d73">Login</text>
+  </g>
+
+  <!-- Option 3 -->
+  <g transform="translate(1040,150)">
+    <text x="0" y="-20" class="option-label">Option 3: Warm Storybook</text>
+    <text x="0" y="2" class="option-note">Cream paper feeling, gentle and readable</text>
+    <rect x="0" y="25" width="390" height="745" rx="46" fill="#eee5d7" filter="url(#softShadow)"/>
+    <rect x="22" y="48" width="346" height="699" rx="36" fill="#fbf4e8"/>
+    <circle cx="88" cy="145" r="58" fill="#eadcc6"/>
+    <circle cx="318" cy="352" r="76" fill="#e4e8dc"/>
+    <circle cx="58" cy="634" r="48" fill="#e9dfd7"/>
+    <rect x="139" y="92" width="112" height="112" rx="26" fill="#ffffff" opacity=".9"/>
+    <path d="M160 164h70c7 0 13-6 13-13s-6-13-13-13h-10c-5-13-18-22-33-22-17 0-31 12-34 28-9 2-16 10-16 20z" fill="#9a8a72"/>
+    <circle cx="193" cy="153" r="9" fill="#fbf4e8"/>
+    <path d="M188 176c10 8 24 8 34 0" stroke="#fbf4e8" stroke-width="5" stroke-linecap="round"/>
+    <text x="195" y="260" text-anchor="middle" class="brand" fill="#312b24">Safe SearchAI</text>
+    <text x="195" y="292" text-anchor="middle" class="body" fill="#6b6256">Safe voice and text chat for kids</text>
+    <text x="195" y="312" text-anchor="middle" class="body" fill="#6b6256">to ask, learn, and explore with confidence.</text>
+    <text x="70" y="485" class="mini" fill="#817568">FOR KIDS</text>
+    <rect x="70" y="505" width="250" height="58" rx="29" fill="#9a8a72"/>
+    <text x="195" y="541" text-anchor="middle" class="btn" fill="#ffffff">Login</text>
+    <text x="70" y="598" class="mini" fill="#817568">FOR PARENTS</text>
+    <rect x="70" y="618" width="150" height="48" rx="24" fill="#fffaf3" stroke="#ded0bd"/>
+    <text x="145" y="648" text-anchor="middle" class="btn" fill="#6b6256">Register</text>
+    <rect x="233" y="618" width="87" height="48" rx="24" fill="#fffaf3" stroke="#ded0bd"/>
+    <text x="276" y="648" text-anchor="middle" class="btn" fill="#6b6256">Login</text>
+  </g>
+
+  <!-- Option 4 -->
+  <g transform="translate(70,570)">
+    <text x="0" y="-20" class="option-label">Option 4: Quiet Ocean</text>
+    <text x="0" y="2" class="option-note">Professional, calm, slightly premium</text>
+    <rect x="0" y="25" width="390" height="365" rx="46" fill="#e6ecee" filter="url(#softShadow)"/>
+    <rect x="22" y="48" width="346" height="319" rx="36" fill="#edf4f5"/>
+    <circle cx="88" cy="126" r="45" fill="#d2e1e3"/>
+    <circle cx="318" cy="250" r="58" fill="#d9e8e5"/>
+    <rect x="146" y="82" width="98" height="98" rx="24" fill="#ffffff" opacity=".92"/>
+    <path d="M166 137c19-22 39-22 58 0-19 23-39 23-58 0z" fill="#5f7f86"/>
+    <circle cx="195" cy="137" r="11" fill="#edf4f5"/>
+    <text x="195" y="218" text-anchor="middle" class="brand" fill="#23373b">Safe SearchAI</text>
+    <text x="195" y="248" text-anchor="middle" class="body" fill="#607175">Safe voice and text chat for kids</text>
+    <rect x="70" y="286" width="250" height="54" rx="27" fill="#5f7f86"/>
+    <text x="195" y="319" text-anchor="middle" class="btn" fill="#ffffff">Login</text>
+  </g>
+
+  <!-- Option 5 -->
+  <g transform="translate(555,570)">
+    <text x="0" y="-20" class="option-label">Option 5: Pebble Mint</text>
+    <text x="0" y="2" class="option-note">Gentle, clean, and safety-focused</text>
+    <rect x="0" y="25" width="390" height="365" rx="46" fill="#e9f0ea" filter="url(#softShadow)"/>
+    <rect x="22" y="48" width="346" height="319" rx="36" fill="#f4f7f1"/>
+    <circle cx="92" cy="130" r="48" fill="#dce8dc"/>
+    <circle cx="316" cy="250" r="58" fill="#e7ead7"/>
+    <rect x="146" y="82" width="98" height="98" rx="24" fill="#ffffff" opacity=".92"/>
+    <path d="M165 139l21 21 41-50" fill="none" stroke="#718c75" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="195" y="218" text-anchor="middle" class="brand" fill="#263528">Safe SearchAI</text>
+    <text x="195" y="248" text-anchor="middle" class="body" fill="#657166">Safe voice and text chat for kids</text>
+    <rect x="70" y="286" width="250" height="54" rx="27" fill="#718c75"/>
+    <text x="195" y="319" text-anchor="middle" class="btn" fill="#ffffff">Login</text>
+  </g>
+
+  <!-- Option 6 -->
+  <g transform="translate(1040,570)">
+    <text x="0" y="-20" class="option-label">Option 6: Soft Slate Sky</text>
+    <text x="0" y="2" class="option-note">Most muted: serious, safe, still kid-friendly</text>
+    <rect x="0" y="25" width="390" height="365" rx="46" fill="#e7ecf2" filter="url(#softShadow)"/>
+    <rect x="22" y="48" width="346" height="319" rx="36" fill="#f1f5f7"/>
+    <circle cx="92" cy="130" r="48" fill="#dae4ed"/>
+    <circle cx="316" cy="250" r="58" fill="#e6e1ec"/>
+    <rect x="146" y="82" width="98" height="98" rx="24" fill="#ffffff" opacity=".92"/>
+    <rect x="166" y="112" width="58" height="44" rx="17" fill="#697d91"/>
+    <path d="M184 112v-8c0-12 22-12 22 0v8" stroke="#697d91" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="195" cy="134" r="7" fill="#f1f5f7"/>
+    <text x="195" y="218" text-anchor="middle" class="brand" fill="#253140">Safe SearchAI</text>
+    <text x="195" y="248" text-anchor="middle" class="body" fill="#687481">Safe voice and text chat for kids</text>
+    <rect x="70" y="286" width="250" height="54" rx="27" fill="#697d91"/>
+    <text x="195" y="319" text-anchor="middle" class="btn" fill="#ffffff">Login</text>
+  </g>
+</svg>

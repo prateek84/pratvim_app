@@ -1,0 +1,9 @@
+{
+  "appId": "ai.pratvim.app",
+  "appName": "Pratvim",
+  "webDir": "www",
+  "backgroundColor": "#FBFAF5",
+  "android": {
+    "backgroundColor": "#FBFAF5"
+  }
+}

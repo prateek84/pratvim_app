@@ -1,0 +1,19 @@
+{
+  "name": "pratvim-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pratvim protected learning app",
+  "scripts": {
+    "build": "node scripts/build-native.cjs",
+    "android:sync": "pnpm run build && cap sync android",
+    "android:open": "pnpm run android:sync && cap open android",
+    "android:run": "pnpm run android:sync && cap run android"
+  },
+  "dependencies": {
+    "@capacitor/android": "latest",
+    "@capacitor/core": "latest"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "latest"
+  }
+}

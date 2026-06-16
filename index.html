@@ -1,0 +1,1112 @@
+<!doctype html>
+<html lang="en" data-theme="curio-sand-light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pratvim App Prototype</title>
+    <link rel="icon" href="pratvim-icon-exact.svg" type="image/svg+xml" />
+    <script>
+      if (window.Capacitor?.isNativePlatform?.() || location.protocol === "capacitor:") {
+        document.documentElement.classList.add("native-app");
+      }
+    </script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="prototype-shell">
+      <aside class="spec-panel">
+        <p class="eyebrow">App layout</p>
+        <h1>Pratvim</h1>
+        <p class="spec-copy">A protected AI learning space where children can ask, understand, and explore confidently.</p>
+
+        <div class="size-card">
+          <span>Current app size</span>
+          <strong id="currentSize">393 x 852</strong>
+          <p>Default: iPhone 16 logical app viewport.</p>
+        </div>
+
+        <div class="size-buttons" aria-label="App level sizes">
+          <button class="size-btn is-active" data-width="393" data-height="852" type="button">iPhone 16</button>
+          <button class="size-btn" data-width="402" data-height="874" type="button">16 Pro</button>
+          <button class="size-btn" data-width="440" data-height="956" type="button">16 Pro Max</button>
+        </div>
+
+        <nav class="screen-nav" aria-label="Prototype screens">
+          <button class="nav-btn is-active" data-screen="splash" type="button">Splash</button>
+          <button class="nav-btn" data-screen="login" type="button">Login</button>
+          <button class="nav-btn" data-screen="parent-register" type="button">Parent Register</button>
+          <button class="nav-btn" data-screen="parent-email-confirm" type="button">Email Confirm</button>
+          <button class="nav-btn" data-screen="parent-onboarding" type="button">Parent Onboarding</button>
+          <button class="nav-btn" data-screen="kid-register" type="button">Kid Setup</button>
+          <button class="nav-btn" data-screen="onboarding" type="button">Onboarding</button>
+          <button class="nav-btn" data-screen="home" type="button">Home</button>
+          <button class="nav-btn" data-screen="chat" type="button">Chat</button>
+          <button class="nav-btn" data-screen="parent-dashboard" type="button">Parent</button>
+          <button class="nav-btn" data-screen="parent-analytics" type="button">Dashboard</button>
+          <button class="nav-btn" data-screen="timer-demo" type="button">Timer Animations</button>
+          <button class="nav-btn" data-screen="parent-alert" type="button">Timer Alert</button>
+          <button class="nav-btn" data-demo="login-parent" type="button">Parent Login State</button>
+          <button class="nav-btn" data-demo="child-onboarding-2" type="button">Kid Onboard 2</button>
+          <button class="nav-btn" data-demo="child-onboarding-3" type="button">Kid Onboard 3</button>
+          <button class="nav-btn" data-demo="parent-onboarding-2" type="button">Parent Onboard 2</button>
+          <button class="nav-btn" data-demo="parent-onboarding-3" type="button">Parent Onboard 3</button>
+          <button class="nav-btn" data-demo="new-chat" type="button">New Chat Empty</button>
+          <button class="nav-btn" data-demo="paused-chat" type="button">Paused Chat</button>
+          <button class="nav-btn" data-demo="unsafe-chat" type="button">Unsafe Block</button>
+          <button class="nav-btn" data-demo="image" type="button">Image Upload</button>
+          <button class="nav-btn" data-demo="image-loading" type="button">Image Fetching</button>
+          <button class="nav-btn" data-demo="image-result" type="button">Image Result</button>
+          <button class="nav-btn" data-demo="avatar" type="button">Avatar Upload</button>
+          <button class="nav-btn" data-demo="kid-edit" type="button">Kid Edit</button>
+          <button class="nav-btn" data-demo="kid-max" type="button">Kid Max</button>
+          <button class="nav-btn" data-demo="parent-empty" type="button">Parent Empty</button>
+          <button class="nav-btn" data-demo="dashboard-empty" type="button">Dashboard Empty</button>
+          <button class="nav-btn" data-demo="timer-complete" type="button">Timer Complete</button>
+          <button class="nav-btn" data-demo="alert-reviewed" type="button">Alert Reviewed</button>
+          <button class="nav-btn" data-demo="closed-chat" type="button">Closed Chat</button>
+          <a class="nav-btn guide-link" href="style-guide.html">UI Style Guide</a>
+        </nav>
+      </aside>
+
+      <section class="phone-wrap" aria-label="Interactive mobile app prototype">
+        <div class="phone-device" id="phoneDevice">
+          <div class="dynamic-island"></div>
+          <button class="floating-back-button is-hidden" id="floatingBackButton" type="button" aria-label="Go to previous screen" title="Back">
+            <span aria-hidden="true"></span>
+          </button>
+
+          <section class="app-screen screen-splash is-active" data-view="splash">
+            <div class="ambient one"></div>
+            <div class="ambient two"></div>
+            <div class="splash-center">
+              <div class="splash-brand">
+                <div class="splash-brand-row">
+                  <img class="splash-brand-icon" src="pratvim-icon-exact.svg" alt="" />
+                  <h1>Pratvim</h1>
+                </div>
+                <p class="splash-tagline">Protected Curiosity, Trusted AI</p>
+              </div>
+              <div class="splash-hero-stage">
+                <div class="splash-reference-scene" role="img" aria-label="A child exploring protected AI questions">
+                  <div class="splash-question-card sky" aria-hidden="true">
+                    <span class="question-icon">💡</span>
+                    <strong>Why is the sky blue?</strong>
+                  </div>
+                  <div class="splash-question-card orbit" aria-hidden="true">
+                    <span class="question-icon">🪐</span>
+                    <strong>How do planets orbit?</strong>
+                  </div>
+                  <div class="splash-question-card leaf" aria-hidden="true">
+                    <span class="question-icon">🌿</span>
+                    <strong>Why do plants need sunlight?</strong>
+                  </div>
+                  <div class="splash-question-card puzzle" aria-hidden="true">
+                    <span class="question-icon">🧩</span>
+                    <strong>How do puzzles fit together?</strong>
+                  </div>
+                  <div class="splash-question-card kind" aria-hidden="true">
+                    <span class="question-icon">💚</span>
+                    <strong>Can kind words make someone's day?</strong>
+                  </div>
+                  <div class="splash-scene-dots" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                  <div class="splash-scene-trail" aria-hidden="true"></div>
+                  <div class="splash-solo-kid" aria-hidden="true">
+                    <span class="kid-shadow"></span>
+                    <span class="kid-head"><i></i></span>
+                    <span class="kid-hair"></span>
+                    <span class="kid-body"></span>
+                    <span class="kid-arm left"></span>
+                    <span class="kid-arm right"></span>
+                    <span class="kid-leg left"></span>
+                    <span class="kid-leg right"></span>
+                    <span class="kid-shoe left"></span>
+                    <span class="kid-shoe right"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="splash-login-actions">
+              <div class="splash-story-panel">
+                <h2>A safe space to explore.</h2>
+                <p>Ask, learn and grow with AI you can trust.</p>
+                <div class="splash-page-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
+                <button class="primary-btn splash-get-started" data-screen="login" type="button">
+                  <span>Get Started</span>
+                  <i aria-hidden="true"></i>
+                </button>
+                <small>Built for curious young minds, backed by trust.</small>
+              </div>
+            </div>
+          </section>
+
+          <section class="app-screen screen-onboarding" data-view="onboarding">
+            <header class="minimal-top branded-top">
+              <button class="ghost-icon" data-screen="login" type="button" aria-label="Back">‹</button>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="text-link" data-screen="home" type="button">Skip</button>
+            </header>
+            <div class="onboarding-card kid-onboarding-card">
+              <div class="kid-onboarding-visual ask" id="kidOnboardingVisual" aria-label="Kid onboarding animation">
+                <div class="kid-ask-animation" aria-hidden="true">
+                  <span class="kid-avatar-dot"></span>
+                  <span class="ask-card text"><b>Type</b><i>Why is the moon bright?</i></span>
+                  <span class="ask-card voice"><b>Read</b><i>Protected answer</i></span>
+                  <span class="ask-card image"><b>Picture</b><i>Upload and ask</i></span>
+                  <span class="ask-spark one"></span>
+                  <span class="ask-spark two"></span>
+                </div>
+                <div class="kid-learn-animation" aria-hidden="true">
+                  <span class="learn-book"></span>
+                  <span class="learn-page left"></span>
+                  <span class="learn-page right"></span>
+                  <span class="learn-light"></span>
+                  <span class="learn-line one">Clear answer</span>
+                  <span class="learn-line two">Easy example</span>
+                  <span class="learn-line three">Try next idea</span>
+                </div>
+                <div class="kid-safe-animation" aria-hidden="true">
+                  <span class="safe-path"></span>
+                  <span class="safe-shield-kid"></span>
+                  <span class="safe-bubble ok">Space &amp; stars</span>
+                  <span class="safe-bubble parent">Animals &amp; nature</span>
+                  <span class="safe-star one"></span>
+                  <span class="safe-star two"></span>
+                </div>
+              </div>
+              <p class="step-label" id="onboardingStep">1 of 3</p>
+              <h2 id="onboardingTitle">Ask, explore, and learn</h2>
+              <p id="onboardingText">Use text or pictures to explore ideas with a protected AI learning companion.</p>
+              <div class="dots" id="onboardingDots" aria-hidden="true">
+                <span class="is-active"></span><span></span><span></span>
+              </div>
+            </div>
+            <button class="primary-btn bottom-action" id="onboardingNext" type="button">Next</button>
+          </section>
+
+          <section class="app-screen screen-login" data-view="login">
+            <header class="minimal-top login-topbar">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <span class="header-balance" aria-hidden="true"></span>
+            </header>
+            <div class="login-mode-tabs icon-mode-tabs login-page-mode-tabs" aria-label="Login type">
+              <button class="is-active" data-login-mode="child" type="button" aria-label="Kid login"><span class="role-icon kid-role-icon" aria-hidden="true">🧒</span><span>Kid</span></button>
+              <button data-login-mode="parent" type="button" aria-label="Parent login"><span class="role-icon parent-role-icon" aria-hidden="true"></span><span>Parent</span></button>
+            </div>
+            <div class="login-panel">
+              <div class="login-intro">
+                <h2 id="loginTitle">Who is learning today?</h2>
+                <p id="loginSubtitle">Choose your profile to enter your private PIN.</p>
+              </div>
+              <div class="kid-login-picker" id="kidLoginPicker" aria-label="Choose child profile"></div>
+              <div class="kid-pin-panel is-hidden" id="kidPinPanel">
+                <div class="selected-kid-login">
+                  <img id="selectedKidLoginAvatar" src="kid-ravin-avatar.png" alt="" />
+                  <div><span>Selected profile</span><strong id="loginProfileName">Ravin</strong></div>
+                  <button id="changeKidLoginBtn" type="button">Change</button>
+                </div>
+                <label class="input-label" for="pinInput">Private PIN</label>
+                <input id="pinInput" maxlength="4" inputmode="numeric" value="" placeholder="Enter 4 digit PIN" />
+              </div>
+              <div class="parent-login-options is-hidden" id="parentLoginOptions">
+                <div class="social-login-divider"><span>Or login through</span></div>
+                <div class="social-login-row parent-social-login" aria-label="Social login">
+                  <button class="social-provider-btn google" data-screen="parent-dashboard" type="button" aria-label="Continue with Google"><span class="provider-mark">G</span><strong>Google</strong></button>
+                  <button class="social-provider-btn facebook" data-screen="parent-dashboard" type="button" aria-label="Continue with Facebook"><span class="provider-mark">f</span><strong>Facebook</strong></button>
+                </div>
+                <div class="terms-check">
+                  <input id="parentLoginTerms" type="checkbox" checked />
+                  <span>I agree to the <button class="inline-legal-link" data-menu-screen="terms" type="button">Terms &amp; Conditions</button>.</span>
+                </div>
+              </div>
+              <button class="primary-btn is-hidden" id="loginContinueBtn" type="button">Start Learning</button>
+            </div>
+          </section>
+
+          <section class="app-screen screen-parent-register" data-view="parent-register">
+            <header class="minimal-top branded-top">
+              <button class="ghost-icon" data-screen="splash" type="button" aria-label="Back">â€¹</button>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <span class="header-balance" aria-hidden="true"></span>
+            </header>
+            <form class="register-panel" id="parentRegisterForm">
+              <div class="login-intro parent-register-intro">
+                <h2>Create parent account</h2>
+                <p>Set up your protected family space and manage up to four kid profiles.</p>
+              </div>
+
+              <div class="form-stack">
+                <div class="split-fields">
+                  <label>
+                    <span>First name</span>
+                    <input id="parentNameInput" autocomplete="given-name" value="Parent" placeholder="First name" />
+                  </label>
+                  <label>
+                    <span>Last name</span>
+                    <input id="parentLastNameInput" autocomplete="family-name" value="" placeholder="Last name" />
+                  </label>
+                </div>
+                <label>
+                  <span>Email</span>
+                  <input id="parentEmailInput" autocomplete="email" type="email" value="parent@example.com" placeholder="parent@example.com" />
+                </label>
+                <label>
+                  <span>Mobile number</span>
+                  <input id="parentMobileInput" autocomplete="tel" inputmode="tel" value="+1 555 010 2026" placeholder="Enter mobile number" />
+                </label>
+                <label>
+                  <span>Password</span>
+                  <input id="parentPasswordInput" autocomplete="new-password" type="password" value="safe1234" placeholder="Create password" />
+                </label>
+              </div>
+
+              <div class="social-login-divider"><span>Or register through</span></div>
+              <div class="social-login-row parent-social-login" aria-label="Social registration">
+                <button class="social-provider-btn google" type="button" aria-label="Register with Google"><span class="provider-mark">G</span><strong>Google</strong></button>
+                <button class="social-provider-btn facebook" type="button" aria-label="Register with Facebook"><span class="provider-mark">f</span><strong>Facebook</strong></button>
+              </div>
+              <div class="terms-check parent-register-terms">
+                <input id="parentTermsInput" type="checkbox" checked />
+                <span>I agree to the <button class="inline-legal-link" data-menu-screen="terms" type="button">Terms &amp; Conditions</button> and <button class="inline-legal-link" data-menu-screen="privacy" type="button">Privacy Policy</button>.</span>
+              </div>
+              <button class="primary-btn" type="submit">Create Parent Account</button>
+              <button class="text-link register-alt-link" data-login-mode="parent" data-parent-action="login" type="button">Already registered? Login</button>
+            </form>
+          </section>
+
+          <section class="app-screen screen-parent-email-confirm" data-view="parent-email-confirm">
+            <header class="minimal-top branded-top">
+              <button class="ghost-icon" data-screen="parent-register" type="button" aria-label="Back">â€¹</button>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <span class="header-balance" aria-hidden="true"></span>
+            </header>
+            <div class="register-panel email-confirm-panel">
+              <p class="step-label">Email confirmation</p>
+              <h2>Confirm your email</h2>
+              <p>We sent a confirmation code to <strong id="confirmEmailText">parent@example.com</strong>. Enter it to complete parent registration.</p>
+
+              <label class="form-mini-label confirmation-code-label">
+                <span>Confirmation code</span>
+                <input id="emailConfirmCode" inputmode="numeric" maxlength="6" value="246810" placeholder="Enter 6 digit code" />
+              </label>
+
+              <button class="primary-btn" id="confirmEmailBtn" type="button">Confirm Email</button>
+              <button class="text-link" id="resendEmailBtn" type="button">Resend code</button>
+            </div>
+          </section>
+
+          <section class="app-screen screen-parent-onboarding" data-view="parent-onboarding">
+            <header class="minimal-top branded-top">
+              <button class="ghost-icon" data-screen="parent-dashboard" type="button" aria-label="Back">â€¹</button>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="text-link" data-screen="parent-dashboard" type="button">Skip</button>
+            </header>
+            <div class="onboarding-card parent-onboarding-card">
+              <div class="parent-onboarding-visual setup" id="parentOnboardingVisual" aria-label="Parent onboarding animation">
+                <div class="setup-animation" aria-hidden="true">
+                  <span class="setup-device"></span>
+                  <span class="setup-profile one"></span>
+                  <span class="setup-profile two"></span>
+                  <span class="setup-profile three"></span>
+                  <span class="setup-shield"></span>
+                </div>
+                <div class="chat-animation" aria-hidden="true">
+                  <span class="chat-phone"></span>
+                  <span class="chat-bubble kid"></span>
+                  <span class="chat-bubble ai"></span>
+                  <span class="chat-mic"></span>
+                  <span class="chat-wave one"></span>
+                  <span class="chat-wave two"></span>
+                </div>
+                <div class="report-animation" aria-hidden="true">
+                  <span class="report-card main"></span>
+                  <span class="report-card small"></span>
+                  <span class="report-ring"></span>
+                  <span class="report-bar one"></span>
+                  <span class="report-bar two"></span>
+                  <span class="report-bar three"></span>
+                  <span class="report-dot"></span>
+                </div>
+              </div>
+              <p class="step-label" id="parentOnboardingStep">1 of 3</p>
+              <h2 id="parentOnboardingTitle">Set up safe profiles</h2>
+              <p id="parentOnboardingText">Create up to four child accounts with age, gender, and a private kid login PIN.</p>
+              <div class="parent-feature-grid" id="parentOnboardingFeatures">
+                <span>Child PINs</span>
+                <span>Screen timer</span>
+              </div>
+              <div class="dots" id="parentOnboardingDots" aria-hidden="true">
+                <span class="is-active"></span><span></span><span></span>
+              </div>
+            </div>
+            <button class="primary-btn bottom-action" id="parentOnboardingNext" type="button">Next</button>
+          </section>
+
+          <section class="app-screen screen-kid-register" data-view="kid-register">
+            <header class="minimal-top branded-top">
+              <button class="ghost-icon" data-screen="parent-dashboard" type="button" aria-label="Back">â€¹</button>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+
+            <form class="register-panel kid-register-panel" id="kidRegisterForm">
+              <div class="kid-register-intro">
+                <div>
+                  <p class="step-label">Child setup</p>
+                  <h2>Create a child profile</h2>
+                  <p>Add their basic details and a private PIN for protected access.</p>
+                </div>
+                <span class="register-count" id="kidCountLabel"><b aria-hidden="true">+</b><span>1 of 4</span></span>
+              </div>
+
+              <div class="form-stack">
+                <label>
+                  <span>Kid nickname <b class="required-mark">*</b></span>
+                  <small class="field-help">Pratvim never requires your child's real name. Please add a nickname instead.</small>
+                  <input id="kidNameInput" autocomplete="off" value="Ravin" placeholder="Kid nickname" required />
+                </label>
+                <div class="split-fields">
+                  <label>
+                    <span>Age <b class="required-mark">*</b></span>
+                    <input id="kidAgeInput" inputmode="numeric" maxlength="2" value="9" placeholder="Age" required />
+                  </label>
+                  <label>
+                    <span>Gender</span>
+                    <select id="kidGenderInput">
+                      <option value="">Select</option>
+                      <option>Boy</option>
+                      <option>Girl</option>
+                      <option>Prefer not to say</option>
+                    </select>
+                  </label>
+                </div>
+                <label>
+                  <span>Kid login PIN <b class="required-mark">*</b></span>
+                  <input id="kidPinInput" inputmode="numeric" maxlength="4" value="1234" placeholder="4 digit PIN" required pattern="[0-9]{4}" />
+                </label>
+              </div>
+
+              <button class="primary-btn" id="addKidBtn" type="submit">Add a kid</button>
+              <div class="added-kids-heading"><strong>Added children</strong><span>Manage profiles from Parent Home</span></div>
+              <div class="kid-profile-list" id="kidProfileList"></div>
+            </form>
+          </section>
+
+          <section class="app-screen screen-parent-dashboard" data-view="parent-dashboard">
+            <header class="chat-header parent-app-header">
+              <button class="ghost-icon" data-screen="login" type="button" aria-label="Back">â€¹</button>
+              <div class="internal-brand"><img src="pratvim-icon-exact.svg" alt="Pratvim" /></div>
+              <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+
+            <section class="parent-dashboard-body">
+              <div class="login-mode-tabs icon-mode-tabs parent-home-mode-tabs" aria-label="Experience type">
+                <button id="parentHomeChildSwitch" type="button" aria-label="Open kid login"><span class="role-icon kid-role-icon" aria-hidden="true">🧒</span><span>Kid</span></button>
+                <button class="is-active" type="button" aria-label="Parent view"><span class="role-icon parent-role-icon" aria-hidden="true"></span><span>Parent</span></button>
+              </div>
+              <div class="parent-overview-heading">
+                <span>Family overview</span>
+                <button class="parent-analytics-icon" data-screen="parent-analytics" type="button" aria-label="Open activity dashboard" title="Activity dashboard">
+                  <i></i><i></i><i></i>
+                </button>
+              </div>
+              <div class="parent-overview-grid" aria-label="Family overview">
+                <article class="family-overview-item"><span class="family-overview-icon kids-icon" aria-hidden="true"></span><span><strong id="parentKidCount">0</strong><small>Kids registered</small></span></article>
+                <button class="family-overview-item family-alert-link" id="parentOverviewAlerts" type="button"><span class="family-overview-icon alert-icon" aria-hidden="true">!</span><span><strong id="parentOverviewAlertCount">0</strong><small>Alerts to review</small></span><b aria-hidden="true">›</b></button>
+              </div>
+              <section class="parent-subscription-summary" aria-label="Family subscription">
+                <div class="subscription-summary-copy">
+                  <span class="subscription-status" id="subscriptionStatus">Active</span>
+                  <strong id="subscriptionPlanName">Family Monthly</strong>
+                  <p id="subscriptionUntil">Valid until 11 Jul 2026</p>
+                  <small>Includes up to 4 kids</small>
+                </div>
+                <div class="subscription-renewal">
+                  <div class="subscription-counter"><strong id="subscriptionDaysLeft">30</strong><span>days left</span></div>
+                  <button id="managePaymentsBtn" type="button">View plans</button>
+                </div>
+              </section>
+              <section class="parent-kids-section">
+                <div class="parent-card-head">
+                  <div>
+                    <h2>Children</h2>
+                    <p>Profiles and activity</p>
+                  </div>
+                  <button class="primary-btn compact-parent-btn" id="registerKidFromParent" type="button">Register Kid</button>
+                </div>
+                <div class="parent-kids-list" id="parentKidsList"></div>
+              </section>
+            </section>
+          </section>
+
+          <section class="app-screen screen-parent-analytics" data-view="parent-analytics">
+            <header class="chat-header parent-app-header">
+              <button class="ghost-icon" data-screen="parent-dashboard" type="button" aria-label="Back">â€¹</button>
+              <div class="internal-brand"><img src="pratvim-icon-exact.svg" alt="Pratvim" /></div>
+              <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+
+            <nav class="analytics-tabs-card kid-report-tabs" id="kidReportTabs" aria-label="Choose kid report"></nav>
+
+            <section class="parent-dashboard-body analytics-body">
+              <article class="parent-summary-card analytics-hero">
+                <span id="selectedKidLabel">Ravin's report</span>
+                <strong id="reportHeadline">Ravin's learning overview</strong>
+                <p id="selectedKidSummary">Track learning time, alert patterns, and healthy app habits for this child.</p>
+              </article>
+
+              <div class="parent-stat-grid parent-stat-grid-three">
+                <article><span>Day streak</span><strong id="overallStreak">0</strong><p>Learning days</p></article>
+                <article><span>Daily time</span><strong id="dailyTimeTotal">0m</strong><p>Current day</p></article>
+                <button class="parent-alert-stat" id="openParentAlerts" type="button"><span>Alerts</span><strong id="alertTotal">0</strong><p>View details</p></button>
+              </div>
+
+              <article class="analytics-card">
+                <span>Quick links</span>
+                <div class="dashboard-link-grid">
+                  <button data-screen="parent-dashboard" type="button">Overview</button>
+                  <button id="dashboardRegisterKid" type="button">Register Kid</button>
+                </div>
+              </article>
+            </section>
+          </section>
+
+          <section class="app-screen screen-avatar-library" data-view="avatar-library">
+            <header class="chat-header info-header">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="kid" type="button" aria-label="Open kid profile menu" aria-expanded="false"><img class="static-profile-image" src="kid-ravin-avatar.png" alt="Kid profile" /></button>
+            </header>
+            <section class="avatar-library-page">
+              <p class="step-label">Child profile</p>
+              <h1>Make this profile yours</h1>
+              <p>Choose a character. Pratvim will automatically assign its display name.</p>
+              <div class="avatar-profile-summary">
+                <img id="avatarProfilePreview" src="kid-ravin-avatar.png" alt="Selected child avatar" />
+                <label for="kidAvatarProfileName"><span>Display name</span><input id="kidAvatarProfileName" value="Ravin" readonly aria-readonly="true" /></label>
+              </div>
+              <div class="avatar-grid-heading"><strong>Choose a character</strong><span>10 options</span></div>
+              <div class="cartoon-avatar-grid" id="cartoonAvatarGrid"></div>
+              <button class="primary-btn" id="saveCartoonAvatar" type="button">Save child profile</button>
+            </section>
+          </section>
+
+          <section class="app-screen screen-payment-plans" data-view="payment-plans">
+            <header class="chat-header info-header">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+            <section class="payment-plans-page">
+              <div class="payment-page-intro">
+                <p class="step-label">Family subscription</p>
+                <h1>Protected learning for your whole family</h1>
+                <p>Choose the duration that works best for one parent and up to four children.</p>
+              </div>
+              <div class="family-plan-options" id="familyPlanOptions" aria-label="Choose a family subscription"></div>
+              <div class="selected-plan-benefits">
+                <span><b>4</b> kid profiles</span>
+                <span><b>AI</b> protected chats</span>
+                <span><b>24/7</b> parent insights</span>
+              </div>
+              <div class="payment-security-note"><span aria-hidden="true">✓</span><p><strong>Secure prototype checkout</strong><small>No real charge will be made.</small></p></div>
+              <button class="primary-btn payment-page-action" id="continueToPayment" type="button">Review and Pay</button>
+            </section>
+          </section>
+
+          <section class="app-screen screen-payment-confirmation" data-view="payment-confirmation">
+            <header class="chat-header info-header">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+            <section class="payment-confirmation-page">
+              <div class="confirmation-check" aria-hidden="true">✓</div>
+              <p class="step-label">Payment confirmed</p>
+              <h1>Your family plan is active</h1>
+              <p id="paymentConfirmationText">Pratvim Family Monthly is ready for your children.</p>
+              <button class="primary-btn" data-screen="parent-dashboard" type="button">Return to Parent Home</button>
+            </section>
+          </section>
+
+          <section class="app-screen screen-parent-alerts" data-view="parent-alerts">
+            <header class="chat-header parent-app-header">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <div class="internal-brand"><img src="pratvim-icon-exact.svg" alt="Pratvim" /></div>
+              <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+            <section class="parent-alerts-body">
+              <div class="alerts-page-title">
+                <div><p class="step-label">Parent review</p><h1>Safety alerts</h1></div>
+                <button class="parent-analytics-icon" data-screen="parent-analytics" type="button" aria-label="Return to dashboard" title="Dashboard"><i></i><i></i><i></i></button>
+              </div>
+              <nav class="kid-report-tabs alert-kid-tabs" id="alertKidTabs" aria-label="Choose child alerts"></nav>
+              <div class="alert-summary-strip">
+                <span>Needs review</span><strong id="parentAlertsTotal">0</strong><small id="parentAlertsKidName">Selected child</small>
+              </div>
+              <div class="parent-alert-list" id="parentAlertList"></div>
+            </section>
+          </section>
+
+          <section class="app-screen screen-home" data-view="home">
+            <header class="app-topbar">
+              <button class="home-mini" data-screen="home" type="button" aria-label="Home">⌂</button>
+              <div class="internal-brand"><img src="pratvim-icon-exact.svg" alt="Pratvim" /></div>
+              <button class="profile-mini avatar-trigger" type="button" aria-label="Upload Ravin avatar"><img class="mini-kid avatar-image" src="ravin.jpg" alt="" /></button>
+            </header>
+
+            <section class="welcome-panel">
+              <div class="home-discovery-copy">
+                <h2>What would you like to discover?</h2>
+                <p>Start a protected conversation, continue a question, or learn from a picture.</p>
+              </div>
+              <button class="primary-btn home-new-chat-btn" id="homeNewChat" type="button"><img src="icon-message-circle.svg" alt="" aria-hidden="true" />Start New Chat</button>
+            </section>
+
+            <section class="home-section">
+              <div class="section-title">
+                <h3>Pinned</h3>
+                <button id="homePinnedViewAll" data-screen="chat" type="button">View all <span aria-hidden="true">›</span></button>
+              </div>
+              <div class="recent-list pinned-list" id="homePinnedList"></div>
+            </section>
+
+            <section class="home-section history-home-section">
+              <div class="section-title">
+                <h3>Recent</h3>
+                <button id="homeRecentViewAll" data-screen="chat" type="button">View all <span aria-hidden="true">›</span></button>
+              </div>
+              <div class="category-history-list" id="homeCategoryList"></div>
+            </section>
+          </section>
+
+          <section class="app-screen screen-chat" data-view="chat">
+            <header class="chat-top-line">
+              <div class="chat-header-capsule chat-header-left">
+                <button class="chat-history-button" id="chatHistoryButton" type="button" aria-label="Open previous chats" aria-expanded="false">
+                  <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+                </button>
+                <img class="chat-header-brand" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              </div>
+              <div class="chat-header-capsule chat-header-right">
+              <button class="inline-timer chat-progress-status" id="chatProgressStatus" type="button" aria-label="Show 4-day learning streak and 4-hour timer" aria-expanded="false" title="4-day streak, 4-hour timer">
+                <span class="timer-ring chat-timer-ring" id="chatTimerRing" aria-hidden="true">4d</span>
+                <span class="timer-dot" aria-hidden="true">◷</span>
+                <strong id="chatTimer" class="is-hidden">00:00:30 / 4h</strong>
+                <span class="chat-streak-badge" aria-hidden="true">4h</span>
+              </button>
+              <button class="profile-mini chat-avatar-button avatar-trigger" type="button" aria-label="Open kid profile"><img class="mini-kid avatar-image" src="ravin.jpg" alt="" /></button>
+              </div>
+            </header>
+
+            <div class="streak-popover is-hidden" id="streakPopover" role="status">
+              <span class="streak-popover-icon" aria-hidden="true">4</span>
+              <div>
+                <strong>4-day streak</strong>
+                <p>You have explored and learned for four days in a row.</p>
+              </div>
+            </div>
+
+            <div class="paused-banner is-hidden" id="pausedBanner">
+              <strong>Chat paused</strong>
+              <span>Tap Resume to continue this conversation.</span>
+            </div>
+
+            <section class="chat-feature-summary">
+              <h2 id="chatHeroQuestion">Why is the sky blue?</h2>
+              <img class="chat-question-avatar avatar-image" src="ravin.jpg" alt="" />
+            </section>
+
+            <section class="message-pane" id="messageArea"></section>
+
+            <form class="composer" id="composer">
+              <input id="imageInput" type="file" accept="image/*" />
+              <div class="composer-field">
+                <button class="tool-btn image" id="imageUploadBtn" type="button" aria-label="Upload image">+</button>
+                <input id="chatInput" autocomplete="off" placeholder="Type your question..." />
+                <span class="composer-safety" aria-label="Protected chat">Safe</span>
+              </div>
+              <button class="tool-btn send" type="submit" aria-label="Send">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M4.5 11.2 19.4 4.3c.8-.4 1.6.4 1.2 1.2l-6.9 14.9c-.3.7-1.3.6-1.5-.1l-1.8-6.2-6.2-1.8c-.7-.2-.8-1.2-.1-1.5Z" />
+                  <path d="m10.6 13.9 4.1-4.1" />
+                </svg>
+              </button>
+            </form>
+            <p class="chat-footnote">Your learning buddy keeps answers calm, clear, and age-aware.</p>
+          </section>
+
+          <div class="chat-history-layer is-hidden" id="chatHistoryLayer">
+            <button class="chat-history-backdrop" id="chatHistoryBackdrop" type="button" aria-label="Close previous chats"></button>
+            <aside class="chat-history-panel" aria-label="Previous chats">
+              <div class="chat-history-heading">
+                <div>
+                  <span>Kid conversations</span>
+                  <h2>Previous chats</h2>
+                </div>
+                <button class="chat-history-close" id="chatHistoryClose" type="button" aria-label="Close previous chats">&times;</button>
+              </div>
+              <div class="chat-history-tabs" role="tablist" aria-label="Filter previous chats">
+                <button class="is-active" data-history-filter="pinned" type="button" role="tab" aria-selected="true">
+                  <img src="icon-pin.svg" alt="" aria-hidden="true" />
+                  <span>Pinned chats</span>
+                </button>
+                <button data-history-filter="recent" type="button" role="tab" aria-selected="false">
+                  <img src="icon-clock-3.svg" alt="" aria-hidden="true" />
+                  <span>Recent chats</span>
+                </button>
+              </div>
+              <div class="chat-history-list" id="historyList"></div>
+              <button class="primary-btn chat-history-new" id="historyNewChatButton" type="button">Start New Chat</button>
+            </aside>
+          </div>
+
+          <section class="app-screen screen-timer-demo" data-view="timer-demo">
+            <header class="chat-header branded-content-header">
+              <button class="ghost-icon" data-screen="chat" type="button" aria-label="Back">â€¹</button>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <div class="chat-title">
+                <span>Choose style</span>
+                <strong>Timer Animations</strong>
+              </div>
+            </header>
+
+            <section class="timer-demo-list">
+              <article class="timer-demo-card">
+                <span class="timer-ring demo-timer soft-pulse">4h</span>
+                <div>
+                  <strong>Soft pulse</strong>
+                  <p>Gentle size and shadow movement.</p>
+                </div>
+              </article>
+              <article class="timer-demo-card">
+                <span class="timer-ring demo-timer orbit-dot">4h</span>
+                <div>
+                  <strong>Orbit dot</strong>
+                  <p>A small dot circles the timer ring.</p>
+                </div>
+              </article>
+              <article class="timer-demo-card">
+                <span class="timer-ring demo-timer breathing-ring">4h</span>
+                <div>
+                  <strong>Breathing ring</strong>
+                  <p>The ring softly fades in and out.</p>
+                </div>
+              </article>
+              <article class="timer-demo-card">
+                <span class="timer-ring demo-timer progress-sweep">4h</span>
+                <div>
+                  <strong>Progress sweep</strong>
+                  <p>A moving sweep shows time passing.</p>
+                </div>
+              </article>
+              <article class="timer-demo-card">
+                <span class="timer-ring demo-timer tiny-tick">4h</span>
+                <div>
+                  <strong>Tiny tick</strong>
+                  <p>A small clock hand rotates inside.</p>
+                </div>
+              </article>
+              <article class="timer-demo-card">
+                <span class="timer-ring demo-timer glow-beat">4h</span>
+                <div>
+                  <strong>Glow beat</strong>
+                  <p>A calm glow appears every few seconds.</p>
+                </div>
+              </article>
+            </section>
+          </section>
+
+          <section class="app-screen screen-info" data-view="about">
+            <header class="chat-header info-header">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+            <article class="info-page">
+              <p class="step-label">About Pratvim</p>
+              <h1>Curiosity with thoughtful boundaries</h1>
+              <p>Pratvim is a protected AI learning space created for children and the adults who care for them. Kids can ask questions in simple language while parents manage profiles, access, screen-time habits, and safety activity.</p>
+              <h2>How it helps</h2>
+              <p>Answers are designed to be clear, age-aware, and encouraging. Pratvim supports text and image questions, keeps family controls in the parent experience, and guides children toward safer questions when a topic needs adult support.</p>
+              <h2>Our approach</h2>
+              <p>Pratvim supports learning, not unsupervised decision-making. Parents remain in control of child access and can review activity whenever needed.</p>
+            </article>
+          </section>
+
+          <section class="app-screen screen-info" data-view="privacy">
+            <header class="chat-header info-header">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+            <article class="info-page">
+              <p class="step-label">Privacy policy</p>
+              <h1>Family privacy comes first</h1>
+              <p>Pratvim collects only the account and profile information needed to operate the family experience, such as a parent email, child profile name, age range, and app activity.</p>
+              <h2>Child information</h2>
+              <p>Child profiles are managed by the parent account. Private PINs are shown only inside parent editing tools and are never displayed on Parent Home.</p>
+              <h2>Conversations</h2>
+              <p>Conversation data may be stored to let a child continue learning and to provide parents with safety and activity summaries. It is not presented as public content.</p>
+              <h2>Your choices</h2>
+              <p>Parents can update profile details, remove child profiles, and request account or stored-data deletion through support.</p>
+            </article>
+          </section>
+
+          <section class="app-screen screen-info" data-view="terms">
+            <header class="chat-header info-header">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+            <article class="info-page">
+              <p class="step-label">Terms &amp; Conditions</p>
+              <h1>Using Pratvim as a family</h1>
+              <p>Pratvim is a protected learning service for children under the supervision of a parent or guardian. A parent account is responsible for creating child profiles, managing access, and keeping account details accurate.</p>
+              <h2>Parent consent</h2>
+              <p>By creating an account, the parent or guardian confirms that they are authorized to provide consent for each child profile and will supervise how the service is used.</p>
+              <h2>Appropriate use</h2>
+              <p>Pratvim may be used for age-appropriate learning and curiosity. Accounts must not be used to harm others, bypass safety controls, share unlawful content, or attempt to access another family's information.</p>
+              <h2>Subscriptions</h2>
+              <p>Paid plans apply to one parent account and up to four child profiles. Plan duration, renewal details, and remaining access are shown in the parent experience before a payment is confirmed.</p>
+              <h2>AI answers</h2>
+              <p>AI responses can be incomplete or incorrect and do not replace a parent, teacher, doctor, or other qualified professional. Children should ask a trusted adult before acting on important information.</p>
+            </article>
+          </section>
+
+          <section class="app-screen screen-info screen-team" data-view="team">
+            <header class="chat-header info-header">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+            <article class="info-page team-page">
+              <p class="step-label">Our team</p>
+              <h1>People building Pratvim</h1>
+              <p>We bring together product delivery, technology architecture, and digital experience to create a safer place for children to explore AI.</p>
+              <div class="team-list">
+                <article class="team-member">
+                  <div class="team-member-head">
+                    <a class="team-profile-link" href="https://www.linkedin.com/in/ravindrasingh22/" target="_blank" rel="noreferrer" aria-label="View Ravindra Singh on LinkedIn"><img class="team-profile-photo team-photo-ravindra" src="team-ravindra-singh.jpg" alt="Ravindra Singh" /></a>
+                    <div>
+                      <h2>Ravindra Singh</h2>
+                      <p class="team-role">Co-founder, CTO</p>
+                      <a class="team-linkedin" href="https://www.linkedin.com/in/ravindrasingh22/" target="_blank" rel="noreferrer"><span aria-hidden="true">in</span>LinkedIn</a>
+                    </div>
+                  </div>
+                  <p>Ravindra has 15+ years of experience in software engineering and technical architecture, designing scalable, resilient products that solve real user problems.</p>
+                  <ul class="team-highlights">
+                    <li>Cloud-native platforms and SaaS architecture</li>
+                    <li>Product delivery from ideation to production</li>
+                    <li>DevOps, automation, security, performance, and cost optimization</li>
+                    <li>AWS Certified Solutions Architect - Associate</li>
+                  </ul>
+                </article>
+                <article class="team-member">
+                  <div class="team-member-head">
+                    <a class="team-profile-link" href="https://www.linkedin.com/in/shashankmerothiya/" target="_blank" rel="noreferrer" aria-label="View Shashank Merothiya on LinkedIn"><img class="team-profile-photo team-photo-shashank" src="team-shashank-merothiya.jpg" alt="Shashank Merothiya" /></a>
+                    <div>
+                      <h2>Shashank Merothiya</h2>
+                      <p class="team-role">Consulting Director</p>
+                      <a class="team-linkedin" href="https://www.linkedin.com/in/shashankmerothiya/" target="_blank" rel="noreferrer"><span aria-hidden="true">in</span>LinkedIn</a>
+                    </div>
+                  </div>
+                  <p>Shashank brings more than 18 years of experience creating organic digital experiences and leading successful digital transformations across industries.</p>
+                  <ul class="team-highlights">
+                    <li>Uncovers critical insights behind complex business challenges</li>
+                    <li>Collaboratively shapes practical digital solutions</li>
+                    <li>Guides adoption and aligns technology with business objectives</li>
+                  </ul>
+                </article>
+                <article class="team-member">
+                  <div class="team-member-head">
+                    <a class="team-profile-link" href="https://www.linkedin.com/in/prateek-sharma-4b584616/" target="_blank" rel="noreferrer" aria-label="View Prateek Sharma on LinkedIn"><img class="team-profile-photo" src="team-prateek-sharma.jpeg" alt="Prateek Sharma" /></a>
+                    <div>
+                      <h2>Prateek Sharma</h2>
+                      <p class="team-role">Co-founder</p>
+                      <a class="team-linkedin" href="https://www.linkedin.com/in/prateek-sharma-4b584616/" target="_blank" rel="noreferrer"><span aria-hidden="true">in</span>LinkedIn</a>
+                    </div>
+                  </div>
+                  <p>Prateek is a Senior Delivery Manager with 15+ years of industry experience, including more than a decade as a Scrum Master guiding agile teams and organizational change.</p>
+                  <ul class="team-highlights">
+                    <li>Agile transformation, Scrum practices, and team empowerment</li>
+                    <li>Backlogs, product roadmaps, reporting, and delivery leadership</li>
+                    <li>Jira, Confluence, GitHub, DevOps, Azure, and Microsoft Office</li>
+                    <li>HTML, CSS, jQuery, Drupal, PHP, wireframes, and template design</li>
+                  </ul>
+                </article>
+              </div>
+            </article>
+          </section>
+
+          <section class="app-screen screen-info" data-view="contact">
+            <header class="chat-header info-header">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+            <article class="info-page">
+              <p class="step-label">Contact us</p>
+              <h1>We are here to help</h1>
+              <p>Contact the Pratvim support team for account access, subscriptions, privacy questions, safety feedback, or technical problems.</p>
+              <div class="contact-detail"><span>Email</span><strong>support@pratvim.ai</strong></div>
+              <div class="contact-detail"><span>Parent support</span><strong>Monday-Friday, 9:00 AM-6:00 PM IST</strong></div>
+              <div class="contact-detail"><span>Response time</span><strong>Within two business days</strong></div>
+              <p>For an urgent child-safety concern, stop app use and contact a trusted adult or the appropriate local emergency service.</p>
+            </article>
+          </section>
+
+          <section class="app-screen screen-support" data-view="support">
+            <header class="chat-header info-header">
+              <span class="header-menu-space" aria-hidden="true"></span>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            </header>
+            <form class="support-page" id="supportForm">
+              <div class="support-intro">
+                <p class="step-label">Parent support</p>
+                <h1>How can we help?</h1>
+                <p>Share the details below. Our support team responds within 1 working day.</p>
+              </div>
+              <div class="support-fields">
+                <label>
+                  <span>Support category</span>
+                  <select id="supportCategory" required>
+                    <option value="">Choose a category</option>
+                    <option>Account access</option>
+                    <option>Subscription or payment</option>
+                    <option>Child profile</option>
+                    <option>Safety concern</option>
+                    <option>Technical issue</option>
+                    <option>Privacy or data request</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Contact email</span>
+                  <input id="supportEmail" type="email" autocomplete="email" value="parent@example.com" required />
+                </label>
+                <label>
+                  <span>Subject</span>
+                  <input id="supportSubject" autocomplete="off" maxlength="100" placeholder="Brief summary of the issue" required />
+                </label>
+                <label>
+                  <span>Description</span>
+                  <textarea id="supportDescription" rows="5" maxlength="1200" placeholder="Tell us what happened, what you expected, and any steps you already tried." required></textarea>
+                </label>
+                <label class="support-file-field">
+                  <span>Attachment <small>Optional</small></span>
+                  <input id="supportAttachment" type="file" accept="image/*,.pdf" />
+                </label>
+              </div>
+              <div class="support-service-note">
+                <strong>Response time</strong>
+                <span>Within 1 working day, Monday to Friday.</span>
+              </div>
+              <button class="primary-btn" type="submit">Send support request</button>
+              <p class="support-success is-hidden" id="supportSuccess" role="status">Your request has been received. We will reply within 1 working day.</p>
+            </form>
+          </section>
+
+          <div class="parent-profile-menu is-hidden" id="parentProfileMenu" role="menu" aria-label="Parent profile options">
+            <div class="parent-profile-menu-head">
+              <img class="parent-avatar-image" src="parent-profile.svg" alt="" />
+              <div><strong>Parent profile</strong><span id="parentMenuEmail">parent@example.com</span></div>
+            </div>
+            <button id="parentEditProfile" type="button" role="menuitem">
+              <span class="parent-menu-icon" aria-hidden="true">✎</span>
+              <span><strong>Update profile</strong><small>Email, mobile number, and picture</small></span>
+            </button>
+            <button data-menu-screen="terms" type="button" role="menuitem">
+              <span class="parent-menu-icon" aria-hidden="true">&sect;</span>
+              <span><strong>Terms &amp; Conditions</strong><small>Review family account terms</small></span>
+            </button>
+            <button data-menu-screen="support" type="button" role="menuitem">
+              <span class="parent-menu-icon" aria-hidden="true">?</span>
+              <span><strong>Support</strong><small>Response within 1 working day</small></span>
+            </button>
+            <button class="parent-logout-option" id="parentLogout" type="button" role="menuitem">
+              <span class="parent-menu-icon" aria-hidden="true">↪</span>
+              <span><strong>Log out</strong><small>Return to parent login</small></span>
+            </button>
+          </div>
+
+          <div class="parent-profile-menu kid-profile-menu is-hidden" id="kidProfileMenu" role="menu" aria-label="Kid profile options">
+            <div class="parent-profile-menu-head">
+              <img class="avatar-image" src="ravin.jpg" alt="" />
+              <div><strong id="kidMenuName">Kid profile</strong><span>Learning profile</span></div>
+            </div>
+            <button id="kidEditProfile" type="button" role="menuitem">
+              <span class="parent-menu-icon" aria-hidden="true">&#9998;</span>
+              <span><strong>Update profile</strong><small>Change name and avatar</small></span>
+            </button>
+            <button class="parent-logout-option" id="kidLogout" type="button" role="menuitem">
+              <span class="parent-menu-icon" aria-hidden="true">&#8617;</span>
+              <span><strong>Log out</strong><small>Return to kid login</small></span>
+            </button>
+          </div>
+
+          <section class="modal-layer is-hidden kid-delete-layer" id="parentKidDeleteModal" aria-label="Confirm child deletion">
+            <div class="modal-card kid-delete-card">
+              <div class="delete-warning-icon" aria-hidden="true">!</div>
+              <h2>Delete child profile?</h2>
+              <p id="parentKidDeleteMessage">This permanently deletes the child's activity, learning dashboard, reports, safety alerts, PIN details, and saved chats. The profile cannot be recovered after deletion.</p>
+              <div class="modal-actions">
+                <button class="danger-btn" id="confirmParentKidDelete" type="button">Delete permanently</button>
+                <button id="cancelParentKidDelete" type="button">Keep profile</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="modal-layer is-hidden" id="parentProfileModal" aria-label="Update parent profile">
+            <form class="modal-card parent-profile-card" id="parentProfileForm">
+              <button class="modal-close" id="parentProfileClose" type="button" aria-label="Close">&times;</button>
+              <div class="parent-profile-photo-editor">
+                <img class="parent-avatar-image" id="parentProfilePreview" src="parent-profile.svg" alt="Parent profile preview" />
+                <button id="parentProfilePhotoButton" type="button" aria-label="Upload parent profile picture">+</button>
+                <input id="parentProfileImageInput" type="file" accept="image/*" />
+              </div>
+              <div class="parent-profile-copy">
+                <h2>Update profile</h2>
+                <p>Keep your parent account details current.</p>
+              </div>
+              <div class="parent-profile-fields">
+                <label>
+                  <span>Email address</span>
+                  <input id="parentProfileEmail" type="email" value="parent@example.com" required />
+                </label>
+                <label>
+                  <span>Mobile number</span>
+                  <input id="parentProfileMobile" type="tel" value="+91 98765 43210" required />
+                </label>
+              </div>
+              <div class="modal-actions">
+                <button type="submit">Save profile</button>
+                <button id="parentProfileCancel" type="button">Cancel</button>
+              </div>
+              <p class="parent-profile-saved is-hidden" id="parentProfileSaved">Profile updated successfully.</p>
+            </form>
+          </section>
+
+          <section class="modal-layer is-hidden" id="paymentModal" aria-label="Manage family subscription">
+            <form class="modal-card payment-card" id="paymentForm">
+              <button class="payment-back-button" id="paymentBack" type="button" aria-label="Back to subscription plans">‹</button>
+              <button class="modal-close" id="paymentClose" type="button" aria-label="Close">&times;</button>
+              <div class="payment-checkout-head">
+                <div class="payment-icon" aria-hidden="true">&#8377;</div>
+                <div class="payment-copy">
+                  <p class="step-label">Secure checkout</p>
+                  <h2>Complete subscription</h2>
+                  <p id="paymentKidText">One monthly payment gives protected chat access to every child on this parent account.</p>
+                </div>
+              </div>
+              <div class="subscription-plan-card">
+                <div><strong id="checkoutPlanName">Pratvim Family Monthly</strong><span id="checkoutPlanRenewal">Renews every 30 days</span></div>
+                <strong><span id="checkoutPlanPrice">&#8377;499</span><small id="checkoutPlanUnit">/month</small></strong>
+              </div>
+              <div class="family-plan-includes"><span>1 parent account</span><span>Up to 4 kid profiles</span><span>Unlimited protected learning chats</span></div>
+              <div class="billing-fields">
+                <label><span>Parent name</span><input id="billingParentName" name="billingParentName" autocomplete="name" value="Parent" required /></label>
+                <label><span>Billing email</span><input id="billingEmail" name="billingEmail" autocomplete="email" type="email" value="parent@example.com" required /></label>
+              </div>
+              <fieldset class="payment-methods">
+                <legend>Payment method</legend>
+                <label><input type="radio" name="paymentMethod" value="UPI" checked /><span>UPI</span></label>
+                <label><input type="radio" name="paymentMethod" value="Card" /><span>Card</span></label>
+              </fieldset>
+              <label class="subscription-consent"><input id="subscriptionTerms" type="checkbox" required /><span id="subscriptionConsentText">I agree to renew this family subscription every 30 days. I can cancel before the next renewal.</span></label>
+              <div class="payment-order-row"><span>Due today</span><strong id="paymentTotal">&#8377;499</strong></div>
+              <button class="primary-btn payment-submit" id="paymentSubmit" type="submit">Renew monthly subscription</button>
+              <p class="payment-note">Prototype payment only. No real charge will be made.</p>
+              <p class="payment-success is-hidden" id="paymentSuccess"></p>
+            </form>
+          </section>
+
+          <section class="modal-layer is-hidden" id="imageModal" aria-label="Image upload popup">
+            <div class="modal-card">
+              <button class="modal-close" id="imageClose" type="button" aria-label="Close">×</button>
+              <div class="modal-icon">IMG</div>
+              <h2>Upload image</h2>
+              <p id="imageModalText">Choose a picture. I will fetch details and explain it in simple words.</p>
+              <div class="upload-box" id="imagePreviewBox">No image selected</div>
+              <div class="modal-actions">
+                <button id="chooseImageBtn" type="button">Choose from system</button>
+                <button id="sampleImageBtn" type="button">Use sample</button>
+              </div>
+              <div class="modal-result is-hidden" id="imageResult"></div>
+            </div>
+          </section>
+
+          <section class="modal-layer is-hidden" id="voiceModal" aria-label="Voice recording popup">
+            <div class="modal-card">
+              <button class="modal-close" id="voiceClose" type="button" aria-label="Close">×</button>
+              <div class="record-orb"><span class="mic-shape"></span></div>
+              <h2 id="voiceTitle">Voice recording</h2>
+              <p id="voiceText">Recording is in progress. Speak your question clearly.</p>
+              <div class="wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+              <div class="modal-result is-hidden" id="voiceResult"></div>
+              <div class="modal-actions">
+                <button id="finishVoiceBtn" type="button">Done recording</button>
+                <button id="cancelVoiceBtn" type="button">Cancel</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="modal-layer is-hidden" id="avatarModal" aria-label="Update kid profile">
+            <form class="modal-card avatar-card" id="kidProfileForm">
+              <button class="modal-close" id="avatarClose" type="button" aria-label="Close">&times;</button>
+              <img class="avatar-preview" id="avatarPreview" src="ravin.jpg" alt="Profile picture preview" />
+              <h2 id="avatarModalTitle">Update kid profile</h2>
+              <p id="avatarModalText">Change the name or choose a new avatar for this learning profile.</p>
+              <label class="kid-profile-name-field" for="kidProfileNameInput">
+                <span>Kid nickname</span>
+                <input id="kidProfileNameInput" autocomplete="off" required />
+              </label>
+              <input id="avatarInput" type="file" accept="image/*" />
+              <div class="modal-actions">
+                <button id="chooseAvatarBtn" type="button">Choose avatar</button>
+                <button id="resetAvatarBtn" type="button">Use default</button>
+              </div>
+              <button class="primary-btn" type="submit">Save profile</button>
+            </form>
+          </section>
+
+          <section class="app-screen screen-parent-alert" id="parentAlert" data-view="parent-alert" aria-label="Timer alert screen">
+            <header class="chat-header branded-content-header">
+              <button class="ghost-icon" id="alertBackBtn" type="button" aria-label="Back">‹</button>
+              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <div class="chat-title">
+                <span>Screen timer</span>
+                <strong>Timer Alert</strong>
+              </div>
+            </header>
+
+            <div class="parent-card">
+              <button class="modal-close" id="alertClose" type="button" aria-label="Close">×</button>
+              <div class="alert-mark">AI</div>
+              <p class="danger-label">Time limit</p>
+              <h2>Screen Time Complete</h2>
+              <p>Your chat is saved. Take a short break now, and come back when a parent says it is okay.</p>
+              <div class="alert-detail">
+                <span>Saved chat</span>
+                <strong id="alertQuestion">Current chat</strong>
+              </div>
+              <div class="alert-detail">
+                <span>Status</span>
+                <strong id="alertReason">Screen time limit reached</strong>
+              </div>
+              <div class="alert-actions-row">
+                <button class="primary-btn" id="alertReviewed" type="button">Back to Chat</button>
+                <button class="secondary-btn" id="alertCloseChatBtn" type="button">Close Chat</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

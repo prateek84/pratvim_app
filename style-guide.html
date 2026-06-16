@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pratvim UI Style Guide</title>
+    <link rel="icon" href="pratvim-icon-exact.svg" type="image/svg+xml" />
+    <style>
+      @font-face {
+        font-family: "Nunito Sans";
+        src: url("NunitoSans-Variable.ttf") format("truetype");
+        font-style: normal;
+        font-weight: 400 900;
+        font-display: swap;
+      }
+
+      :root {
+        --paper: #fbfaf5;
+        --paper-soft: #f4f2ec;
+        --surface: #fffefa;
+        --ink: #20292c;
+        --text: #4d5658;
+        --text-soft: #606a6c;
+        --muted: #858b8c;
+        --line: #e7e2d9;
+        --primary: #668f96;
+        --primary-hover: #527b83;
+        --primary-active: #426970;
+        --primary-soft: #eef3f2;
+        --accent: #f3e7d3;
+        --accent-text: #6e5e42;
+        --success: #477963;
+        --success-soft: #e9f3ed;
+        --warning: #966f35;
+        --warning-soft: #fbf1df;
+        --danger: #a65151;
+        --danger-soft: #f9eaea;
+        --info: #527b83;
+        --info-soft: #e9f1f2;
+        --white: #ffffff;
+        --shadow-1: 0 4px 12px rgba(52, 58, 55, 0.08);
+        --shadow-2: 0 12px 24px rgba(52, 58, 55, 0.1);
+        --shadow-3: 0 18px 42px rgba(52, 58, 55, 0.12);
+        --radius-xs: 4px;
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+        --radius-pill: 999px;
+        --space-1: 4px;
+        --space-2: 8px;
+        --space-3: 12px;
+        --space-4: 16px;
+        --space-5: 20px;
+        --space-6: 24px;
+        --space-8: 32px;
+        --space-10: 40px;
+        --space-12: 48px;
+        --space-16: 64px;
+        --content: 1180px;
+        --display: "Nunito Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --ui: "Nunito Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--paper);
+        font-family: var(--ui);
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      button, input, select, textarea { font: inherit; }
+      a { color: inherit; }
+      :focus-visible {
+        outline: 3px solid rgba(102, 143, 150, 0.35);
+        outline-offset: 3px;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid var(--line);
+        background: rgba(251, 250, 245, 0.94);
+        backdrop-filter: blur(16px);
+      }
+      .topbar-inner {
+        width: min(var(--content), calc(100% - 40px));
+        min-height: 72px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+      }
+      .brand img { width: 40px; height: 40px; border-radius: 8px; }
+      .brand strong {
+        display: block;
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: 20px;
+      }
+      .brand span { display: block; color: var(--muted); font-size: 12px; font-weight: 700; }
+      .topnav { display: flex; flex-wrap: wrap; gap: 6px; }
+      .topnav a {
+        padding: 8px 12px;
+        border-radius: var(--radius-pill);
+        color: var(--text-soft);
+        font-size: 13px;
+        font-weight: 750;
+        text-decoration: none;
+      }
+      .topnav a:hover { background: var(--primary-soft); color: var(--primary-hover); }
+
+      main { width: min(var(--content), calc(100% - 40px)); margin: 0 auto; padding-bottom: 80px; }
+      .hero {
+        padding: 64px 0 48px;
+        border-bottom: 1px solid var(--line);
+      }
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--primary-hover);
+        font-size: 12px;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .hero h1 {
+        max-width: 760px;
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: clamp(42px, 7vw, 72px);
+        font-weight: 800;
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+      .hero > p:not(.eyebrow) {
+        max-width: 720px;
+        margin: 20px 0 0;
+        color: var(--text-soft);
+        font-size: 18px;
+        line-height: 1.65;
+      }
+      .meta-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        padding: 0 12px;
+        border-radius: var(--radius-pill);
+        background: var(--accent);
+        color: var(--accent-text);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+        gap: 32px;
+        margin-bottom: 32px;
+      }
+      .section h2 {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--display);
+        font-size: 34px;
+        line-height: 1.15;
+      }
+      .section-head p { max-width: 680px; margin: 4px 0 0; color: var(--text-soft); line-height: 1.65; }
+      .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+      .span-3 { grid-column: span 3; }
+      .span-4 { grid-column: span 4; }
+      .span-6 { grid-column: span 6; }
+      .span-8 { grid-column: span 8; }
+      .span-12 { grid-column: 1 / -1; }
+      .panel {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        background: var(--surface);
+        box-shadow: var(--shadow-1);
+      }
+      .panel-title {
+        margin: 0 0 16px;
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 850;
+      }
+      .code {
+        display: block;
+        margin-top: 12px;
+        color: var(--muted);
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .swatch { min-height: 150px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; padding: 0; }
+      .swatch-color { min-height: 92px; }
+      .swatch-info { padding: 14px 16px; background: var(--surface); }
+      .swatch-info strong { display: block; color: var(--ink); font-size: 13px; }
+      .swatch-info span { color: var(--muted); font-family: ui-monospace, monospace; font-size: 12px; }
+
+      .type-row {
+        display: grid;
+        grid-template-columns: 135px minmax(0, 1fr) 210px;
+        align-items: baseline;
+        gap: 24px;
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .type-row:last-child { border-bottom: 0; }
+      .type-label { color: var(--primary-hover); font-size: 12px; font-weight: 850; text-transform: uppercase; }
+      .type-meta { color: var(--muted); font-size: 12px; }
+      .sample-h1, .sample-h2, .sample-h3, .sample-h4, .sample-h5 {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--display);
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+      .sample-h1 { font-size: 48px; line-height: 1.08; }
+      .sample-h2 { font-size: 40px; line-height: 1.12; }
+      .sample-h3 { font-size: 32px; line-height: 1.18; }
+      .sample-h4 { font-size: 24px; line-height: 1.25; }
+      .sample-h5 { font-family: var(--ui); font-size: 18px; line-height: 1.35; }
+      .body-lg { font-size: 18px; line-height: 1.65; }
+      .body-md { font-size: 16px; line-height: 1.6; }
+      .body-sm { font-size: 14px; line-height: 1.55; }
+      .caption { font-size: 12px; line-height: 1.45; font-weight: 700; }
+      .overline { font-size: 11px; line-height: 1.4; font-weight: 850; letter-spacing: 0.08em; text-transform: uppercase; }
+
+      .button-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+      .btn {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 20px;
+        border: 1px solid transparent;
+        border-radius: var(--radius-pill);
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 140ms ease, border-color 140ms ease, color 140ms ease, box-shadow 140ms ease, transform 80ms ease;
+      }
+      .btn:hover { transform: translateY(-1px); }
+      .btn:active, .btn.is-active { transform: translateY(0); }
+      .btn-primary { background: var(--primary); color: var(--white); box-shadow: 0 8px 18px rgba(82, 123, 131, 0.18); }
+      .btn-primary:hover { background: var(--primary-hover); box-shadow: 0 10px 22px rgba(82, 123, 131, 0.24); }
+      .btn-primary:active, .btn-primary.is-active { background: var(--primary-active); box-shadow: inset 0 2px 5px rgba(32, 41, 44, 0.18); }
+      .btn-secondary { border-color: var(--line); background: var(--surface); color: var(--primary-hover); }
+      .btn-secondary:hover { border-color: #c7d6d6; background: var(--primary-soft); }
+      .btn-secondary:active, .btn-secondary.is-active { border-color: var(--primary); background: #dde9e8; }
+      .btn-tertiary { padding-inline: 12px; background: transparent; color: var(--primary-hover); }
+      .btn-tertiary:hover { background: var(--primary-soft); }
+      .btn-danger { background: var(--danger); color: var(--white); }
+      .btn-danger:hover { background: #8d4141; }
+      .btn:disabled, .btn.is-disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+      .btn-sm { min-height: 36px; padding-inline: 15px; font-size: 13px; }
+      .btn-lg { min-height: 52px; padding-inline: 26px; font-size: 15px; }
+      .icon-btn {
+        width: 44px;
+        height: 44px;
+        display: inline-grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        background: var(--surface);
+        color: var(--primary-hover);
+        font-size: 22px;
+        cursor: pointer;
+      }
+      .icon-btn:hover { background: var(--primary-soft); border-color: #c7d6d6; }
+      .icon-btn:active, .icon-btn.is-active { background: var(--primary); color: var(--white); }
+
+      .field { display: grid; gap: 7px; }
+      .field label { color: var(--ink); font-size: 13px; font-weight: 800; }
+      .field small { color: var(--muted); font-size: 12px; line-height: 1.45; }
+      .control {
+        width: 100%;
+        min-height: 46px;
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        background: var(--surface);
+        color: var(--ink);
+        outline: none;
+      }
+      .control::placeholder { color: #a4a9a9; }
+      .control:hover { border-color: #c9d1cd; }
+      .control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(102, 143, 150, 0.16); }
+      .control[aria-invalid="true"] { border-color: var(--danger); background: var(--danger-soft); }
+      .control:disabled { background: var(--paper-soft); color: var(--muted); cursor: not-allowed; }
+      textarea.control { min-height: 112px; resize: vertical; }
+      .check { display: inline-flex; align-items: flex-start; gap: 9px; color: var(--text-soft); font-size: 14px; }
+      .check input { width: 17px; height: 17px; margin: 2px 0 0; accent-color: var(--primary); }
+
+      .state {
+        display: flex;
+        gap: 12px;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-sm);
+        background: var(--surface);
+      }
+      .state-mark { width: 10px; min-width: 10px; height: 10px; margin-top: 6px; border-radius: 50%; background: var(--info); }
+      .state strong { display: block; color: var(--ink); font-size: 14px; }
+      .state p { margin: 3px 0 0; font-size: 13px; line-height: 1.5; }
+      .state.success { background: var(--success-soft); border-color: #cfe0d7; }
+      .state.success .state-mark { background: var(--success); }
+      .state.warning { background: var(--warning-soft); border-color: #eddbb9; }
+      .state.warning .state-mark { background: var(--warning); }
+      .state.danger { background: var(--danger-soft); border-color: #e9caca; }
+      .state.danger .state-mark { background: var(--danger); }
+
+      .space-scale { display: grid; gap: 12px; }
+      .space-item { display: grid; grid-template-columns: 90px minmax(0, 1fr) 60px; align-items: center; gap: 14px; }
+      .space-bar { height: 14px; border-radius: 3px; background: var(--primary); }
+      .space-item code, .space-item span { color: var(--muted); font-size: 12px; }
+      .radius-demo { height: 92px; border: 1px solid var(--line); background: var(--primary-soft); }
+      .shadow-demo { height: 92px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); }
+
+      .nav-demo {
+        display: flex;
+        gap: 6px;
+        padding: 6px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-pill);
+        background: var(--surface);
+      }
+      .nav-item {
+        min-height: 36px;
+        padding: 0 16px;
+        border: 0;
+        border-radius: var(--radius-pill);
+        background: transparent;
+        color: var(--text-soft);
+        font-size: 13px;
+        font-weight: 800;
+      }
+      .nav-item:hover { background: var(--primary-soft); }
+      .nav-item.is-active { background: var(--primary); color: var(--white); }
+      .card-demo h4 { margin: 0; color: var(--ink); font-family: var(--display); font-size: 24px; }
+      .card-demo p { margin: 8px 0 18px; font-size: 14px; line-height: 1.55; }
+
+      .table-wrap { overflow-x: auto; }
+      table { width: 100%; border-collapse: collapse; min-width: 720px; }
+      th, td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+      th { color: var(--ink); font-size: 12px; font-weight: 850; letter-spacing: 0.05em; text-transform: uppercase; }
+      td { font-size: 14px; line-height: 1.5; }
+      td code { color: var(--primary-hover); font-size: 12px; }
+
+      .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .rule { padding: 20px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--surface); }
+      .rule strong { display: block; margin-bottom: 10px; color: var(--ink); }
+      .rule ul { margin: 0; padding-left: 18px; }
+      .rule li { margin: 7px 0; font-size: 14px; line-height: 1.5; }
+      .rule.do { border-top: 4px solid var(--success); }
+      .rule.dont { border-top: 4px solid var(--danger); }
+
+      @media (max-width: 900px) {
+        .topnav { display: none; }
+        .section-head { grid-template-columns: 1fr; gap: 10px; }
+        .span-3, .span-4 { grid-column: span 6; }
+        .type-row { grid-template-columns: 100px minmax(0, 1fr); }
+        .type-meta { grid-column: 2; }
+      }
+      @media (max-width: 640px) {
+        main, .topbar-inner { width: min(100% - 28px, var(--content)); }
+        .hero { padding-top: 40px; }
+        .section { padding: 40px 0; }
+        .span-3, .span-4, .span-6, .span-8 { grid-column: 1 / -1; }
+        .type-row { grid-template-columns: 1fr; gap: 8px; }
+        .type-meta { grid-column: auto; }
+        .sample-h1 { font-size: 40px; }
+        .sample-h2 { font-size: 34px; }
+        .sample-h3 { font-size: 28px; }
+        .do-dont { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <a class="brand" href="./">
+          <img src="pratvim-brand-exact.svg" alt="" />
+          <span><strong>Pratvim</strong><span>UI style guide</span></span>
+        </a>
+        <nav class="topnav" aria-label="Style guide sections">
+          <a href="#foundations">Foundations</a>
+          <a href="#type">Typography</a>
+          <a href="#buttons">Buttons</a>
+          <a href="#forms">Forms</a>
+          <a href="#components">Components</a>
+          <a href="#responsive">Responsive</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Pratvim design system</p>
+        <h1>Warm, trustworthy interfaces for curious minds.</h1>
+        <p>A shared visual and interaction language for the Pratvim mobile app and responsive website. Curio Atlas combines editorial warmth with quiet, accessible product UI.</p>
+        <div class="meta-row">
+          <span class="tag">App + Web</span>
+          <span class="tag">8px grid</span>
+          <span class="tag">Accessible states</span>
+          <span class="tag">Curio Atlas theme</span>
+        </div>
+      </section>
+
+      <section class="section" id="foundations">
+        <div class="section-head">
+          <h2>Foundations</h2>
+          <p>Use warm paper surfaces, restrained teal actions, dark neutral text, and cream accents. Color should communicate hierarchy and state, not decorate every surface.</p>
+        </div>
+        <div class="grid">
+          <article class="panel swatch span-3"><div class="swatch-color" style="background:#fbfaf5"></div><div class="swatch-info"><strong>Page / Paper</strong><span>#FBFAF5</span></div></article>
+          <article class="panel swatch span-3"><div class="swatch-color" style="background:#fffefa"></div><div class="swatch-info"><strong>Surface / Card</strong><span>#FFFEFA</span></div></article>
+          <article class="panel swatch span-3"><div class="swatch-color" style="background:#20292c"></div><div class="swatch-info"><strong>Primary Ink</strong><span>#20292C</span></div></article>
+          <article class="panel swatch span-3"><div class="swatch-color" style="background:#668f96"></div><div class="swatch-info"><strong>Primary Action</strong><span>#668F96</span></div></article>
+          <article class="panel swatch span-3"><div class="swatch-color" style="background:#527b83"></div><div class="swatch-info"><strong>Action Hover</strong><span>#527B83</span></div></article>
+          <article class="panel swatch span-3"><div class="swatch-color" style="background:#f3e7d3"></div><div class="swatch-info"><strong>Warm Accent</strong><span>#F3E7D3</span></div></article>
+          <article class="panel swatch span-3"><div class="swatch-color" style="background:#eef3f2"></div><div class="swatch-info"><strong>Primary Soft</strong><span>#EEF3F2</span></div></article>
+          <article class="panel swatch span-3"><div class="swatch-color" style="background:#e7e2d9"></div><div class="swatch-info"><strong>Border / Divider</strong><span>#E7E2D9</span></div></article>
+          <article class="panel span-6">
+            <h3 class="panel-title">Semantic colors</h3>
+            <div style="display:grid;gap:10px">
+              <div class="state success"><span class="state-mark"></span><div><strong>Success</strong><p>#477963 on #E9F3ED</p></div></div>
+              <div class="state warning"><span class="state-mark"></span><div><strong>Warning</strong><p>#966F35 on #FBF1DF</p></div></div>
+              <div class="state danger"><span class="state-mark"></span><div><strong>Error / Safety block</strong><p>#A65151 on #F9EAEA</p></div></div>
+              <div class="state"><span class="state-mark"></span><div><strong>Information</strong><p>#527B83 on #E9F1F2</p></div></div>
+            </div>
+          </article>
+          <article class="panel span-6">
+            <h3 class="panel-title">Contrast rules</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Content</th><th>Token</th><th>Use</th></tr></thead>
+                <tbody>
+                  <tr><td>Primary text</td><td><code>#20292C</code></td><td>Headings, important values, form values</td></tr>
+                  <tr><td>Body text</td><td><code>#4D5658</code></td><td>Paragraphs and standard interface copy</td></tr>
+                  <tr><td>Supporting text</td><td><code>#606A6C</code></td><td>Descriptions and metadata</td></tr>
+                  <tr><td>Muted text</td><td><code>#858B8C</code></td><td>Captions only; avoid for essential instructions</td></tr>
+                  <tr><td>On primary</td><td><code>#FFFFFF</code></td><td>Text/icons on teal actions</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="type">
+        <div class="section-head">
+          <h2>Typography</h2>
+          <p>Inter or the platform system sans handles headings, product UI, labels, controls, tables, and body copy. Letter spacing stays at zero except overlines.</p>
+        </div>
+        <div class="panel">
+          <div class="type-row"><span class="type-label">H1</span><h1 class="sample-h1">Explore with confidence</h1><span class="type-meta">48px / 52px, Inter 800<br />Web page title; app hero max 34px</span></div>
+          <div class="type-row"><span class="type-label">H2</span><h2 class="sample-h2">Family safety metrics</h2><span class="type-meta">40px / 45px, Inter 800<br />Web section title; app 30-34px</span></div>
+          <div class="type-row"><span class="type-label">H3</span><h3 class="sample-h3">Ask in simple words</h3><span class="type-meta">32px / 38px, Inter 800<br />Feature or app hero heading</span></div>
+          <div class="type-row"><span class="type-label">H4</span><h4 class="sample-h4">Previous chats</h4><span class="type-meta">24px / 30px, Inter 800<br />Card group or subsection</span></div>
+          <div class="type-row"><span class="type-label">H5</span><h5 class="sample-h5">Registered kids</h5><span class="type-meta">18px / 24px, Inter 800<br />Compact panel heading</span></div>
+          <div class="type-row"><span class="type-label">Body large</span><div class="body-lg">Clear, friendly explanations help children learn without feeling overwhelmed.</div><span class="type-meta">18px / 30px, Inter 400-650<br />Web intros and prominent support copy</span></div>
+          <div class="type-row"><span class="type-label">Body</span><div class="body-md">Use text, voice, or pictures to explore ideas with a friendly AI buddy.</div><span class="type-meta">16px / 26px, Inter 400-650<br />Default website body</span></div>
+          <div class="type-row"><span class="type-label">Body small</span><div class="body-sm">Your learning buddy keeps answers calm, clear, and age-aware.</div><span class="type-meta">14px / 22px, Inter 500-650<br />Default app body and card copy</span></div>
+          <div class="type-row"><span class="type-label">Caption</span><div class="caption">May 23, 2026 | Active | Pinned</div><span class="type-meta">12px / 17px, Inter 700<br />Metadata, timestamps, helper text</span></div>
+          <div class="type-row"><span class="type-label">Overline</span><div class="overline">Parent account</div><span class="type-meta">11px / 15px, Inter 850<br />Uppercase; 0.08em tracking</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="spacing">
+        <div class="section-head">
+          <h2>Spacing and shape</h2>
+          <p>Build on a 4px base with an 8px working rhythm. Use smaller gaps inside controls, 16-24px inside cards, and 48-64px between website sections.</p>
+        </div>
+        <div class="grid">
+          <article class="panel span-6">
+            <h3 class="panel-title">Spacing scale</h3>
+            <div class="space-scale">
+              <div class="space-item"><code>space-1</code><div class="space-bar" style="width:4px"></div><span>4px</span></div>
+              <div class="space-item"><code>space-2</code><div class="space-bar" style="width:8px"></div><span>8px</span></div>
+              <div class="space-item"><code>space-3</code><div class="space-bar" style="width:12px"></div><span>12px</span></div>
+              <div class="space-item"><code>space-4</code><div class="space-bar" style="width:16px"></div><span>16px</span></div>
+              <div class="space-item"><code>space-6</code><div class="space-bar" style="width:24px"></div><span>24px</span></div>
+              <div class="space-item"><code>space-8</code><div class="space-bar" style="width:32px"></div><span>32px</span></div>
+              <div class="space-item"><code>space-12</code><div class="space-bar" style="width:48px"></div><span>48px</span></div>
+              <div class="space-item"><code>space-16</code><div class="space-bar" style="width:64px"></div><span>64px</span></div>
+            </div>
+          </article>
+          <article class="panel span-6">
+            <h3 class="panel-title">Radii and elevation</h3>
+            <div class="grid">
+              <div class="span-3"><div class="radius-demo" style="border-radius:4px"></div><span class="code">XS 4px</span></div>
+              <div class="span-3"><div class="radius-demo" style="border-radius:8px"></div><span class="code">SM 8px</span></div>
+              <div class="span-3"><div class="radius-demo" style="border-radius:12px"></div><span class="code">MD 12px</span></div>
+              <div class="span-3"><div class="radius-demo" style="border-radius:16px"></div><span class="code">LG 16px</span></div>
+              <div class="span-4"><div class="shadow-demo" style="box-shadow:var(--shadow-1)"></div><span class="code">Elevation 1</span></div>
+              <div class="span-4"><div class="shadow-demo" style="box-shadow:var(--shadow-2)"></div><span class="code">Elevation 2</span></div>
+              <div class="span-4"><div class="shadow-demo" style="box-shadow:var(--shadow-3)"></div><span class="code">Elevation 3</span></div>
+            </div>
+            <p class="body-sm" style="margin:22px 0 0">Use 8px for cards and panels, 12-16px for modals, and pill radius only for actions, tags, segmented controls, and status chips.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="buttons">
+        <div class="section-head">
+          <h2>Buttons and actions</h2>
+          <p>All clickable controls need normal, hover, active/pressed, keyboard focus, loading, and disabled treatment. Hover applies to pointer-based websites; mobile app controls use pressed feedback instead.</p>
+        </div>
+        <div class="grid">
+          <article class="panel span-12">
+            <h3 class="panel-title">Button hierarchy</h3>
+            <div class="button-row">
+              <button class="btn btn-primary">Primary action</button>
+              <button class="btn btn-secondary">Secondary</button>
+              <button class="btn btn-tertiary">Tertiary action</button>
+              <button class="btn btn-danger">Destructive</button>
+              <button class="icon-btn" aria-label="Back">&lsaquo;</button>
+              <button class="icon-btn is-active" aria-label="Voice active">&#9679;</button>
+            </div>
+          </article>
+          <article class="panel span-6">
+            <h3 class="panel-title">Primary states</h3>
+            <div class="button-row">
+              <button class="btn btn-primary">Normal</button>
+              <button class="btn btn-primary" style="background:var(--primary-hover)">Hover</button>
+              <button class="btn btn-primary is-active">Active</button>
+              <button class="btn btn-primary" disabled>Disabled</button>
+              <button class="btn btn-primary"><span aria-hidden="true">&#8635;</span> Loading</button>
+            </div>
+            <span class="code">44px default height; 52px app primary; minimum touch target 44 x 44px.</span>
+          </article>
+          <article class="panel span-6">
+            <h3 class="panel-title">Sizes</h3>
+            <div class="button-row">
+              <button class="btn btn-primary btn-sm">Small 36</button>
+              <button class="btn btn-primary">Default 44</button>
+              <button class="btn btn-primary btn-lg">Large 52</button>
+            </div>
+            <span class="code">Use small in dense web tables, default on websites, and large for primary app flows.</span>
+          </article>
+          <article class="panel span-12">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>State</th><th>Visual rule</th><th>Interaction rule</th></tr></thead>
+                <tbody>
+                  <tr><td>Normal</td><td>Primary teal or neutral surface</td><td>Clear verb; one primary action per region</td></tr>
+                  <tr><td>Hover (web)</td><td>Darker fill, stronger border/shadow, optional 1px lift</td><td>Never rely on hover to reveal required information</td></tr>
+                  <tr><td>Active / pressed</td><td>Darkest fill, no lift, inset shadow permitted</td><td>Immediate pointer/touch feedback; 80-120ms</td></tr>
+                  <tr><td>Focus visible</td><td>3px translucent teal outer ring</td><td>Required for keyboard users; do not remove outline without replacement</td></tr>
+                  <tr><td>Loading</td><td>Keep width stable; spinner plus present-tense label</td><td>Disable repeat submission but preserve readable label</td></tr>
+                  <tr><td>Disabled</td><td>50% opacity, no shadow</td><td>Use only when the reason is evident; helper copy explains blockers</td></tr>
+                  <tr><td>Selected / active nav</td><td>Teal fill with white text</td><td>Use `aria-current` or selected semantics</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="forms">
+        <div class="section-head">
+          <h2>Forms</h2>
+          <p>Labels remain visible above fields. Inputs use 46-48px height on the web and 48-56px in the app. Validation appears near the field and must not depend on color alone.</p>
+        </div>
+        <div class="grid">
+          <article class="panel span-4">
+            <div class="field">
+              <label for="default-field">Default field</label>
+              <input class="control" id="default-field" placeholder="Enter a value" />
+              <small>Optional helper text.</small>
+            </div>
+          </article>
+          <article class="panel span-4">
+            <div class="field">
+              <label for="error-field">Error field</label>
+              <input class="control" id="error-field" aria-invalid="true" value="12" />
+              <small style="color:var(--danger)">PIN must contain four digits.</small>
+            </div>
+          </article>
+          <article class="panel span-4">
+            <div class="field">
+              <label for="disabled-field">Disabled field</label>
+              <input class="control" id="disabled-field" value="Unavailable" disabled />
+              <small>This value cannot be changed.</small>
+            </div>
+          </article>
+          <article class="panel span-4">
+            <div class="field">
+              <label for="select-field">Select</label>
+              <select class="control" id="select-field"><option>Ravin</option><option>Maya</option></select>
+            </div>
+          </article>
+          <article class="panel span-4">
+            <div class="field">
+              <label for="message-field">Text area</label>
+              <textarea class="control" id="message-field" placeholder="Ask a question"></textarea>
+            </div>
+          </article>
+          <article class="panel span-4">
+            <h3 class="panel-title">Selection controls</h3>
+            <div style="display:grid;gap:14px">
+              <label class="check"><input type="checkbox" checked /><span>I agree to the Terms and Conditions.</span></label>
+              <label class="check"><input type="radio" name="mode" checked /><span>Child account</span></label>
+              <label class="check"><input type="radio" name="mode" /><span>Parent account</span></label>
+            </div>
+          </article>
+          <article class="panel span-12">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Form state</th><th>Required behavior</th><th>Message pattern</th></tr></thead>
+                <tbody>
+                  <tr><td>Idle</td><td>Visible label, optional placeholder, neutral border</td><td>Helper text is descriptive, not redundant</td></tr>
+                  <tr><td>Hover (web)</td><td>Slightly stronger neutral border</td><td>No copy change</td></tr>
+                  <tr><td>Focused</td><td>Primary border plus 3px focus halo</td><td>Keep helper or requirement visible</td></tr>
+                  <tr><td>Invalid</td><td>Danger border, soft danger background, error icon/text</td><td>Say what happened and how to fix it</td></tr>
+                  <tr><td>Valid</td><td>Optional success indicator after meaningful validation</td><td>Avoid success noise for every field</td></tr>
+                  <tr><td>Submitting</td><td>Preserve entered data; primary button becomes loading</td><td>"Creating account..." or "Sending code..."</td></tr>
+                  <tr><td>Success</td><td>Confirm result and next step</td><td>"Email confirmed. Opening parent setup."</td></tr>
+                  <tr><td>Server error</td><td>Keep form editable; focus summary or first error</td><td>"We could not create the account. Try again."</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="components">
+        <div class="section-head">
+          <h2>Core components</h2>
+          <p>Components use quiet surfaces and clear hierarchy. Avoid nesting multiple decorative cards. Reserve elevation for actionable or temporary surfaces such as cards, menus, and modals.</p>
+        </div>
+        <div class="grid">
+          <article class="panel span-6">
+            <h3 class="panel-title">Segmented navigation</h3>
+            <div class="nav-demo" role="tablist">
+              <button class="nav-item is-active">Child</button>
+              <button class="nav-item">Parent</button>
+              <button class="nav-item">Reports</button>
+            </div>
+            <span class="code">Active: teal fill; hover: primary-soft; container: surface + 1px line.</span>
+          </article>
+          <article class="panel card-demo span-6">
+            <span class="overline" style="color:var(--primary-hover)">Science</span>
+            <h4>Why is the sky blue?</h4>
+            <p>A simple explanation with examples, safe details, and a follow-up idea.</p>
+            <div class="button-row"><span class="tag">Active</span><button class="btn btn-secondary btn-sm">Open chat</button></div>
+          </article>
+          <article class="panel span-6">
+            <h3 class="panel-title">Feedback and alerts</h3>
+            <div style="display:grid;gap:10px">
+              <div class="state"><span class="state-mark"></span><div><strong>Information</strong><p>Your chat is saved automatically.</p></div></div>
+              <div class="state success"><span class="state-mark"></span><div><strong>Success</strong><p>Email confirmed successfully.</p></div></div>
+              <div class="state warning"><span class="state-mark"></span><div><strong>Screen time reminder</strong><p>Five minutes remain in today's session.</p></div></div>
+              <div class="state danger"><span class="state-mark"></span><div><strong>Safe redirect</strong><p>This topic needs help from a trusted adult.</p></div></div>
+            </div>
+          </article>
+          <article class="panel span-6">
+            <h3 class="panel-title">Modal and overlay specification</h3>
+            <div class="card-demo" style="padding:24px;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-3)">
+              <div style="display:flex;justify-content:space-between;gap:16px">
+                <div><span class="overline" style="color:var(--primary-hover)">Image upload</span><h4 style="margin-top:5px">Choose a picture</h4></div>
+                <button class="icon-btn" aria-label="Close">&times;</button>
+              </div>
+              <p>Images are explained with calm, age-aware language.</p>
+              <div class="button-row"><button class="btn btn-primary">Choose image</button><button class="btn btn-secondary">Cancel</button></div>
+            </div>
+            <span class="code">Web max-width 520-640px; app inset 16-20px. Trap focus and return it on close.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="responsive">
+        <div class="section-head">
+          <h2>App and web usage</h2>
+          <p>The same tokens serve both products, while density and scale adapt to context. App UI favors touch targets and compact headings. Websites use wider layouts, visible hover states, and larger section spacing.</p>
+        </div>
+        <div class="table-wrap panel">
+          <table>
+            <thead><tr><th>Property</th><th>Mobile app</th><th>Responsive website</th></tr></thead>
+            <tbody>
+              <tr><td>Viewport</td><td>Design from 393 x 852; support 320px+</td><td>320px to 1440px+; content max 1180-1280px</td></tr>
+              <tr><td>Page gutter</td><td>16-20px</td><td>20px mobile, 32px tablet, 40-64px desktop</td></tr>
+              <tr><td>Section gap</td><td>24-32px</td><td>48px tablet, 64-80px desktop</td></tr>
+              <tr><td>H1</td><td>30-34px</td><td>48px standard; up to 72px for a true landing hero</td></tr>
+              <tr><td>Body</td><td>14-16px / 1.5-1.6</td><td>16-18px / 1.6-1.65</td></tr>
+              <tr><td>Buttons</td><td>48-52px primary height</td><td>44px default; 36px only in dense tools</td></tr>
+              <tr><td>Cards</td><td>Full-width; 16-20px padding</td><td>Grid-based; 20-24px padding</td></tr>
+              <tr><td>Hover</td><td>Not required; use pressed state</td><td>Required for links, buttons, rows, cards, and icon controls</td></tr>
+              <tr><td>Navigation</td><td>Bottom/top app navigation; one active destination</td><td>Header/sidebar navigation with hover, focus, and `aria-current`</td></tr>
+              <tr><td>Motion</td><td>180-280ms; gentle onboarding illustrations</td><td>120-200ms controls; 200-300ms overlays</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section" id="accessibility">
+        <div class="section-head">
+          <h2>Accessibility and content</h2>
+          <p>Safety-oriented products need especially clear language, predictable controls, and visible state changes. Every interaction should work without color, hover, or animation.</p>
+        </div>
+        <div class="do-dont">
+          <article class="rule do">
+            <strong>Do</strong>
+            <ul>
+              <li>Maintain at least 4.5:1 text contrast and 3:1 for large text and essential UI boundaries.</li>
+              <li>Use 44 x 44px minimum touch targets and visible keyboard focus.</li>
+              <li>Use labels that remain visible after typing.</li>
+              <li>Announce loading, success, errors, and modal changes to assistive technology.</li>
+              <li>Respect reduced-motion preferences and keep layouts stable while loading.</li>
+              <li>Write calm, direct safety messages with a constructive next action.</li>
+            </ul>
+          </article>
+          <article class="rule dont">
+            <strong>Do not</strong>
+            <ul>
+              <li>Use muted gray for essential instructions or errors.</li>
+              <li>Communicate state with color alone.</li>
+              <li>Disable actions without explaining what is required.</li>
+              <li>Use all caps for sentences or long labels.</li>
+              <li>Place cards inside cards or use excessive shadows.</li>
+              <li>Use playful wording for serious safety, privacy, or account errors.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="tokens">
+        <div class="section-head">
+          <h2>Implementation tokens</h2>
+          <p>These are the recommended shared variables for app and website codebases. Platform adapters may map them to native semantic names.</p>
+        </div>
+        <pre class="panel code" style="white-space:pre-wrap;margin:0;color:var(--text)">:root {
+  --font-display: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-ui: Inter, ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: #fbfaf5;
+  --color-bg-soft: #f4f2ec;
+  --color-surface: #fffefa;
+  --color-text: #20292c;
+  --color-text-body: #4d5658;
+  --color-text-muted: #858b8c;
+  --color-border: #e7e2d9;
+  --color-primary: #668f96;
+  --color-primary-hover: #527b83;
+  --color-primary-active: #426970;
+  --color-primary-soft: #eef3f2;
+  --color-accent: #f3e7d3;
+  --color-danger: #a65151;
+
+  --radius-card: 8px;
+  --radius-control: 8px;
+  --radius-modal: 16px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --shadow-card: 0 4px 12px rgba(52, 58, 55, 0.08);
+  --shadow-modal: 0 18px 42px rgba(52, 58, 55, 0.12);
+  --focus-ring: 0 0 0 3px rgba(102, 143, 150, 0.35);
+}</pre>
+      </section>
+    </main>
+  </body>
+</html>

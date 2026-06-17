@@ -269,6 +269,7 @@ const chatHistoryBackdrop = document.querySelector("#chatHistoryBackdrop");
 const chatHistoryClose = document.querySelector("#chatHistoryClose");
 const chatHistoryFilterButtons = document.querySelectorAll("[data-history-filter]");
 const historyNewChatButton = document.querySelector("#historyNewChatButton");
+const historySearchInput = document.querySelector("#historySearchInput");
 const chatProgressStatus = document.querySelector("#chatProgressStatus");
 const streakPopover = document.querySelector("#streakPopover");
 const messageArea = document.querySelector("#messageArea");
@@ -980,6 +981,7 @@ function showScreen(name, options = {}) {
     alertQuestion.textContent = alertQuestion.textContent || "Current chat";
     alertReason.textContent = alertReason.textContent || "Screen time limit reached";
   }
+  decorateBrandLocks();
 }
 
 function showPreviousScreen() {
@@ -1004,6 +1006,33 @@ function syncStaticProfileTriggers() {
       image.src = isParent ? parentSource : kidSource;
       image.alt = isParent ? "Parent profile" : `${kid?.name || "Kid"} profile`;
     }
+  });
+}
+
+function decorateBrandLocks() {
+  const brandImages = document.querySelectorAll(".internal-screen-logo, .chat-header-brand, .internal-brand img");
+  brandImages.forEach((image) => {
+    if (!(image instanceof HTMLImageElement)) return;
+    let wrapper = image.parentElement;
+    if (!wrapper?.classList.contains("brand-lock")) {
+      wrapper = document.createElement("span");
+      wrapper.className = "brand-lock";
+      image.replaceWith(wrapper);
+      wrapper.appendChild(image);
+    }
+    const header = wrapper.closest("header, .chat-header-capsule, .app-topbar, .chat-top-line");
+    const isCompact =
+      image.classList.contains("chat-header-brand") ||
+      wrapper.closest(".internal-brand") ||
+      Boolean(
+        header?.querySelector(
+          ".ghost-icon, .profile-mini, .home-mini, .global-menu-button, .chat-history-button, .chat-progress-status, .avatar-trigger"
+        )
+      );
+    image.src = "pratvim-icon-new.svg";
+    image.dataset.brandReady = "true";
+    wrapper.classList.toggle("is-compact", isCompact);
+    wrapper.classList.toggle("is-full", !isCompact);
   });
 }
 
@@ -1178,10 +1207,13 @@ function renderParentOnboarding() {
 }
 
 let chatHistoryFilter = "pinned";
+let chatHistorySearch = "";
 
 function sortedChats() {
   const filtered = chatHistoryFilter === "pinned" ? chats.filter((chat) => chat.pinned) : chats;
-  return filtered.slice();
+  const search = chatHistorySearch.trim().toLowerCase();
+  if (!search) return filtered.slice();
+  return filtered.filter((chat) => `${chat.title} ${chat.preview}`.toLowerCase().includes(search));
 }
 
 function chatStatus(chat) {
@@ -1246,7 +1278,7 @@ function renderHistory() {
       `
         )
         .join("")
-    : `<div class="chat-history-empty"><strong>No pinned chats yet</strong><p>Pin a useful conversation and it will appear here.</p></div>`;
+    : `<div class="chat-history-empty"><strong>${chatHistoryFilter === "pinned" ? "No pinned chats yet" : "No matching chats"}</strong><p>${chatHistoryFilter === "pinned" ? "Pin a useful conversation and it will appear here." : "Try another keyword or open a different chat."}</p></div>`;
 
   chatHistoryFilterButtons.forEach((button) => {
     const isActive = button.dataset.historyFilter === chatHistoryFilter;
@@ -1264,6 +1296,7 @@ function renderHistory() {
 }
 
 function openChatHistory() {
+  if (historySearchInput) historySearchInput.value = chatHistorySearch;
   renderHistory();
   chatHistoryLayer?.classList.remove("is-hidden");
   chatHistoryButton?.setAttribute("aria-expanded", "true");
@@ -1296,11 +1329,13 @@ function positionStreakPopover() {
 
 function renderMessages() {
   const chat = activeChat();
+  const kid = kidProfiles[activeLoginKidIndex] || kidProfiles[0];
+  const kidSrc = kidAvatar(kid, activeLoginKidIndex);
   if (!chat.messages.length) {
     messageArea.innerHTML = `
       <div class="chat-empty-state">
         <div class="ask-anything-graphic" aria-hidden="true">
-          <img src="pratvim-icon-exact.svg" alt="" />
+          <img src="pratvim-icon-new.svg" alt="" />
           <span class="ask-suggestion one">Why?</span>
           <span class="ask-suggestion two">How?</span>
           <span class="ask-suggestion three">What?</span>
@@ -1315,7 +1350,11 @@ function renderMessages() {
     .map(
       (message) => `
         <article class="chat-message ${message.role}">
-          <div class="avatar">${message.role === "kid" ? "" : message.role === "blocked" ? "!" : "P"}</div>
+          ${
+            message.role === "kid"
+              ? `<div class="avatar avatar-photo"><img src="${kidSrc}" alt="${kid?.name || "Kid"}" /></div>`
+              : `<div class="avatar">${message.role === "blocked" ? "!" : "P"}</div>`
+          }
           <div class="bubble">
             <p>${message.text}</p>
             ${message.role === "loading" ? "" : `<time>${message.time}</time>`}
@@ -1350,6 +1389,7 @@ function renderChat() {
   if (micBtn) micBtn.disabled = chat.paused;
   renderHistory();
   renderMessages();
+  decorateBrandLocks();
 }
 
 function createNewChat() {
@@ -1768,6 +1808,8 @@ sizeButtons.forEach((button) => {
   });
 });
 
+decorateBrandLocks();
+
 onboardingNext.addEventListener("click", () => {
   if (onboardingIndex === onboardingSlides.length - 1) {
     showScreen("home");
@@ -1795,6 +1837,10 @@ chatHistoryFilterButtons.forEach((button) => {
     chatHistoryFilter = button.dataset.historyFilter;
     renderHistory();
   });
+});
+historySearchInput?.addEventListener("input", () => {
+  chatHistorySearch = historySearchInput.value;
+  renderHistory();
 });
 historyNewChatButton?.addEventListener("click", createNewChat);
 chatProgressStatus?.addEventListener("click", (event) => {

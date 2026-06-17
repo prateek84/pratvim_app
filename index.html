@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pratvim App Prototype</title>
-    <link rel="icon" href="pratvim-icon-exact.svg" type="image/svg+xml" />
+    <link rel="icon" href="pratvim-icon-new.svg" type="image/svg+xml" />
     <script>
       if (window.Capacitor?.isNativePlatform?.() || location.protocol === "capacitor:") {
         document.documentElement.classList.add("native-app");
@@ -15,7 +15,7 @@
   <body>
     <main class="prototype-shell">
       <aside class="spec-panel">
-        <p class="eyebrow">App layout</p>
+        <p class="eyebrow">App layout</p>prat
         <h1>Pratvim</h1>
         <p class="spec-copy">A protected AI learning space where children can ask, understand, and explore confidently.</p>
 
@@ -29,6 +29,7 @@
           <button class="size-btn is-active" data-width="393" data-height="852" type="button">iPhone 16</button>
           <button class="size-btn" data-width="402" data-height="874" type="button">16 Pro</button>
           <button class="size-btn" data-width="440" data-height="956" type="button">16 Pro Max</button>
+          <button class="size-btn" data-width="834" data-height="1194" type="button">iPad</button>
         </div>
 
         <nav class="screen-nav" aria-label="Prototype screens">
@@ -81,30 +82,29 @@
             <div class="splash-center">
               <div class="splash-brand">
                 <div class="splash-brand-row">
-                  <img class="splash-brand-icon" src="pratvim-icon-exact.svg" alt="" />
-                  <h1>Pratvim</h1>
+                  <img class="splash-brand-logo-main" src="pratvim-wordmark.png" alt="Pratvim" />
                 </div>
                 <p class="splash-tagline">Protected Curiosity, Trusted AI</p>
               </div>
               <div class="splash-hero-stage">
                 <div class="splash-reference-scene" role="img" aria-label="A child exploring protected AI questions">
-                  <div class="splash-question-card sky" aria-hidden="true">
+                  <div class="splash-question-card sky is-featured" aria-hidden="true">
                     <span class="question-icon">💡</span>
                     <strong>Why is the sky blue?</strong>
                   </div>
-                  <div class="splash-question-card orbit" aria-hidden="true">
-                    <span class="question-icon">🪐</span>
-                    <strong>How do planets orbit?</strong>
-                  </div>
-                  <div class="splash-question-card leaf" aria-hidden="true">
-                    <span class="question-icon">🌿</span>
-                    <strong>Why do plants need sunlight?</strong>
-                  </div>
-                  <div class="splash-question-card puzzle" aria-hidden="true">
+                  <div class="splash-question-card puzzle is-featured" aria-hidden="true">
                     <span class="question-icon">🧩</span>
                     <strong>How do puzzles fit together?</strong>
                   </div>
-                  <div class="splash-question-card kind" aria-hidden="true">
+                  <div class="splash-question-card orbit is-ghost" aria-hidden="true">
+                    <span class="question-icon">🪐</span>
+                    <strong>How do planets orbit?</strong>
+                  </div>
+                  <div class="splash-question-card leaf is-ghost" aria-hidden="true">
+                    <span class="question-icon">🌿</span>
+                    <strong>Why do plants need sunlight?</strong>
+                  </div>
+                  <div class="splash-question-card kind is-ghost" aria-hidden="true">
                     <span class="question-icon">💚</span>
                     <strong>Can kind words make someone's day?</strong>
                   </div>
@@ -113,16 +113,7 @@
                   </div>
                   <div class="splash-scene-trail" aria-hidden="true"></div>
                   <div class="splash-solo-kid" aria-hidden="true">
-                    <span class="kid-shadow"></span>
-                    <span class="kid-head"><i></i></span>
-                    <span class="kid-hair"></span>
-                    <span class="kid-body"></span>
-                    <span class="kid-arm left"></span>
-                    <span class="kid-arm right"></span>
-                    <span class="kid-leg left"></span>
-                    <span class="kid-leg right"></span>
-                    <span class="kid-shoe left"></span>
-                    <span class="kid-shoe right"></span>
+                    <img class="splash-kid-figure splash-kid-single-figure" src="splash-kid-cutout.png" alt="" />
                   </div>
                 </div>
               </div>
@@ -144,7 +135,7 @@
           <section class="app-screen screen-onboarding" data-view="onboarding">
             <header class="minimal-top branded-top">
               <button class="ghost-icon" data-screen="login" type="button" aria-label="Back">‹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="text-link" data-screen="home" type="button">Skip</button>
             </header>
             <div class="onboarding-card kid-onboarding-card">
@@ -188,7 +179,7 @@
           <section class="app-screen screen-login" data-view="login">
             <header class="minimal-top login-topbar">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <span class="header-balance" aria-hidden="true"></span>
             </header>
             <div class="login-mode-tabs icon-mode-tabs login-page-mode-tabs" aria-label="Login type">
@@ -228,7 +219,7 @@
           <section class="app-screen screen-parent-register" data-view="parent-register">
             <header class="minimal-top branded-top">
               <button class="ghost-icon" data-screen="splash" type="button" aria-label="Back">â€¹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <span class="header-balance" aria-hidden="true"></span>
             </header>
             <form class="register-panel" id="parentRegisterForm">
@@ -279,7 +270,7 @@
           <section class="app-screen screen-parent-email-confirm" data-view="parent-email-confirm">
             <header class="minimal-top branded-top">
               <button class="ghost-icon" data-screen="parent-register" type="button" aria-label="Back">â€¹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <span class="header-balance" aria-hidden="true"></span>
             </header>
             <div class="register-panel email-confirm-panel">
@@ -300,7 +291,7 @@
           <section class="app-screen screen-parent-onboarding" data-view="parent-onboarding">
             <header class="minimal-top branded-top">
               <button class="ghost-icon" data-screen="parent-dashboard" type="button" aria-label="Back">â€¹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="text-link" data-screen="parent-dashboard" type="button">Skip</button>
             </header>
             <div class="onboarding-card parent-onboarding-card">
@@ -347,7 +338,7 @@
           <section class="app-screen screen-kid-register" data-view="kid-register">
             <header class="minimal-top branded-top">
               <button class="ghost-icon" data-screen="parent-dashboard" type="button" aria-label="Back">â€¹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
 
@@ -397,7 +388,7 @@
           <section class="app-screen screen-parent-dashboard" data-view="parent-dashboard">
             <header class="chat-header parent-app-header">
               <button class="ghost-icon" data-screen="login" type="button" aria-label="Back">â€¹</button>
-              <div class="internal-brand"><img src="pratvim-icon-exact.svg" alt="Pratvim" /></div>
+              <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
               <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
 
@@ -444,7 +435,7 @@
           <section class="app-screen screen-parent-analytics" data-view="parent-analytics">
             <header class="chat-header parent-app-header">
               <button class="ghost-icon" data-screen="parent-dashboard" type="button" aria-label="Back">â€¹</button>
-              <div class="internal-brand"><img src="pratvim-icon-exact.svg" alt="Pratvim" /></div>
+              <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
               <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
 
@@ -476,7 +467,7 @@
           <section class="app-screen screen-avatar-library" data-view="avatar-library">
             <header class="chat-header info-header">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="kid" type="button" aria-label="Open kid profile menu" aria-expanded="false"><img class="static-profile-image" src="kid-ravin-avatar.png" alt="Kid profile" /></button>
             </header>
             <section class="avatar-library-page">
@@ -496,7 +487,7 @@
           <section class="app-screen screen-payment-plans" data-view="payment-plans">
             <header class="chat-header info-header">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
             <section class="payment-plans-page">
@@ -519,7 +510,7 @@
           <section class="app-screen screen-payment-confirmation" data-view="payment-confirmation">
             <header class="chat-header info-header">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
             <section class="payment-confirmation-page">
@@ -534,7 +525,7 @@
           <section class="app-screen screen-parent-alerts" data-view="parent-alerts">
             <header class="chat-header parent-app-header">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <div class="internal-brand"><img src="pratvim-icon-exact.svg" alt="Pratvim" /></div>
+              <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
               <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
             <section class="parent-alerts-body">
@@ -553,7 +544,7 @@
           <section class="app-screen screen-home" data-view="home">
             <header class="app-topbar">
               <button class="home-mini" data-screen="home" type="button" aria-label="Home">⌂</button>
-              <div class="internal-brand"><img src="pratvim-icon-exact.svg" alt="Pratvim" /></div>
+              <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
               <button class="profile-mini avatar-trigger" type="button" aria-label="Upload Ravin avatar"><img class="mini-kid avatar-image" src="ravin.jpg" alt="" /></button>
             </header>
 
@@ -588,7 +579,7 @@
                 <button class="chat-history-button" id="chatHistoryButton" type="button" aria-label="Open previous chats" aria-expanded="false">
                   <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
                 </button>
-                <img class="chat-header-brand" src="pratvim-icon-exact.svg" alt="Pratvim" />
+                <img class="chat-header-brand" src="pratvim-icon-new.svg" alt="Pratvim" />
               </div>
               <div class="chat-header-capsule chat-header-right">
               <button class="inline-timer chat-progress-status" id="chatProgressStatus" type="button" aria-label="Show 4-day learning streak and 4-hour timer" aria-expanded="false" title="4-day streak, 4-hour timer">
@@ -598,6 +589,7 @@
                 <span class="chat-streak-badge" aria-hidden="true">4h</span>
               </button>
               <button class="profile-mini chat-avatar-button avatar-trigger" type="button" aria-label="Open kid profile"><img class="mini-kid avatar-image" src="ravin.jpg" alt="" /></button>
+              <div class="chat-header-companion" aria-hidden="true"><img src="splash-kid-cutout.png" alt="" /></div>
               </div>
             </header>
 
@@ -623,17 +615,16 @@
 
             <form class="composer" id="composer">
               <input id="imageInput" type="file" accept="image/*" />
+              <button class="tool-btn image" id="imageUploadBtn" type="button" aria-label="Upload image">+</button>
               <div class="composer-field">
-                <button class="tool-btn image" id="imageUploadBtn" type="button" aria-label="Upload image">+</button>
                 <input id="chatInput" autocomplete="off" placeholder="Type your question..." />
-                <span class="composer-safety" aria-label="Protected chat">Safe</span>
+                <button class="tool-btn send" type="submit" aria-label="Send">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M4.5 11.2 19.4 4.3c.8-.4 1.6.4 1.2 1.2l-6.9 14.9c-.3.7-1.3.6-1.5-.1l-1.8-6.2-6.2-1.8c-.7-.2-.8-1.2-.1-1.5Z" />
+                    <path d="m10.6 13.9 4.1-4.1" />
+                  </svg>
+                </button>
               </div>
-              <button class="tool-btn send" type="submit" aria-label="Send">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M4.5 11.2 19.4 4.3c.8-.4 1.6.4 1.2 1.2l-6.9 14.9c-.3.7-1.3.6-1.5-.1l-1.8-6.2-6.2-1.8c-.7-.2-.8-1.2-.1-1.5Z" />
-                  <path d="m10.6 13.9 4.1-4.1" />
-                </svg>
-              </button>
             </form>
             <p class="chat-footnote">Your learning buddy keeps answers calm, clear, and age-aware.</p>
           </section>
@@ -643,7 +634,7 @@
             <aside class="chat-history-panel" aria-label="Previous chats">
               <div class="chat-history-heading">
                 <div>
-                  <span>Kid conversations</span>
+                  <img class="chat-history-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
                   <h2>Previous chats</h2>
                 </div>
                 <button class="chat-history-close" id="chatHistoryClose" type="button" aria-label="Close previous chats">&times;</button>
@@ -653,11 +644,14 @@
                   <img src="icon-pin.svg" alt="" aria-hidden="true" />
                   <span>Pinned chats</span>
                 </button>
-                <button data-history-filter="recent" type="button" role="tab" aria-selected="false">
+                <button data-history-filter="all" type="button" role="tab" aria-selected="false">
                   <img src="icon-clock-3.svg" alt="" aria-hidden="true" />
-                  <span>Recent chats</span>
+                  <span>All chats</span>
                 </button>
               </div>
+              <label class="chat-history-search" aria-label="Search chats">
+                <input id="historySearchInput" type="search" placeholder="Search chats" />
+              </label>
               <div class="chat-history-list" id="historyList"></div>
               <button class="primary-btn chat-history-new" id="historyNewChatButton" type="button">Start New Chat</button>
             </aside>
@@ -666,7 +660,7 @@
           <section class="app-screen screen-timer-demo" data-view="timer-demo">
             <header class="chat-header branded-content-header">
               <button class="ghost-icon" data-screen="chat" type="button" aria-label="Back">â€¹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <div class="chat-title">
                 <span>Choose style</span>
                 <strong>Timer Animations</strong>
@@ -722,7 +716,7 @@
           <section class="app-screen screen-info" data-view="about">
             <header class="chat-header info-header">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
             <article class="info-page">
@@ -739,7 +733,7 @@
           <section class="app-screen screen-info" data-view="privacy">
             <header class="chat-header info-header">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
             <article class="info-page">
@@ -758,7 +752,7 @@
           <section class="app-screen screen-info" data-view="terms">
             <header class="chat-header info-header">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
             <article class="info-page">
@@ -779,7 +773,7 @@
           <section class="app-screen screen-info screen-team" data-view="team">
             <header class="chat-header info-header">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
             <article class="info-page team-page">
@@ -844,7 +838,7 @@
           <section class="app-screen screen-info" data-view="contact">
             <header class="chat-header info-header">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
             <article class="info-page">
@@ -861,7 +855,7 @@
           <section class="app-screen screen-support" data-view="support">
             <header class="chat-header info-header">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
             <form class="support-page" id="supportForm">
@@ -1076,7 +1070,7 @@
           <section class="app-screen screen-parent-alert" id="parentAlert" data-view="parent-alert" aria-label="Timer alert screen">
             <header class="chat-header branded-content-header">
               <button class="ghost-icon" id="alertBackBtn" type="button" aria-label="Back">‹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-exact.svg" alt="Pratvim" />
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <div class="chat-title">
                 <span>Screen timer</span>
                 <strong>Timer Alert</strong>
@@ -1110,3 +1104,4 @@
     <script src="app.js"></script>
   </body>
 </html>
+

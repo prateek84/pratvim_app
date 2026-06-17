@@ -8986,12 +8986,12 @@ html[data-theme="curio-sand-light"] body {
   background: linear-gradient(145deg, #fbfaf5 0%, #f8efe1 58%, #f3e7d3 100%);
 }
 
-html[data-theme="curio-sand-light"] img[src$="pratvim-icon-exact.svg"] {
-  content: url("pratvim-icon-exact.svg");
+html[data-theme="curio-sand-light"] img[src$="pratvim-icon-new.svg"] {
+  content: url("pratvim-icon-new.svg");
 }
 
 html[data-theme="curio-sand-light"] .splash-brand-lockup {
-  content: url("pratvim-brand-exact.svg");
+  content: url("pratvim-wordmark.svg");
 }
 
 html[data-theme="curio-sand-light"] :is(
@@ -9194,11 +9194,11 @@ html[data-theme="curio-sand-light"] .screen-chat .chat-top-line::before {
   justify-self: center;
   grid-column: 2;
   grid-row: 1;
-  background: url("pratvim-icon-exact.svg") center / contain no-repeat;
+  background: url("pratvim-icon-new.svg") center / contain no-repeat;
 }
 
 html[data-theme="curio-sand-light"] .screen-chat .chat-top-line::before {
-  background-image: url("pratvim-icon-exact.svg");
+  background-image: url("pratvim-icon-new.svg");
 }
 
 html[data-theme="curio-sand-light"] .screen-chat .chat-progress-status {
@@ -10999,7 +10999,7 @@ html[data-theme="curio-sand-light"] .chat-header-brand {
   height: 43px;
   margin-left: 12px;
   object-fit: contain;
-  content: url("pratvim-icon-exact.svg");
+  content: url("pratvim-icon-new.svg");
 }
 
 html[data-theme="curio-sand-light"] .screen-chat .chat-progress-status {
@@ -14079,3 +14079,1037 @@ html[data-theme="curio-sand-light"] .splash-family-hero {
   35% { transform: scale(1.125) translateY(-2px) rotate(0.12deg); }
   70% { transform: scale(1.13) translateY(1px) rotate(-0.1deg); }
 }
+
+/* Final June 17 UI alignment pass */
+html[data-theme="curio-sand-light"] {
+  --screen-cream: #fffdf8;
+  --screen-shell: #fbfaf5;
+  --screen-wave: #d8ecea;
+  --screen-wave-2: #c8e2df;
+  --screen-accent: #1b4e56;
+  --screen-accent-soft: #5d8f96;
+  --header-icon-size: clamp(40px, calc(var(--app-width) / 9), 46px);
+  --brand-full-width: clamp(136px, calc(var(--app-width) * 0.36), 172px);
+}
+
+html[data-theme="curio-sand-light"] .app-screen {
+  position: absolute;
+  background:
+    radial-gradient(circle at 50% 6%, rgba(255, 255, 255, 0.98), transparent 200px),
+    linear-gradient(180deg, var(--screen-cream) 0%, var(--screen-shell) 62%, #eef6f4 100%) !important;
+}
+
+html[data-theme="curio-sand-light"] .app-screen::before,
+html[data-theme="curio-sand-light"] .app-screen::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  pointer-events: none;
+}
+
+html[data-theme="curio-sand-light"] .app-screen::before {
+  top: 0;
+  bottom: auto;
+  height: 160px;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.85), transparent 74%);
+  z-index: 0;
+}
+
+html[data-theme="curio-sand-light"] .app-screen::after {
+  height: 176px;
+  background:
+    url("reference-wave-crest.png") center top / 100% 76px no-repeat,
+    linear-gradient(180deg, transparent 0 42px, #c8e1de 42px 100%);
+  opacity: 1;
+  z-index: 0;
+}
+
+html[data-theme="curio-sand-light"] .app-screen > * {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme="curio-sand-light"] :is(.app-topbar, .chat-top-line, .chat-header, .minimal-top) {
+  background: rgba(251, 250, 245, 0.92) !important;
+  border-bottom: 1px solid rgba(223, 210, 190, 0.68);
+  backdrop-filter: blur(14px);
+  padding-top: 18px !important;
+}
+
+html[data-theme="curio-sand-light"] :is(
+  .ghost-icon,
+  .home-mini,
+  .profile-mini,
+  .chat-history-button,
+  .chat-avatar-button,
+  .global-menu-button,
+  .parent-analytics-icon,
+  .chat-header-companion
+) {
+  width: var(--header-icon-size) !important;
+  height: var(--header-icon-size) !important;
+  border-radius: 18px !important;
+}
+
+html[data-theme="curio-sand-light"] :is(.profile-mini img, .chat-header-companion img, .mini-kid) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+html[data-theme="curio-sand-light"] .brand-lock {
+  display: inline-flex;
+  align-items: center;
+  height: var(--header-icon-size);
+  overflow: hidden;
+  transform-origin: left center;
+}
+
+html[data-theme="curio-sand-light"] .brand-lock img {
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: left center;
+}
+
+html[data-theme="curio-sand-light"] .brand-lock.is-full {
+  width: clamp(154px, calc(var(--app-width) * 0.42), 196px);
+}
+
+html[data-theme="curio-sand-light"] .brand-lock.is-compact {
+  width: clamp(54px, calc(var(--app-width) / 7), 62px);
+  animation: brandSlideToIcon 1.15s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+html[data-theme="curio-sand-light"] .internal-brand {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-brand-row {
+  width: 100%;
+  justify-content: center;
+}
+
+html[data-theme="curio-sand-light"] .splash-brand-logo {
+  width: min(82%, 280px);
+  height: auto;
+  display: block;
+}
+
+html[data-theme="curio-sand-light"] .splash-brand h1,
+html[data-theme="curio-sand-light"] .splash-brand-icon {
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-splash.is-active {
+  background:
+    radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 0.98), transparent 220px),
+    linear-gradient(180deg, var(--screen-cream) 0%, var(--screen-shell) 60%, #edf5f3 100%) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-splash.is-active::after {
+  display: none;
+}
+
+html[data-theme="curio-sand-light"] .splash-center {
+  padding-top: 28px !important;
+  gap: 14px !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-tagline {
+  color: #5c8d92 !important;
+  font-size: 13px !important;
+  letter-spacing: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-reference-scene {
+  width: min(100%, 340px);
+  min-height: 560px;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card {
+  opacity: 0;
+  transform: translateX(-26px) translateY(10px) rotate(var(--card-rot, 0deg));
+  animation:
+    splashCardReveal 0.78s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+    questionCardFloat 4.8s ease-in-out 2.2s infinite;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.puzzle {
+  --card-rot: -4deg;
+  animation-delay: 0.15s, 2.25s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.sky {
+  --card-rot: -5deg;
+  animation-delay: 0.55s, 2.45s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.orbit {
+  --card-rot: -1deg;
+  animation-delay: 0.95s, 2.65s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.leaf {
+  --card-rot: 4deg;
+  animation-delay: 1.35s, 2.85s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.kind {
+  --card-rot: 3deg;
+  animation-delay: 1.75s, 3.05s;
+}
+
+html[data-theme="curio-sand-light"] .splash-solo-kid {
+  width: 250px;
+  height: 360px;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: splashKidFloat 5.2s ease-in-out infinite;
+}
+
+html[data-theme="curio-sand-light"] .splash-solo-kid .kid-shadow {
+  left: 34px;
+  bottom: 18px;
+  width: 182px;
+  height: 30px;
+  background: radial-gradient(circle, rgba(64, 79, 81, 0.24), transparent 72%);
+}
+
+html[data-theme="curio-sand-light"] .splash-kid-figure {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 18px 26px rgba(69, 86, 87, 0.16));
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel {
+  background:
+    url("reference-wave-crest.png") center top / 100% 78px no-repeat,
+    linear-gradient(180deg, transparent 0 48px, #c8e1de 48px 100%);
+  padding-top: 70px;
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel::before,
+html[data-theme="curio-sand-light"] .splash-story-panel::after {
+  content: "";
+  position: absolute;
+  inset: -52px -14px auto;
+  height: 128px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel::before {
+  background: none;
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel::after {
+  inset: auto 0 0;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 0 52px, rgba(200, 225, 222, 0.02) 52px, rgba(200, 225, 222, 0.02) 100%);
+  opacity: 1;
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel h2 {
+  font-size: 22px !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-get-started {
+  letter-spacing: 1px !important;
+}
+
+html[data-theme="curio-sand-light"] .chat-top-line {
+  padding: 22px 0 12px !important;
+  margin-bottom: 10px;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-left,
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-right {
+  gap: 8px;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-capsule {
+  background: rgba(255, 254, 250, 0.88) !important;
+  border: 1px solid rgba(233, 220, 199, 0.72) !important;
+  box-shadow: 0 8px 18px rgba(72, 61, 44, 0.08) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-top-line {
+  grid-template-columns: minmax(0, 146px) minmax(0, 156px) !important;
+  gap: 12px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-left {
+  width: 146px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-right {
+  width: 156px !important;
+  padding-right: 8px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-brand {
+  display: block;
+  width: 44px !important;
+  height: 44px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-progress-status {
+  width: 58px !important;
+  min-width: 58px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  padding: 0 4px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-companion {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: rgba(255, 254, 250, 0.88);
+  box-shadow: 0 8px 18px rgba(72, 61, 44, 0.08);
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 16px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-companion img {
+  width: 86%;
+  height: 86%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .message-pane {
+  padding: 2px 0 8px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message {
+  align-items: flex-end;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.kid {
+  justify-content: flex-end;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.kid .avatar {
+  order: 2;
+  margin-left: 8px;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.kid .bubble {
+  order: 1;
+  width: min(74%, 286px) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message .avatar {
+  width: 38px !important;
+  height: 38px !important;
+  font-size: 19px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message .avatar.avatar-photo {
+  overflow: hidden;
+  padding: 0;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message .avatar.avatar-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .bubble p {
+  letter-spacing: 1px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px !important;
+  padding: 7px 8px !important;
+  border-radius: 30px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-height: 42px;
+  padding: 0 6px 0 14px;
+  border: 1px solid rgba(234, 219, 196, 0.7);
+  border-radius: 999px;
+  background: rgba(255, 254, 250, 0.96);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.84);
+}
+
+html[data-theme="curio-sand-light"] .screen-chat #chatInput {
+  flex: 1 1 auto;
+  height: 34px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  letter-spacing: 1px !important;
+  font-size: 14px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.image {
+  width: 44px !important;
+  height: 44px !important;
+  margin-left: 2px;
+  flex: 0 0 auto;
+  border-radius: 16px !important;
+  background: rgba(255, 254, 250, 0.98) !important;
+  color: #22828a !important;
+  box-shadow: 0 8px 16px rgba(72, 61, 44, 0.08) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.send {
+  width: 36px !important;
+  height: 36px !important;
+  flex: 0 0 auto;
+  border-radius: 50% !important;
+  background: linear-gradient(180deg, #14959a 0%, #16777f 100%) !important;
+  box-shadow: 0 8px 16px rgba(19, 109, 116, 0.18) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.image,
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.send svg {
+  font-size: 22px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.send svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-footnote {
+  margin-top: 6px;
+}
+
+@keyframes splashCardReveal {
+  0% {
+    opacity: 0;
+    transform: translateX(-28px) translateY(12px) rotate(var(--card-rot, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0) rotate(var(--card-rot, 0deg));
+  }
+}
+
+@keyframes splashKidFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-7px); }
+}
+
+@keyframes brandSlideToIcon {
+  0% { width: var(--brand-full-width); }
+  62% { width: var(--brand-full-width); }
+  100% { width: var(--header-icon-size); }
+}
+
+/* Final June 17 splash/chat polish */
+html[data-theme="curio-sand-light"] .screen-splash.is-active {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  gap: 10px !important;
+  padding: 34px 0 0 !important;
+  overflow: hidden;
+  background:
+    url("splash-wave-background.jpeg") center bottom / cover no-repeat,
+    #fbfaf5 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-splash.is-active::before,
+html[data-theme="curio-sand-light"] .screen-splash.is-active::after {
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"] .phone-device:has(.screen-splash.is-active) .dynamic-island {
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-splash .ambient {
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-center,
+html[data-theme="curio-sand-light"] .splash-login-actions {
+  display: grid !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-center {
+  align-content: start;
+  justify-items: center;
+  text-align: center;
+  gap: 8px !important;
+  padding-top: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+html[data-theme="curio-sand-light"] .splash-brand-logo-main {
+  width: min(78vw, 276px);
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+html[data-theme="curio-sand-light"] .splash-brand-logo,
+html[data-theme="curio-sand-light"] .splash-brand-stack,
+html[data-theme="curio-sand-light"] .splash-brand-wordmark {
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-tagline {
+  margin: 2px 0 0 !important;
+  color: #5b8f93 !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-hero-stage {
+  width: 100%;
+  margin: 2px 0 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-reference-scene {
+  position: relative;
+  width: min(100%, 355px);
+  min-height: 460px !important;
+  margin: 0 auto;
+}
+
+html[data-theme="curio-sand-light"] .splash-reference-scene::before {
+  content: none;
+}
+
+html[data-theme="curio-sand-light"] .splash-solo-kid {
+  width: 100%;
+  height: 252px;
+  left: 50%;
+  bottom: 18px !important;
+  transform: translateX(-50%) !important;
+  animation: none !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-kid-single-figure {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  z-index: 4;
+  width: min(72%, 214px);
+  height: auto;
+  transform: translateX(-50%);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 10px 16px rgba(54, 74, 76, 0.08));
+}
+
+html[data-theme="curio-sand-light"] .splash-scene-trail,
+html[data-theme="curio-sand-light"] .splash-scene-dots {
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card {
+  z-index: 5;
+  opacity: 0;
+  animation:
+    splashCardReveal 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+    questionCardFloat 4.8s ease-in-out 2.8s infinite;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.puzzle {
+  --card-rot: -5deg;
+  left: 26px;
+  bottom: 138px;
+  animation-delay: 0.15s, 2.95s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.sky {
+  --card-rot: -5deg;
+  left: 34px;
+  top: 114px;
+  animation-delay: 0.55s, 3.15s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.orbit {
+  --card-rot: -1deg;
+  left: 50%;
+  top: 54px;
+  transform: translateX(-50%);
+  animation-delay: 0.95s, 3.35s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.leaf {
+  --card-rot: 4deg;
+  right: 24px;
+  top: 116px;
+  animation-delay: 1.35s, 3.55s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.kind {
+  --card-rot: 3deg;
+  right: 20px;
+  bottom: 140px;
+  animation-delay: 1.75s, 3.75s;
+}
+
+html[data-theme="curio-sand-light"] .splash-login-actions {
+  width: 100%;
+  padding: 0 0 18px !important;
+  background: transparent;
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 48px 26px 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel::before,
+html[data-theme="curio-sand-light"] .splash-story-panel::after {
+  content: none !important;
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel h2 {
+  margin: 0 !important;
+  color: #1e4b52 !important;
+  font-size: 24px !important;
+  font-weight: 900 !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel p {
+  max-width: 280px;
+  margin: 0 !important;
+  color: #4c7075 !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1.45 !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-get-started {
+  width: min(100%, 320px);
+  min-height: 58px !important;
+  margin-top: 8px;
+  letter-spacing: 1px !important;
+}
+
+html[data-theme="curio-sand-light"] .splash-story-panel small {
+  color: #5d8488 !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme="curio-sand-light"] .brand-lock {
+  overflow: visible !important;
+}
+
+html[data-theme="curio-sand-light"] .brand-lock img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+
+html[data-theme="curio-sand-light"] .brand-lock.is-compact {
+  width: clamp(50px, calc(var(--app-width) / 7.6), 58px) !important;
+  animation: none !important;
+}
+
+html[data-theme="curio-sand-light"] .chat-history-logo {
+  width: 28px;
+  height: 28px;
+  display: block;
+  margin: 0 0 6px;
+  object-fit: contain;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.kid {
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: flex-end !important;
+  gap: 10px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.kid .avatar {
+  flex: 0 0 40px !important;
+  align-self: flex-end !important;
+  margin: 0 0 8px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.kid .bubble {
+  width: min(76%, 286px) !important;
+  justify-self: auto !important;
+  margin: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-top-line {
+  grid-template-columns: minmax(0, 146px) minmax(0, 58px) !important;
+  gap: 12px !important;
+  align-items: center !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-left {
+  width: 146px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-right {
+  width: 58px !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-progress-status,
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-companion {
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-brand,
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-left .brand-lock {
+  width: 48px !important;
+  height: 48px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .message-pane {
+  flex: 0 1 auto !important;
+  min-height: 128px !important;
+  padding: 2px 0 2px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message {
+  display: grid !important;
+  align-items: end !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.kid {
+  grid-template-columns: minmax(0, 1fr) 40px !important;
+  justify-content: end !important;
+  column-gap: 10px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.kid .avatar {
+  display: grid !important;
+  place-items: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  margin: 0 !important;
+  order: 0 !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.kid .bubble {
+  width: min(76%, 286px) !important;
+  justify-self: end !important;
+  margin-right: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message .avatar {
+  display: grid !important;
+  place-items: center !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  font-size: 16px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.ai .avatar,
+html[data-theme="curio-sand-light"] .screen-chat .chat-message.blocked .avatar {
+  width: 44px !important;
+  height: 44px !important;
+  padding-right: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-message .avatar.avatar-photo img {
+  display: block;
+}
+
+html[data-theme="curio-sand-light"] .chat-history-tabs button {
+  color: #456267 !important;
+}
+
+html[data-theme="curio-sand-light"] .chat-history-tabs img {
+  width: 17px;
+  height: 17px;
+  opacity: 0.88;
+  filter: brightness(0) saturate(100%) invert(33%) sepia(18%) saturate(500%) hue-rotate(138deg) brightness(93%) contrast(88%);
+}
+
+html[data-theme="curio-sand-light"] .chat-history-tabs button.is-active img {
+  opacity: 1;
+  filter: brightness(0) invert(1);
+}
+
+html[data-theme="curio-sand-light"] .chat-history-search {
+  display: block;
+}
+
+html[data-theme="curio-sand-light"] .chat-history-search input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid rgba(226, 214, 195, 0.92);
+  border-radius: 14px;
+  background: rgba(255, 254, 250, 0.94);
+  color: #21373c;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme="curio-sand-light"] .chat-history-search input::placeholder {
+  color: #7d8a8d;
+}
+
+/* Splash question cards: white squircle overlays on kid artwork (reference-matched). */
+@keyframes splashQuestionEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) rotate(var(--card-rot, 0deg)) scale(0.9);
+  }
+  100% {
+    opacity: var(--card-opacity, 1);
+    transform: translateY(0) rotate(var(--card-rot, 0deg)) scale(1);
+  }
+}
+
+@keyframes splashQuestionDrift {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--card-rot, 0deg));
+  }
+  50% {
+    transform: translateY(-10px) rotate(calc(var(--card-rot, 0deg) + 2deg));
+  }
+}
+
+@keyframes splashSceneSparkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.82);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.08);
+  }
+}
+
+html[data-theme="curio-sand-light"] .splash-scene-dots {
+  display: block !important;
+  inset: 48px 0 auto;
+  height: 250px;
+  pointer-events: none;
+}
+
+html[data-theme="curio-sand-light"] .splash-scene-dots span {
+  width: 7px;
+  height: 7px;
+  background: rgba(108, 164, 168, 0.72);
+  animation: splashSceneSparkle 3.8s ease-in-out infinite;
+}
+
+html[data-theme="curio-sand-light"] .splash-scene-dots span:nth-child(1) {
+  left: 28px;
+  top: 34px;
+}
+
+html[data-theme="curio-sand-light"] .splash-scene-dots span:nth-child(2) {
+  left: 148px;
+  top: 18px;
+  width: 5px;
+  height: 5px;
+  animation-delay: -0.8s;
+}
+
+html[data-theme="curio-sand-light"] .splash-scene-dots span:nth-child(3) {
+  right: 54px;
+  top: 42px;
+  width: 9px;
+  height: 9px;
+  animation-delay: -1.5s;
+}
+
+html[data-theme="curio-sand-light"] .splash-scene-dots span:nth-child(4) {
+  right: 18px;
+  top: 168px;
+  width: 5px;
+  height: 5px;
+  animation-delay: -2.1s;
+}
+
+html[data-theme="curio-sand-light"] .splash-scene-dots span:nth-child(5) {
+  left: 72px;
+  top: 196px;
+  animation-delay: -2.7s;
+}
+
+html[data-theme="curio-sand-light"] .splash-scene-dots span:nth-child(6) {
+  right: 108px;
+  top: 214px;
+  width: 5px;
+  height: 5px;
+  animation-delay: -1.2s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card {
+  z-index: 6;
+  width: 108px;
+  min-height: 108px;
+  padding: 14px 12px 12px;
+  display: grid;
+  align-content: start;
+  justify-items: center;
+  gap: 10px;
+  border: 1px solid rgba(228, 239, 238, 0.96);
+  border-radius: 28px;
+  background: rgba(255, 255, 254, 0.97);
+  box-shadow:
+    0 16px 32px rgba(54, 92, 96, 0.11),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.88);
+  text-align: center;
+  --card-opacity: 1;
+  opacity: 1;
+  animation:
+    splashQuestionEnter 0.82s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+    splashQuestionDrift 5s ease-in-out 1.05s infinite;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.is-ghost {
+  z-index: 2;
+  width: 94px;
+  min-height: 88px;
+  padding: 11px 10px 10px;
+  gap: 7px;
+  border-radius: 24px;
+  --card-opacity: 0.58;
+  background: rgba(255, 255, 254, 0.78);
+  box-shadow: 0 10px 22px rgba(54, 92, 96, 0.06);
+  animation-duration: 0.72s, 6.4s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card .question-icon {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card strong {
+  color: #24484d;
+  font-size: 11px;
+  font-weight: 850;
+  line-height: 1.34;
+  letter-spacing: 0;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.is-ghost strong {
+  font-size: 10px;
+  font-weight: 800;
+  color: #4f6f74;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.sky .question-icon {
+  background: linear-gradient(180deg, #fff4b8 0%, #ffe27a 100%);
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.puzzle .question-icon {
+  background: linear-gradient(180deg, #d8f5df 0%, #9ed9b2 100%);
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.orbit .question-icon {
+  background: linear-gradient(180deg, #eef6f7 0%, #d7ecef 100%);
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.leaf .question-icon {
+  background: linear-gradient(180deg, #e8f6e4 0%, #c8e8c0 100%);
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.kind .question-icon {
+  background: linear-gradient(180deg, #e9f7ef 0%, #c8e8d8 100%);
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.sky {
+  --card-rot: -6deg;
+  left: 16px;
+  top: 68px;
+  animation-delay: 0.1s, 1.15s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.puzzle {
+  --card-rot: -4deg;
+  left: 12px;
+  bottom: 112px;
+  animation-delay: 0.35s, 1.45s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.orbit {
+  --card-rot: -2deg;
+  left: 118px;
+  top: 22px;
+  animation-delay: 0.55s, 2.1s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.leaf {
+  --card-rot: 5deg;
+  right: 14px;
+  top: 78px;
+  animation-delay: 0.75s, 2.35s;
+}
+
+html[data-theme="curio-sand-light"] .splash-question-card.kind {
+  --card-rot: 4deg;
+  right: 10px;
+  bottom: 118px;
+  animation-delay: 0.95s, 2.6s;
+}
+
+html[data-theme="curio-sand-light"] .splash-kid-single-figure {
+  z-index: 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="curio-sand-light"] .splash-question-card {
+    opacity: var(--card-opacity, 1) !important;
+    animation: none !important;
+    transform: rotate(var(--card-rot, 0deg)) !important;
+  }
+
+  html[data-theme="curio-sand-light"] .splash-scene-dots span {
+    animation: none !important;
+    opacity: 0.55 !important;
+  }
+}
+

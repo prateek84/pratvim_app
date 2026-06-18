@@ -560,12 +560,12 @@ function setLoginMode(mode, openLogin = false, action = "login") {
   loginModeButtons.forEach((button) => {
     button.classList.toggle("is-active", button.dataset.loginMode === mode);
   });
-  loginTitle.textContent = isParentRegister ? "Register parent" : isParent ? "Parent login" : "Who is learning today?";
+  loginTitle.textContent = isParentRegister ? "Register parent" : isParent ? "Parent access" : "Who is learning today?";
   loginTitle.classList.toggle("is-parent-login-title", isParent);
   loginSubtitle.textContent = isParentRegister
     ? "Create a parent PIN to manage safety settings, alerts, and screen time."
     : isParent
-    ? "Review safety settings, alerts, screen time, and saved learning activity."
+    ? "Use email and password, Parent PIN, or a social account to continue."
     : "Choose your profile to enter your private PIN.";
   loginProfileName.textContent = isParent ? "Parent account" : "";
   pinInput.value = isParentRegister ? "" : isParent ? "0000" : "";
@@ -575,7 +575,7 @@ function setLoginMode(mode, openLogin = false, action = "login") {
   kidPinPanel?.querySelector(".selected-kid-login")?.classList.toggle("is-hidden", isParent);
   const pinLabel = kidPinPanel?.querySelector(".input-label");
   if (pinLabel) pinLabel.textContent = isParent ? "Parent PIN" : "Private PIN";
-  loginContinueBtn.textContent = isParentRegister ? "Create Parent Account" : isParent ? "Go to Parent Home" : "Start Learning";
+  loginContinueBtn.textContent = isParentRegister ? "Create Parent Account" : isParent ? "Continue to Parent Home" : "Start Learning";
   loginContinueBtn.classList.toggle("is-hidden", !isParent);
   if (!isParent) resetKidLoginSelection();
   if (openLogin) showScreen("login");
@@ -1284,6 +1284,15 @@ function renderHistory() {
     const isActive = button.dataset.historyFilter === chatHistoryFilter;
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-selected", String(isActive));
+    if (isActive) {
+      button.style.setProperty("background-color", "#006c67", "important");
+      button.style.setProperty("border-color", "#006c67", "important");
+      button.style.setProperty("color", "#ffffff", "important");
+    } else {
+      button.style.removeProperty("background-color");
+      button.style.removeProperty("border-color");
+      button.style.removeProperty("color");
+    }
   });
 
   document.querySelectorAll("[data-history-chat]").forEach((button) => {
@@ -1346,22 +1355,52 @@ function renderMessages() {
     return;
   }
 
-  messageArea.innerHTML = chat.messages
-    .map(
-      (message) => `
-        <article class="chat-message ${message.role}">
-          ${
-            message.role === "kid"
-              ? `<div class="avatar avatar-photo"><img src="${kidSrc}" alt="${kid?.name || "Kid"}" /></div>`
-              : `<div class="avatar">${message.role === "blocked" ? "!" : "P"}</div>`
-          }
-          <div class="bubble">
-            <p>${message.text}</p>
-            ${message.role === "loading" ? "" : `<time>${message.time}</time>`}
-          </div>
+  const conversationPairs = [];
+  for (let index = 0; index < chat.messages.length; index += 1) {
+    const message = chat.messages[index];
+    if (message.role === "kid") {
+      const response = chat.messages[index + 1] && chat.messages[index + 1].role !== "kid"
+        ? chat.messages[index + 1]
+        : null;
+      if (response) index += 1;
+      conversationPairs.push({ kid: message, response });
+    } else {
+      conversationPairs.push({ kid: null, response: message });
+    }
+  }
+
+  messageArea.innerHTML = conversationPairs
+    .map(({ kid: kidMessage, response }) => {
+      const responseRole = response?.role || "pending";
+      const responseLabel = responseRole === "blocked" ? "Safe reply" : responseRole === "loading" ? "Piku is thinking" : "Piku answered";
+      const responseIcon = responseRole === "blocked" ? "!" : `<img src="pratvim-icon-new.svg" alt="" />`;
+
+      return `
+        <article class="conversation-pair ${responseRole}">
+          <section class="kid-query-panel">
+            <div class="conversation-label">Kid query</div>
+            <div class="kid-query-content">
+              <div class="avatar avatar-photo kid-query-avatar"><img src="${kidSrc}" alt="${kid?.name || "Kid"}" /></div>
+              <div class="bubble kid-query-bubble">
+                <p>${kidMessage?.text || ""}</p>
+                ${kidMessage?.time ? `<time>${kidMessage.time}</time>` : ""}
+              </div>
+            </div>
+          </section>
+
+          <section class="app-response-panel ${responseRole}">
+            <div class="conversation-label">${responseLabel}</div>
+            <div class="app-response-content">
+              <div class="avatar app-response-icon ${responseRole === "blocked" ? "blocked-icon" : ""}">${responseIcon}</div>
+              <div class="bubble app-response-bubble">
+                <p>${response?.text || "Piku is getting the answer ready..."}</p>
+                ${response && response.role !== "loading" ? `<time>${response.time}</time>` : ""}
+              </div>
+            </div>
+          </section>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
   messageArea.scrollTop = messageArea.scrollHeight;
 }

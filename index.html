@@ -122,8 +122,7 @@
               <div class="splash-story-panel">
                 <h2>A safe space to explore.</h2>
                 <p>Ask, learn and grow with AI you can trust.</p>
-                <div class="splash-page-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
-                <button class="primary-btn splash-get-started" data-screen="login" type="button">
+                                <button class="primary-btn splash-get-started" data-screen="login" data-login-mode="parent" data-parent-action="login" type="button">
                   <span>Get Started</span>
                   <i aria-hidden="true"></i>
                 </button>
@@ -202,11 +201,22 @@
                 <input id="pinInput" maxlength="4" inputmode="numeric" value="" placeholder="Enter 4 digit PIN" />
               </div>
               <div class="parent-login-options is-hidden" id="parentLoginOptions">
+                <div class="parent-email-login-fields">
+                  <label>
+                    <span>Email address</span>
+                    <input id="parentAccessEmail" type="email" autocomplete="email" value="parent@example.com" placeholder="parent@example.com" />
+                  </label>
+                  <label>
+                    <span>Password</span>
+                    <input id="parentAccessPassword" type="password" autocomplete="current-password" value="safe1234" placeholder="Enter password" />
+                  </label>
+                </div>
                 <div class="social-login-divider"><span>Or login through</span></div>
                 <div class="social-login-row parent-social-login" aria-label="Social login">
                   <button class="social-provider-btn google" data-screen="parent-dashboard" type="button" aria-label="Continue with Google"><span class="provider-mark">G</span><strong>Google</strong></button>
                   <button class="social-provider-btn facebook" data-screen="parent-dashboard" type="button" aria-label="Continue with Facebook"><span class="provider-mark">f</span><strong>Facebook</strong></button>
                 </div>
+                <button class="secondary-btn parent-register-entry" data-login-mode="parent" data-parent-action="register" type="button">Register as Parent</button>
                 <div class="terms-check">
                   <input id="parentLoginTerms" type="checkbox" checked />
                   <span>I agree to the <button class="inline-legal-link" data-menu-screen="terms" type="button">Terms &amp; Conditions</button>.</span>
@@ -634,7 +644,7 @@
             <aside class="chat-history-panel" aria-label="Previous chats">
               <div class="chat-history-heading">
                 <div>
-                  <img class="chat-history-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
+                  <img class="chat-history-logo chat-history-full-logo" src="pratvim-wordmark.png" alt="Pratvim" />
                   <h2>Previous chats</h2>
                 </div>
                 <button class="chat-history-close" id="chatHistoryClose" type="button" aria-label="Close previous chats">&times;</button>

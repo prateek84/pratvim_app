@@ -1,11 +1,9 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="987.000000pt" height="253.000000pt" viewBox="0 0 987.000000 253.000000"
- preserveAspectRatio="xMidYMid meet">
-
-<g transform="translate(0.000000,253.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
-</g>
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 178" role="img" aria-labelledby="title">
+  <title id="title">Pratvim</title>
+  <g fill="#006c67">
+    <path d="M56 28h112c7 0 12 5 12 12s-5 12-12 12H92v50c0 23 15 36 39 36h14c7 0 12 5 12 12s-5 12-12 12h-17c-39 0-62-22-62-59V52H56c-7 0-12-5-12-12s5-12 12-12Z"/>
+    <path d="M78 48h46c36 0 62 23 62 58s-26 58-62 58H96c-7 0-12-5-12-12V96h38c22 0 37-12 37-30s-15-30-37-30H78V48Z"/>
+  </g>
+  <text x="205" y="126" fill="#006c67" font-family="Nunito Sans, Nunito, Arial, sans-serif" font-size="112" font-weight="850" letter-spacing="-2">Pratvim</text>
 </svg>
+

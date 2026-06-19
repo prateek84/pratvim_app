@@ -26,6 +26,7 @@ const files = [
   "reference-wave-bottom.png",
   "splash-wave-background.jpeg",
   "splash-kid-cutout.png",
+  "splash-kid-reference.png",
   "ravin.jpg",
   "team-prateek-sharma.jpeg",
   "team-ravindra-singh.jpg",

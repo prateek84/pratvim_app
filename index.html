@@ -35,6 +35,7 @@
         <nav class="screen-nav" aria-label="Prototype screens">
           <button class="nav-btn is-active" data-screen="splash" type="button">Splash</button>
           <button class="nav-btn" data-screen="login" type="button">Login</button>
+          <button class="nav-btn" data-screen="parent-full-login" type="button">Parent Full Login</button>
           <button class="nav-btn" data-screen="parent-register" type="button">Parent Register</button>
           <button class="nav-btn" data-screen="parent-email-confirm" type="button">Email Confirm</button>
           <button class="nav-btn" data-screen="parent-onboarding" type="button">Parent Onboarding</button>
@@ -82,7 +83,7 @@
             <div class="splash-center">
               <div class="splash-brand">
                 <div class="splash-brand-row">
-                  <img class="splash-brand-logo-main" src="pratvim-wordmark.png" alt="Pratvim" />
+                  <img class="splash-brand-logo-main" src="pratvim-wordmark.svg" alt="Pratvim" />
                 </div>
                 <p class="splash-tagline">Protected Curiosity, Trusted AI</p>
               </div>
@@ -122,7 +123,7 @@
               <div class="splash-story-panel">
                 <h2>A safe space to explore.</h2>
                 <p>Ask, learn and grow with AI you can trust.</p>
-                                <button class="primary-btn splash-get-started" data-screen="login" data-login-mode="parent" data-parent-action="login" type="button">
+                <button class="primary-btn splash-get-started" data-screen="parent-register" type="button">
                   <span>Get Started</span>
                   <i aria-hidden="true"></i>
                 </button>
@@ -201,22 +202,10 @@
                 <input id="pinInput" maxlength="4" inputmode="numeric" value="" placeholder="Enter 4 digit PIN" />
               </div>
               <div class="parent-login-options is-hidden" id="parentLoginOptions">
-                <div class="parent-email-login-fields">
-                  <label>
-                    <span>Email address</span>
-                    <input id="parentAccessEmail" type="email" autocomplete="email" value="parent@example.com" placeholder="parent@example.com" />
-                  </label>
-                  <label>
-                    <span>Password</span>
-                    <input id="parentAccessPassword" type="password" autocomplete="current-password" value="safe1234" placeholder="Enter password" />
-                  </label>
+                <div class="parent-pin-card">
+                  <strong>Quick parent PIN</strong>
+                  <p>Use this on a trusted device after session timeout or when moving from a child profile back to parent controls.</p>
                 </div>
-                <div class="social-login-divider"><span>Or login through</span></div>
-                <div class="social-login-row parent-social-login" aria-label="Social login">
-                  <button class="social-provider-btn google" data-screen="parent-dashboard" type="button" aria-label="Continue with Google"><span class="provider-mark">G</span><strong>Google</strong></button>
-                  <button class="social-provider-btn facebook" data-screen="parent-dashboard" type="button" aria-label="Continue with Facebook"><span class="provider-mark">f</span><strong>Facebook</strong></button>
-                </div>
-                <button class="secondary-btn parent-register-entry" data-login-mode="parent" data-parent-action="register" type="button">Register as Parent</button>
                 <div class="terms-check">
                   <input id="parentLoginTerms" type="checkbox" checked />
                   <span>I agree to the <button class="inline-legal-link" data-menu-screen="terms" type="button">Terms &amp; Conditions</button>.</span>
@@ -224,6 +213,41 @@
               </div>
               <button class="primary-btn is-hidden" id="loginContinueBtn" type="button">Start Learning</button>
             </div>
+          </section>
+
+          <section class="app-screen screen-parent-full-login" data-view="parent-full-login">
+            <header class="minimal-top branded-top">
+              <button class="ghost-icon" data-screen="login" data-login-mode="parent" type="button" aria-label="Back">‹</button>
+              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
+              <span class="header-balance" aria-hidden="true"></span>
+            </header>
+            <form class="register-panel parent-full-login-panel" id="parentFullLoginForm">
+              <div class="login-intro parent-register-intro">
+                <p class="step-label">Parent account</p>
+                <h2>Login to Pratvim</h2>
+                <p>Use email and password after a complete logout, or when opening Pratvim on a new device.</p>
+              </div>
+
+              <div class="form-stack">
+                <label>
+                  <span>Email address</span>
+                  <input id="parentAccessEmail" type="email" autocomplete="email" value="parent@example.com" placeholder="parent@example.com" />
+                </label>
+                <label>
+                  <span>Password</span>
+                  <input id="parentAccessPassword" type="password" autocomplete="current-password" value="safe1234" placeholder="Enter password" />
+                </label>
+              </div>
+
+              <button class="primary-btn" type="submit">Login</button>
+              <div class="social-login-divider"><span>Or login through</span></div>
+              <div class="social-login-row parent-social-login" aria-label="Social login">
+                <button class="social-provider-btn google" data-screen="parent-dashboard" type="button" aria-label="Continue with Google"><span class="provider-mark">G</span><strong>Google</strong></button>
+                <button class="social-provider-btn facebook" data-screen="parent-dashboard" type="button" aria-label="Continue with Facebook"><span class="provider-mark">f</span><strong>Facebook</strong></button>
+              </div>
+              <button class="secondary-btn" data-screen="login" data-login-mode="parent" type="button">Use quick PIN instead</button>
+              <button class="text-link register-alt-link" data-screen="parent-register" type="button">New parent? Register first</button>
+            </form>
           </section>
 
           <section class="app-screen screen-parent-register" data-view="parent-register">
@@ -273,7 +297,7 @@
                 <span>I agree to the <button class="inline-legal-link" data-menu-screen="terms" type="button">Terms &amp; Conditions</button> and <button class="inline-legal-link" data-menu-screen="privacy" type="button">Privacy Policy</button>.</span>
               </div>
               <button class="primary-btn" type="submit">Create Parent Account</button>
-              <button class="text-link register-alt-link" data-login-mode="parent" data-parent-action="login" type="button">Already registered? Login</button>
+              <button class="text-link register-alt-link" data-screen="parent-full-login" type="button">Already registered? Login</button>
             </form>
           </section>
 
@@ -284,6 +308,7 @@
               <span class="header-balance" aria-hidden="true"></span>
             </header>
             <div class="register-panel email-confirm-panel">
+              <img class="email-confirm-logo" src="pratvim-wordmark.svg" alt="Pratvim" />
               <p class="step-label">Email confirmation</p>
               <h2>Confirm your email</h2>
               <p>We sent a confirmation code to <strong id="confirmEmailText">parent@example.com</strong>. Enter it to complete parent registration.</p>
@@ -598,7 +623,7 @@
                 <strong id="chatTimer" class="is-hidden">00:00:30 / 4h</strong>
                 <span class="chat-streak-badge" aria-hidden="true">4h</span>
               </button>
-              <button class="profile-mini chat-avatar-button avatar-trigger" type="button" aria-label="Open kid profile"><img class="mini-kid avatar-image" src="ravin.jpg" alt="" /></button>
+              <button class="profile-mini chat-avatar-button avatar-trigger" type="button" aria-label="Open kid profile"><img class="mini-kid avatar-image" src="kid-ravin-avatar.png" alt="" /></button>
               <div class="chat-header-companion" aria-hidden="true"><img src="splash-kid-cutout.png" alt="" /></div>
               </div>
             </header>
@@ -618,7 +643,7 @@
 
             <section class="chat-feature-summary">
               <h2 id="chatHeroQuestion">Why is the sky blue?</h2>
-              <img class="chat-question-avatar avatar-image" src="ravin.jpg" alt="" />
+              <img class="chat-question-avatar avatar-image" src="kid-ravin-avatar.png" alt="" />
             </section>
 
             <section class="message-pane" id="messageArea"></section>
@@ -644,7 +669,7 @@
             <aside class="chat-history-panel" aria-label="Previous chats">
               <div class="chat-history-heading">
                 <div>
-                  <img class="chat-history-logo chat-history-full-logo" src="pratvim-wordmark.png" alt="Pratvim" />
+                  <img class="chat-history-logo chat-history-full-logo" src="pratvim-wordmark.svg" alt="Pratvim" />
                   <h2>Previous chats</h2>
                 </div>
                 <button class="chat-history-close" id="chatHistoryClose" type="button" aria-label="Close previous chats">&times;</button>
@@ -935,8 +960,11 @@
               <span class="parent-menu-icon" aria-hidden="true">↪</span>
               <span><strong>Log out</strong><small>Return to parent login</small></span>
             </button>
+            <button class="parent-logout-option parent-full-logout-option" id="parentFullLogout" type="button" role="menuitem">
+              <span class="parent-menu-icon" aria-hidden="true">X</span>
+              <span><strong>Full logout</strong><small>Use email or social login next time</small></span>
+            </button>
           </div>
-
           <div class="parent-profile-menu kid-profile-menu is-hidden" id="kidProfileMenu" role="menu" aria-label="Kid profile options">
             <div class="parent-profile-menu-head">
               <img class="avatar-image" src="ravin.jpg" alt="" />
@@ -1114,4 +1142,3 @@
     <script src="app.js"></script>
   </body>
 </html>
-

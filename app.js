@@ -316,6 +316,7 @@ const staticProfileTriggers = document.querySelectorAll(".static-profile-trigger
 const parentUploadAvatar = document.querySelector("#parentUploadAvatar");
 const parentEditProfile = document.querySelector("#parentEditProfile");
 const parentLogout = document.querySelector("#parentLogout");
+const parentFullLogout = document.querySelector("#parentFullLogout");
 const parentProfileModal = document.querySelector("#parentProfileModal");
 const parentProfileForm = document.querySelector("#parentProfileForm");
 const parentProfileClose = document.querySelector("#parentProfileClose");
@@ -359,6 +360,7 @@ const changeKidLoginBtn = document.querySelector("#changeKidLoginBtn");
 const parentHomeChildSwitch = document.querySelector("#parentHomeChildSwitch");
 const floatingBackButton = document.querySelector("#floatingBackButton");
 const legalScreenButtons = document.querySelectorAll("[data-menu-screen]");
+const parentFullLoginForm = document.querySelector("#parentFullLoginForm");
 const parentRegisterForm = document.querySelector("#parentRegisterForm");
 const parentLastNameInput = document.querySelector("#parentLastNameInput");
 const parentEmailInput = document.querySelector("#parentEmailInput");
@@ -560,12 +562,12 @@ function setLoginMode(mode, openLogin = false, action = "login") {
   loginModeButtons.forEach((button) => {
     button.classList.toggle("is-active", button.dataset.loginMode === mode);
   });
-  loginTitle.textContent = isParentRegister ? "Register parent" : isParent ? "Parent access" : "Who is learning today?";
+  loginTitle.textContent = isParentRegister ? "Register parent" : isParent ? "Parent quick access" : "Who is learning today?";
   loginTitle.classList.toggle("is-parent-login-title", isParent);
   loginSubtitle.textContent = isParentRegister
     ? "Create a parent PIN to manage safety settings, alerts, and screen time."
     : isParent
-    ? "Use email and password, Parent PIN, or a social account to continue."
+    ? "Enter your parent PIN after a session timeout or when returning from a child profile."
     : "Choose your profile to enter your private PIN.";
   loginProfileName.textContent = isParent ? "Parent account" : "";
   pinInput.value = isParentRegister ? "" : isParent ? "0000" : "";
@@ -575,7 +577,7 @@ function setLoginMode(mode, openLogin = false, action = "login") {
   kidPinPanel?.querySelector(".selected-kid-login")?.classList.toggle("is-hidden", isParent);
   const pinLabel = kidPinPanel?.querySelector(".input-label");
   if (pinLabel) pinLabel.textContent = isParent ? "Parent PIN" : "Private PIN";
-  loginContinueBtn.textContent = isParentRegister ? "Create Parent Account" : isParent ? "Continue to Parent Home" : "Start Learning";
+  loginContinueBtn.textContent = isParentRegister ? "Create Parent Account" : isParent ? "Open Parent Home" : "Start Learning";
   loginContinueBtn.classList.toggle("is-hidden", !isParent);
   if (!isParent) resetKidLoginSelection();
   if (openLogin) showScreen("login");
@@ -946,7 +948,7 @@ const screenHistory = [];
 function showScreen(name, options = {}) {
   if (!options.fromBack && name !== currentScreenName) screenHistory.push(currentScreenName);
   currentScreenName = name;
-  if (name === "parent-dashboard" || name === "parent-analytics" || name === "parent-alerts") loginMode = "parent";
+  if (name === "parent-dashboard" || name === "parent-analytics" || name === "parent-alerts" || name === "parent-full-login" || name === "parent-register") loginMode = "parent";
   if (name === "home" || name === "chat" || name === "onboarding") loginMode = "child";
   closeParentProfileModal();
   closeParentProfileMenu();
@@ -1373,7 +1375,7 @@ function renderMessages() {
     .map(({ kid: kidMessage, response }) => {
       const responseRole = response?.role || "pending";
       const responseLabel = responseRole === "blocked" ? "Safe reply" : responseRole === "loading" ? "Piku is thinking" : "Piku answered";
-      const responseIcon = responseRole === "blocked" ? "!" : `<img src="pratvim-icon-new.svg" alt="" />`;
+      const responseIcon = responseRole === "blocked" ? "!" : `<span class="piku-logo-mark" aria-hidden="true"><img src="pratvim-icon-new.svg" alt="" /><i></i><i></i></span>`;
 
       return `
         <article class="conversation-pair ${responseRole}">
@@ -1644,6 +1646,17 @@ function applyAvatar(src) {
   if (activeAvatarScope === "kid" && kidProfiles[activeLoginKidIndex]) {
     kidProfiles[activeLoginKidIndex].avatar = src;
     renderKidLoginPicker();
+    renderKidProfiles();
+    renderParentKids();
+    renderParentAnalytics();
+    renderParentAlerts();
+    renderMessages();
+    const activeKid = kidProfiles[activeLoginKidIndex];
+    if (selectedKidLoginAvatar) {
+      selectedKidLoginAvatar.src = src;
+      selectedKidLoginAvatar.alt = `${activeKid.name} profile`;
+      selectedKidLoginAvatar.closest(".selected-kid-login")?.style.setProperty("--selected-kid-art", `url("${src}")`);
+    }
   }
   syncStaticProfileTriggers();
 }
@@ -1726,6 +1739,13 @@ changeKidLoginBtn?.addEventListener("click", resetKidLoginSelection);
 parentHomeChildSwitch?.addEventListener("click", () => setLoginMode("child", true));
 loginContinueBtn?.addEventListener("click", () => {
   if (loginMode === "parent") {
+    if (pinInput.value.trim() !== "0000") {
+      pinInput.classList.add("has-error");
+      loginSubtitle.textContent = "That parent PIN does not match. Use 0000 for this prototype, or login with email.";
+      pinInput.focus();
+      return;
+    }
+    pinInput.classList.remove("has-error");
     showScreen("parent-dashboard");
     return;
   }
@@ -1746,6 +1766,11 @@ parentRegisterForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   if (confirmEmailText) confirmEmailText.textContent = parentEmailInput?.value || "parent@example.com";
   showScreen("parent-email-confirm");
+});
+
+parentFullLoginForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  showScreen("parent-dashboard");
 });
 
 confirmEmailBtn?.addEventListener("click", () => {
@@ -1840,8 +1865,11 @@ demoButtons.forEach((button) => {
 
 sizeButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    const width = Number(button.dataset.width);
+    const height = Number(button.dataset.height);
     document.documentElement.style.setProperty("--app-width", `${button.dataset.width}px`);
     document.documentElement.style.setProperty("--app-height", `${button.dataset.height}px`);
+    document.documentElement.dataset.deviceOrientation = width > height ? "landscape" : "portrait";
     currentSize.textContent = `${button.dataset.width} x ${button.dataset.height}`;
     sizeButtons.forEach((item) => item.classList.toggle("is-active", item === button));
   });
@@ -1989,6 +2017,10 @@ parentLogout?.addEventListener("click", () => {
   closeParentProfileMenu();
   setLoginMode("parent", true);
 });
+parentFullLogout?.addEventListener("click", () => {
+  closeParentProfileMenu();
+  showScreen("parent-full-login");
+});
 document.addEventListener("click", (event) => {
   if (!parentProfileMenu?.contains(event.target)) closeParentProfileMenu();
   if (!kidProfileMenu?.contains(event.target) && !event.target.closest(".avatar-trigger:not(.parent-profile-trigger)")) {
@@ -2053,7 +2085,7 @@ renderHome();
 renderChat();
 updateTimer();
 
-window.kidsSafeDemo = {
+globalThis.kidsSafeDemo = {
   showScreen,
   openDemoState,
   completeTimer() {

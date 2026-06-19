@@ -15272,6 +15272,428 @@ html[data-theme="curio-sand-light"] .chat-history-tabs button.is-active img {
   opacity: 1 !important;
 }
 
+/* June 19: unified header controls and email confirmation branding. */
+html[data-theme="curio-sand-light"] :is(
+  .global-menu-button,
+  .chat-history-button,
+  .internal-screen-logo,
+  .internal-brand,
+  .internal-brand img,
+  .profile-mini,
+  .parent-profile-trigger,
+  .chat-avatar-button,
+  .chat-avatar-button img
+) {
+  width: 42px !important;
+  min-width: 42px !important;
+  max-width: 42px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  box-sizing: border-box !important;
+}
+
+html[data-theme="curio-sand-light"] :is(
+  .minimal-top,
+  .app-topbar,
+  .parent-app-header,
+  .chat-top-line,
+  .chat-header-left,
+  .chat-header-right
+) {
+  align-items: center !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-avatar-button {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="curio-sand-light"] .email-confirm-panel {
+  padding-top: 22px !important;
+}
+
+html[data-theme="curio-sand-light"] .email-confirm-logo {
+  display: block;
+  width: min(58vw, 188px);
+  height: auto;
+  max-height: 58px;
+  margin: 0 auto 12px;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* June 19 follow-up: compact confirmation spacing and matched chat controls. */
+html[data-theme="curio-sand-light"] .screen-parent-email-confirm.is-active {
+  grid-template-rows: auto auto !important;
+  align-content: start !important;
+  gap: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-parent-email-confirm .email-confirm-panel {
+  min-height: 0 !important;
+  align-self: start !important;
+  align-content: start !important;
+  padding-top: 4px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-parent-email-confirm .email-confirm-logo {
+  margin-bottom: 6px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat :is(
+  .chat-history-button,
+  .chat-header-brand,
+  .chat-avatar-button,
+  .chat-avatar-button img
+) {
+  width: 35px !important;
+  min-width: 35px !important;
+  max-width: 35px !important;
+  height: 35px !important;
+  min-height: 35px !important;
+  max-height: 35px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat :is(.chat-header-left, .chat-header-right) {
+  min-height: 46px !important;
+  align-items: center !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .piku-logo-mark {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .piku-logo-mark img {
+  display: block !important;
+  width: 23px !important;
+  height: 29px !important;
+  object-fit: contain !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .piku-logo-mark i {
+  position: absolute !important;
+  top: 10px !important;
+  width: 3px !important;
+  height: 3px !important;
+  border-radius: 50% !important;
+  background: #006c67 !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.92) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .piku-logo-mark i:first-of-type {
+  left: 14px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .piku-logo-mark i:last-of-type {
+  left: 19px !important;
+}
+
+/* Final auth + chat polish pass. */
+html[data-theme="curio-sand-light"] .screen-parent-full-login .parent-full-login-panel,
+html[data-theme="curio-sand-light"] .screen-login .login-panel {
+  gap: 16px !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-card {
+  display: grid !important;
+  gap: 6px !important;
+  padding: 14px 16px !important;
+  border-radius: 18px !important;
+  background: rgba(255, 255, 255, 0.72) !important;
+  border: 1px solid rgba(226, 214, 195, 0.9) !important;
+  color: #244f52 !important;
+  text-align: left !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-card strong {
+  font-size: 14px !important;
+  font-weight: 1000 !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-card p {
+  margin: 0 !important;
+  color: #607a7b !important;
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+  font-weight: 800 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat.is-active {
+  padding: 48px 20px 16px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-top-line {
+  display: grid !important;
+  grid-template-columns: auto auto !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  width: 100% !important;
+  padding: 0 0 10px !important;
+  margin: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-left {
+  width: 124px !important;
+  min-height: 52px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 14px !important;
+  padding: 4px 10px 4px 14px !important;
+  border-radius: 24px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-history-button {
+  position: relative !important;
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-history-button span {
+  position: absolute !important;
+  left: 50% !important;
+  width: 19px !important;
+  height: 2px !important;
+  border-radius: 999px !important;
+  transform: translateX(-50%) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-history-button span:nth-child(1) { top: 10px !important; }
+html[data-theme="curio-sand-light"] .screen-chat .chat-history-button span:nth-child(2) { top: 16px !important; }
+html[data-theme="curio-sand-light"] .screen-chat .chat-history-button span:nth-child(3) { top: 22px !important; }
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-brand {
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  margin: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-right {
+  width: 50px !important;
+  min-width: 50px !important;
+  height: 50px !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-progress-status,
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-companion {
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-avatar-button,
+html[data-theme="curio-sand-light"] .screen-chat .chat-avatar-button img {
+  width: 46px !important;
+  min-width: 46px !important;
+  height: 46px !important;
+  border-radius: 50% !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-avatar-button {
+  overflow: hidden !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-avatar-button img {
+  display: block !important;
+  object-fit: cover !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .message-pane {
+  padding: 8px 0 10px !important;
+  gap: 16px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .kid-query-content {
+  width: min(92%, 330px) !important;
+  display: flex !important;
+  flex-direction: row-reverse !important;
+  align-items: flex-end !important;
+  gap: 10px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .app-response-content {
+  width: min(92%, 330px) !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  gap: 10px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .app-response-icon {
+  font-size: 22px !important;
+  font-weight: 1000 !important;
+  line-height: 1 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .piku-p-mark {
+  position: relative !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 32px !important;
+  height: 32px !important;
+  color: #007f78 !important;
+  font-weight: 1000 !important;
+  font-size: 25px !important;
+  font-family: "Nunito Sans", Arial, sans-serif !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .piku-p-mark i {
+  position: absolute !important;
+  top: 10px !important;
+  width: 4px !important;
+  height: 4px !important;
+  border-radius: 50% !important;
+  background: #007f78 !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .piku-p-mark i:first-of-type { right: 9px !important; }
+html[data-theme="curio-sand-light"] .screen-chat .piku-p-mark i:last-of-type { right: 3px !important; }
+
+html[data-theme="curio-sand-light"] .screen-chat .composer {
+  display: grid !important;
+  grid-template-columns: 48px minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 12px !important;
+  min-height: 68px !important;
+  padding: 10px 14px !important;
+  border-radius: 34px !important;
+  background: rgba(255, 246, 237, 0.72) !important;
+  border: 0 !important;
+  box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.34), 0 12px 28px rgba(70, 55, 36, 0.1) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.image {
+  position: relative !important;
+  width: 48px !important;
+  min-width: 48px !important;
+  height: 48px !important;
+  margin: 0 !important;
+  border-radius: 18px !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 16px rgba(70, 55, 36, 0.08) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer-field {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) 44px !important;
+  grid-auto-columns: 0 !important;
+  grid-auto-flow: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  padding: 0 6px 0 18px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.94) !important;
+  border: 0 !important;
+  box-shadow: 0 8px 18px rgba(70, 55, 36, 0.08) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat #chatInput {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  display: block !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-align: left !important;
+  letter-spacing: 1px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.send {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: #27918b !important;
+  border: 0 !important;
+  box-shadow: 0 10px 16px rgba(0, 108, 103, 0.18) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.send svg {
+  width: 19px !important;
+  height: 19px !important;
+}
+
+html[data-theme="curio-sand-light"] .chat-history-panel {
+  align-content: start !important;
+}
+
+html[data-theme="curio-sand-light"] .chat-history-tabs button:not(.is-active) img {
+  opacity: 1 !important;
+  filter: brightness(0) saturate(100%) invert(30%) sepia(19%) saturate(787%) hue-rotate(135deg) brightness(90%) contrast(88%) !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .phone-device {
+  width: min(var(--app-width), calc(100vw - 20px)) !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat.is-active {
+  padding-inline: 28px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat .conversation-pair {
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr) !important;
+  align-items: start !important;
+  gap: 22px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat .kid-query-panel,
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat .app-response-panel {
+  justify-items: stretch !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat .kid-query-content,
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat .app-response-content {
+  width: 100% !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat .kid-query-bubble,
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat .app-response-bubble {
+  padding: 14px 16px !important;
+  border-radius: 22px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat .bubble p {
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+}
+
 html[data-theme="curio-sand-light"] .chat-history-panel .chat-history-tabs button.is-active,
 html[data-theme="curio-sand-light"] .chat-history-layer .chat-history-panel .chat-history-tabs button.is-active {
   background: #006c67 !important;
@@ -15820,4 +16242,51 @@ html[data-theme="curio-sand-light"] .chat-history-tabs button.is-active {
 html[data-theme="curio-sand-light"] .chat-history-tabs button.is-active img {
   filter: brightness(0) invert(1) !important;
   opacity: 1 !important;
+}
+
+/* Final compact header sizing. */
+html[data-theme="curio-sand-light"] :is(
+  .global-menu-button,
+  .chat-history-button,
+  .internal-screen-logo,
+  .internal-brand,
+  .internal-brand img,
+  .profile-mini,
+  .profile-mini img,
+  .parent-profile-trigger,
+  .parent-profile-trigger img,
+  .static-profile-trigger,
+  .static-profile-trigger img,
+  .chat-avatar-button,
+  .chat-avatar-button img,
+  .chat-header-brand
+) {
+  width: 35px !important;
+  min-width: 35px !important;
+  max-width: 35px !important;
+  height: 35px !important;
+  min-height: 35px !important;
+  max-height: 35px !important;
+  box-sizing: border-box !important;
+}
+
+html[data-theme="curio-sand-light"] :is(
+  .minimal-top,
+  .app-topbar,
+  .parent-app-header,
+  .chat-top-line,
+  .chat-header-left,
+  .chat-header-right
+) {
+  align-items: center !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat button.profile-mini.chat-avatar-button.avatar-trigger,
+html[data-theme="curio-sand-light"] .screen-chat button.profile-mini.chat-avatar-button.avatar-trigger img {
+  width: 38px !important;
+  min-width: 38px !important;
+  max-width: 38px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  max-height: 38px !important;
 }

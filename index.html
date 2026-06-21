@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="curio-sand-light">
+<html lang="en" data-theme="curio-sand-light" data-device-orientation="portrait" data-device-preset="iphone-portrait">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -30,6 +30,7 @@
           <button class="size-btn" data-width="402" data-height="874" type="button">16 Pro</button>
           <button class="size-btn" data-width="440" data-height="956" type="button">16 Pro Max</button>
           <button class="size-btn" data-width="834" data-height="1194" type="button">iPad</button>
+          <button class="size-btn" data-width="1194" data-height="834" data-device-preset="ipad-landscape" type="button">iPad Landscape</button>
         </div>
 
         <nav class="screen-nav" aria-label="Prototype screens">
@@ -652,6 +653,9 @@
               <input id="imageInput" type="file" accept="image/*" />
               <button class="tool-btn image" id="imageUploadBtn" type="button" aria-label="Upload image">+</button>
               <div class="composer-field">
+                <button class="tool-btn mic" id="voiceBtn" type="button" aria-label="Start voice chat" title="Voice chat">
+                  <span class="mic-shape" aria-hidden="true"></span>
+                </button>
                 <input id="chatInput" autocomplete="off" placeholder="Type your question..." />
                 <button class="tool-btn send" type="submit" aria-label="Send">
                   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">

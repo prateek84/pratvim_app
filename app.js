@@ -1375,7 +1375,7 @@ function renderMessages() {
     .map(({ kid: kidMessage, response }) => {
       const responseRole = response?.role || "pending";
       const responseLabel = responseRole === "blocked" ? "Safe reply" : responseRole === "loading" ? "Piku is thinking" : "Piku answered";
-      const responseIcon = responseRole === "blocked" ? "!" : `<span class="piku-logo-mark" aria-hidden="true"><img src="pratvim-icon-new.svg" alt="" /><i></i><i></i></span>`;
+      const responseIcon = responseRole === "blocked" ? "!" : `<span class="piku-logo-mark" aria-hidden="true"><img src="pratvim-icon-new.svg" alt="" /></span>`;
 
       return `
         <article class="conversation-pair ${responseRole}">
@@ -1870,10 +1870,25 @@ sizeButtons.forEach((button) => {
     document.documentElement.style.setProperty("--app-width", `${button.dataset.width}px`);
     document.documentElement.style.setProperty("--app-height", `${button.dataset.height}px`);
     document.documentElement.dataset.deviceOrientation = width > height ? "landscape" : "portrait";
+    document.documentElement.dataset.devicePreset = button.dataset.devicePreset || (width >= 768 ? "ipad-portrait" : "iphone-portrait");
     currentSize.textContent = `${button.dataset.width} x ${button.dataset.height}`;
     sizeButtons.forEach((item) => item.classList.toggle("is-active", item === button));
   });
 });
+
+function syncNativeOrientation() {
+  if (!document.documentElement.classList.contains("native-app")) return;
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const landscape = width > height;
+  document.documentElement.dataset.deviceOrientation = landscape ? "landscape" : "portrait";
+  document.documentElement.dataset.devicePreset = landscape
+    ? width >= 1024 ? "ipad-landscape" : "iphone-landscape"
+    : width >= 768 ? "ipad-portrait" : "iphone-portrait";
+}
+
+syncNativeOrientation();
+window.addEventListener("resize", syncNativeOrientation);
 
 decorateBrandLocks();
 

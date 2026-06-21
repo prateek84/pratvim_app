@@ -7,6 +7,7 @@ const files = [
   "index.html",
   "app.js",
   "styles.css",
+  "chat-wave-background.jpeg",
   "NunitoSans-Variable.ttf",
   "NunitoSans-OFL.txt",
   "icon-chevron-right-teal.svg",

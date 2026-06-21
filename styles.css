@@ -139,6 +139,10 @@ button {
   gap: 10px;
 }
 
+.size-buttons {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .screen-nav {
   grid-template-columns: 1fr 1fr;
 }
@@ -1560,9 +1564,23 @@ img.kid-picture.medium {
 
 .chat-message {
   display: grid;
-  grid-template-columns: 32px minmax(0, 1fr);
+  grid-template-columns: 28px minmax(0, 1fr);
   gap: 8px;
   align-items: start;
+}
+
+.chat-message .bubble {
+  width: calc(100% - 4px);
+  max-width: 100%;
+}
+
+.chat-message.kid .bubble {
+  margin-left: auto;
+  width: 88%;
+}
+
+.chat-message:not(.kid) .bubble {
+  width: 92%;
 }
 
 .chat-message.kid {
@@ -1601,9 +1619,9 @@ img.kid-picture.medium {
 }
 
 .bubble {
-  padding: 12px 14px;
+  padding: 16px 14px;
   border: 1px solid rgba(36, 184, 173, 0.22);
-  border-radius: 18px;
+  border-radius: 24px;
   background: rgba(255, 255, 255, 0.84);
   box-shadow: 0 10px 22px rgba(17, 113, 119, 0.08);
 }
@@ -1611,9 +1629,9 @@ img.kid-picture.medium {
 .bubble p {
   margin: 0;
   color: inherit;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.65;
 }
 
 .bubble time {
@@ -1716,7 +1734,9 @@ img.kid-picture.medium {
 }
 
 .tool-btn.mic {
-  background: var(--blue);
+  background: #008f88;
+  color: white;
+  box-shadow: 0 8px 20px rgba(0, 143, 136, 0.25);
 }
 
 .tool-btn.mic.is-recording {
@@ -1748,26 +1768,39 @@ img.kid-picture.medium {
   transform: translateY(-1px);
 }
 
+.tool-btn.mic {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #9bbcc0;
+  color: #008f88;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .mic-shape {
   position: relative;
-  display: block;
-  width: 10px;
-  height: 14px;
-  border: 2px solid currentColor;
-  border-radius: 999px;
-  transform: translateY(-2px);
+  width: 8px;
+  height: 12px;
+  border: 2px solid #008f88;
+  border-radius: 8px;
+  border-bottom-width: 2px;
 }
 
 .mic-shape::before {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -6px;
-  width: 16px;
-  height: 8px;
-  border: 2px solid currentColor;
+  bottom: -5px;
+  width: 12px;
+  height: 6px;
+  border: 2px solid #008f88;
   border-top: 0;
-  border-radius: 0 0 999px 999px;
+  border-radius: 0 0 8px 8px;
   transform: translateX(-50%);
 }
 
@@ -1775,11 +1808,10 @@ img.kid-picture.medium {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -10px;
+  bottom: -9px;
   width: 2px;
-  height: 6px;
-  border-radius: 999px;
-  background: currentColor;
+  height: 4px;
+  background: #008f88;
   transform: translateX(-50%);
 }
 
@@ -5706,6 +5738,7 @@ html[data-theme="curio-sand-light"] #pinInput {
   margin: 0 0 12px;
   border-radius: 999px;
   background: #fffefa;
+  letter-spacing: 1px;
 }
 
 html[data-theme="curio-sand-light"] .form-stack input,
@@ -7177,7 +7210,7 @@ html[data-theme="curio-sand-light"] :is(
   color: #fff;
   box-shadow: 0 7px 16px rgba(82, 123, 131, 0.18);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 850;
   line-height: 1.2;
   letter-spacing: 0;
@@ -9218,6 +9251,7 @@ html[data-theme="curio-sand-light"] .parent-kid-card {
   border-color: transparent;
   background: transparent !important;
   box-shadow: none !important;
+  backdrop-filter: none;
 }
 
 html[data-theme="curio-sand-light"] .parent-kid-card:has(.kid-card-menu-popover:not(.is-hidden)) {
@@ -10870,6 +10904,16 @@ html[data-theme="curio-sand-light"] #phoneDevice :is(
 }
 
 html[data-theme="curio-sand-light"] #phoneDevice :is(
+  button.text-link.register-alt-link
+) {
+  width : 250px !important;
+  justify-self: center;
+}
+
+
+
+
+html[data-theme="curio-sand-light"] #phoneDevice :is(
   button.primary-btn,
   button.secondary-btn,
   button.bottom-action,
@@ -10902,8 +10946,8 @@ html[data-theme="curio-sand-light"] #phoneDevice :is(
   .kid-report-tab.is-active,
   button.is-on
 ) {
-  border-color: #527b83 !important;
-  background: #527b83 !important;
+  border-color: #0b9f98 !important;
+  background: #0b9f98 !important;
   color: #fff !important;
   box-shadow:
     inset 0 0 0 2px rgba(255, 255, 255, 0.16),
@@ -12809,7 +12853,7 @@ html[data-theme="curio-sand-light"] #phoneDevice#phoneDevice button.primary-btn 
   border-color: #008f88 !important;
   background: #008f88 !important;
   color: #fff !important;
-  letter-spacing: 2px !important;
+  letter-spacing: 1px !important;
   box-shadow: 0 9px 20px rgba(0, 116, 111, 0.2) !important;
 }
 
@@ -13815,9 +13859,9 @@ html[data-theme="curio-sand-light"] .splash-get-started {
 
 html[data-theme="curio-sand-light"] .splash-get-started span {
   color: inherit;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 900;
-  letter-spacing:2px;
+  letter-spacing:1px;
 }
 
 html[data-theme="curio-sand-light"] .splash-get-started i {
@@ -15532,15 +15576,15 @@ html[data-theme="curio-sand-light"] .screen-chat .kid-query-content {
   width: min(92%, 330px) !important;
   display: flex !important;
   flex-direction: row-reverse !important;
-  align-items: flex-end !important;
-  gap: 10px !important;
+  align-items: flex-start !important;
+  gap: 0px !important;
 }
 
 html[data-theme="curio-sand-light"] .screen-chat .app-response-content {
   width: min(92%, 330px) !important;
   display: flex !important;
-  align-items: flex-end !important;
-  gap: 10px !important;
+  align-items: flex-start !important;
+  gap: 0px !important;
 }
 
 html[data-theme="curio-sand-light"] .screen-chat .app-response-icon {
@@ -15584,7 +15628,6 @@ html[data-theme="curio-sand-light"] .screen-chat .composer {
   border-radius: 34px !important;
   background: rgba(255, 246, 237, 0.72) !important;
   border: 0 !important;
-  box-shadow: inset 0 0 0 10px rgba(255, 255, 255, 0.34), 0 12px 28px rgba(70, 55, 36, 0.1) !important;
 }
 
 html[data-theme="curio-sand-light"] .screen-chat .tool-btn.image {
@@ -16283,10 +16326,1333 @@ html[data-theme="curio-sand-light"] :is(
 
 html[data-theme="curio-sand-light"] .screen-chat button.profile-mini.chat-avatar-button.avatar-trigger,
 html[data-theme="curio-sand-light"] .screen-chat button.profile-mini.chat-avatar-button.avatar-trigger img {
-  width: 38px !important;
-  min-width: 38px !important;
-  max-width: 38px !important;
-  height: 38px !important;
-  min-height: 38px !important;
-  max-height: 38px !important;
+  width: 35px !important;
+  min-width: 35px !important;
+  max-width: 35px !important;
+  height: 35px !important;
+  min-height: 35px !important;
+  max-height: 35px !important;
+}
+
+/* Complete phone and tablet landscape layouts. */
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .phone-device {
+  width: min(var(--app-width), calc(100vw - 20px)) !important;
+  height: min(var(--app-height), calc(100vh - 20px)) !important;
+  min-width: 0 !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .app-screen.is-active {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding: 44px 26px 18px !important;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .app-screen.is-active::-webkit-scrollbar {
+  display: none;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(
+  .minimal-top,
+  .chat-header,
+  .app-topbar,
+  .parent-app-header,
+  .chat-top-line
+) {
+  width: min(100%, 980px) !important;
+  min-height: 44px !important;
+  margin-inline: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(
+  .login-panel,
+  .register-panel,
+  .onboarding-card,
+  .parent-dashboard-body,
+  .analytics-body,
+  .avatar-library-page,
+  .payment-plans-page,
+  .payment-confirmation-page,
+  .parent-alerts-body,
+  .welcome-panel,
+  .home-section,
+  .timer-demo-list,
+  .info-page,
+  .support-page
+) {
+  width: min(100%, 920px) !important;
+  max-width: 920px !important;
+  min-height: 0 !important;
+  margin-inline: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(
+  .primary-btn,
+  .secondary-btn,
+  .danger-btn,
+  .bottom-action
+):not(.compact-parent-btn):not(.home-new-chat-btn) {
+  width: min(100%, 360px) !important;
+  max-width: 360px !important;
+  justify-self: center !important;
+  margin-inline: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-splash.is-active {
+  grid-template-columns: minmax(440px, 1.35fr) minmax(280px, 0.65fr) !important;
+  grid-template-rows: minmax(0, 1fr) !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  padding: 10px 18px !important;
+  overflow: hidden !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-center {
+  grid-column: 1;
+  grid-row: 1;
+  grid-template-rows: 68px minmax(0, 1fr) !important;
+  min-width: 0;
+  height: 100%;
+  padding: 0 !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-brand-logo-main[src$=".svg"] {
+  width: min(34vw, 230px) !important;
+  max-height: 54px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-tagline {
+  margin-top: -3px !important;
+  font-size: 11px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-hero-stage {
+  height: 295px !important;
+  min-height: 0 !important;
+  align-items: start !important;
+  overflow: hidden !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-reference-scene {
+  width: 355px !important;
+  min-width: 355px !important;
+  min-height: 460px !important;
+  margin: 0 auto !important;
+  transform: scale(0.64);
+  transform-origin: top center;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-login-actions {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: stretch;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-story-panel {
+  width: 100%;
+  max-width: 340px;
+  align-content: center;
+  gap: 9px !important;
+  padding: 24px 20px !important;
+  border-radius: 24px !important;
+  background: rgba(211, 233, 231, 0.64) !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-story-panel::before,
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-story-panel::after {
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-story-panel h2 {
+  font-size: 21px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .splash-get-started {
+  min-height: 48px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(
+  .screen-login,
+  .screen-parent-full-login,
+  .screen-parent-register,
+  .screen-parent-email-confirm,
+  .screen-kid-register,
+  .screen-parent-onboarding,
+  .screen-onboarding
+).is-active {
+  align-content: start !important;
+  gap: 10px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(
+  .screen-login .login-panel,
+  .screen-parent-full-login .register-panel,
+  .screen-parent-register .register-panel,
+  .screen-parent-email-confirm .register-panel,
+  .screen-kid-register .register-panel
+) {
+  width: min(100%, 720px) !important;
+  padding: 14px 20px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(
+  .screen-parent-full-login,
+  .screen-parent-register,
+  .screen-kid-register,
+  .screen-support
+) .form-stack,
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .support-fields {
+  width: 100%;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .support-fields > label:has(textarea),
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .support-fields > .support-file-field {
+  grid-column: 1 / -1;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(
+  .kid-onboarding-card,
+  .parent-onboarding-card
+) {
+  width: min(100%, 760px) !important;
+  display: grid !important;
+  grid-template-columns: minmax(230px, 0.85fr) minmax(0, 1.15fr) !important;
+  grid-template-rows: auto auto auto auto !important;
+  align-items: center !important;
+  column-gap: 28px !important;
+  row-gap: 8px !important;
+  padding: 14px 24px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(
+  .kid-onboarding-visual,
+  .parent-onboarding-visual
+) {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  min-height: 210px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(
+  .kid-onboarding-card,
+  .parent-onboarding-card
+) > :not(.kid-onboarding-visual):not(.parent-onboarding-visual) {
+  grid-column: 2;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .parent-dashboard-body {
+  display: grid !important;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(340px, 1.1fr) !important;
+  gap: 12px 24px !important;
+  align-items: start;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .parent-dashboard-body > :is(
+  .login-mode-tabs,
+  .parent-overview-heading,
+  .parent-overview-grid,
+  .parent-subscription-summary
+) {
+  grid-column: 1;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .parent-dashboard-body > .parent-kids-section {
+  grid-column: 2;
+  grid-row: 1 / span 5;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .analytics-body {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+  gap: 14px 24px !important;
+  align-items: start;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .analytics-body .analytics-hero {
+  grid-row: 1 / span 2;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .avatar-library-page {
+  display: grid !important;
+  grid-template-columns: minmax(250px, 0.8fr) minmax(380px, 1.2fr) !important;
+  gap: 10px 26px !important;
+  align-items: start;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .avatar-library-page > :is(.step-label, h1, p, .avatar-profile-summary) {
+  grid-column: 1;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .avatar-library-page > :is(.avatar-grid-heading, .cartoon-avatar-grid) {
+  grid-column: 2;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .avatar-library-page > .primary-btn {
+  grid-column: 2;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .cartoon-avatar-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .payment-plans-page {
+  display: grid !important;
+  grid-template-columns: minmax(230px, 0.7fr) minmax(440px, 1.3fr) !important;
+  gap: 12px 24px !important;
+  align-items: start;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .payment-plans-page > :is(
+  .payment-page-intro,
+  .selected-plan-benefits,
+  .payment-security-note
+) {
+  grid-column: 1;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .payment-plans-page > .family-plan-options {
+  grid-column: 2;
+  grid-row: 1 / span 3;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .payment-plans-page > .payment-page-action {
+  grid-column: 2;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-home .welcome-panel {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 24px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-home .home-new-chat-btn {
+  width: auto !important;
+  min-width: 220px !important;
+  max-width: 260px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat.is-active {
+  overflow: hidden !important;
+  padding: 42px 28px 14px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat .message-pane {
+  min-height: 0 !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-chat .composer {
+  width: min(100%, 820px) !important;
+  margin-inline: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-info .info-page,
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-team .team-page {
+  column-width: 320px;
+  column-gap: 34px;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .screen-team .team-list {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px !important;
+  column-span: all;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] .timer-demo-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 18px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(.modal-layer, .payment-modal-layer) {
+  padding: 16px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-orientation="landscape"] :is(.modal-card, .payment-modal-card) {
+  width: min(100%, 720px) !important;
+  max-width: 720px !important;
+  max-height: calc(100% - 32px) !important;
+  overflow-y: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .app-screen.is-active {
+  padding-inline: 46px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .splash-reference-scene {
+  transform: scale(0.9);
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .splash-hero-stage {
+  height: 620px !important;
+  align-items: center !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .splash-center {
+  grid-template-rows: 108px minmax(0, 1fr) !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .splash-brand-logo-main[src$=".svg"] {
+  width: 292px !important;
+  max-height: 72px !important;
+}
+
+/* June 20: compact portrait actions, centered iPad layout, and supplied chat artwork. */
+html[data-theme="curio-sand-light"][data-device-preset="iphone-portrait"] #phoneDevice#phoneDevice :is(
+  button.primary-btn,
+  button.secondary-btn,
+  button.danger-btn,
+  button.bottom-action
+):not(.compact-parent-btn):not(.home-new-chat-btn) {
+  width: min(calc(100% - 32px), 280px) !important;
+  max-width: 250px !important;
+  justify-self: center !important;
+  margin-inline: auto !important;
+}
+
+html[data-theme="curio-sand-light"] #phoneDevice .screen-chat.is-active {
+  background: #fbfaf5 url("chat-wave-background.jpeg") center center / 100% 100% no-repeat !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] {
+  --ipad-landscape-content: 860px;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .minimal-top,
+  .chat-header,
+  .app-topbar,
+  .parent-app-header,
+  .chat-top-line,
+  .login-mode-tabs,
+  .analytics-tabs-card,
+  .kid-report-tabs
+) {
+  width: min(100%, var(--ipad-landscape-content)) !important;
+  max-width: var(--ipad-landscape-content) !important;
+  margin-inline: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .login-panel,
+  .register-panel,
+  .onboarding-card,
+  .parent-dashboard-body,
+  .analytics-body,
+  .avatar-library-page,
+  .payment-plans-page,
+  .payment-confirmation-page,
+  .parent-alerts-body,
+  .welcome-panel,
+  .home-section,
+  .timer-demo-list,
+  .info-page,
+  .support-page,
+  .message-pane,
+  .composer,
+  .paused-banner,
+  .chat-feature-summary,
+  .chat-footnote
+) {
+  width: min(100%, var(--ipad-landscape-content)) !important;
+  max-width: var(--ipad-landscape-content) !important;
+  margin-inline: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash.is-active {
+  padding-inline: max(46px, calc((100% - 980px) / 2)) !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .primary-btn,
+  .secondary-btn,
+  .danger-btn,
+  .bottom-action
+):not(.compact-parent-btn):not(.home-new-chat-btn) {
+  width: min(100%, 320px) !important;
+  max-width: 320px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-chat .composer {
+  width: min(100%, var(--ipad-landscape-content)) !important;
+  max-width: var(--ipad-landscape-content) !important;
+  margin-inline: auto !important;
+}
+
+
+/* =========================================================
+   Pratvim universal screen background update
+   Uses supplied soft wave background across all app screens.
+   Keep this block at the end of styles.css so it overrides
+   previous theme/background rules safely.
+========================================================= */
+
+:root {
+  --pratvim-bg-image: url("pratvim-screen-background.jpeg");
+  --pratvim-bg-cream: #fffdf8;
+  --pratvim-bg-shell: #fbfaf5;
+  --pratvim-bg-wave: #c8e1de;
+  --pratvim-card-glass: rgba(255, 255, 255, 0.90);
+  --pratvim-card-glass-strong: rgba(255, 255, 255, 0.96);
+  --pratvim-soft-line: rgba(223, 210, 190, 0.72);
+}
+
+/* Main phone shell */
+.phone-device {
+  background: var(--pratvim-bg-cream) !important;
+}
+
+/* Apply the supplied background consistently across all possible screens */
+.app-screen,
+html[data-theme="curio-sand-light"] .app-screen,
+.screen-splash,
+.screen-onboarding,
+.screen-parent-onboarding,
+.screen-login,
+.screen-parent-full-login,
+.screen-parent-register,
+.screen-parent-email-confirm,
+.screen-kid-register,
+.screen-home,
+.screen-chat,
+.screen-parent-dashboard,
+.screen-parent-analytics,
+.screen-parent-alert,
+.screen-timer-demo,
+.screen-info,
+.screen-support,
+.screen-legal {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.94) 0%, rgba(255, 253, 248, 0.86) 48%, rgba(255, 253, 248, 0.24) 68%, rgba(200, 225, 222, 0.18) 100%),
+    var(--pratvim-bg-image) center bottom / cover no-repeat !important;
+}
+
+/* Disable older generated bottom wave pseudo layers so the supplied image is the single source of truth */
+html[data-theme="curio-sand-light"] .app-screen::after {
+  display: none !important;
+  content: none !important;
+}
+
+html[data-theme="curio-sand-light"] .app-screen::before {
+  height: 170px !important;
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.78), transparent 74%) !important;
+  z-index: 0 !important;
+}
+
+/* Remove custom ocean animation from prior version; background now handles the wave area */
+.chat-ocean {
+  display: none !important;
+}
+
+/* Keep all screen content above the background */
+.app-screen > *,
+.screen-chat > *,
+.screen-home > *,
+.screen-parent-dashboard > *,
+.screen-parent-analytics > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Improve readability on the new background */
+/*
+:is(
+  .onboarding-card,
+  .login-panel,
+  .register-panel,
+  .welcome-panel,
+  .recent-card,
+  .history-card,
+  .category-group,
+  .category-chat-card,
+  .parent-card,
+  .parent-summary-card,
+  .parent-review-card,
+  .analytics-card,
+  .timer-card,
+  .alert-card,
+  .info-card,
+  .support-card,
+  .plan-card,
+  .subscription-card,
+  .kid-profile-chip,
+  .empty-card,
+  .bubble,
+  .kid-query-bubble,
+  .response-bubble,
+  .chat-history-panel,
+  .modal-card
+) {
+  background: var(--pratvim-card-glass) !important;
+  border-color: rgba(223, 210, 190, 0.70) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+} */
+
+/* Stronger cards where forms or important information appear */
+
+/*
+:is(
+  .form-stack input,
+  .form-stack select,
+  .form-mini-label input,
+  #pinInput,
+  .composer-field,
+  .social-login-row button,
+  .selected-kid-login,
+  .parent-pin-card,
+  .terms-check,
+  .stat-card,
+  .parent-stat-card
+) {
+  background: var(--pratvim-card-glass-strong) !important;
+  border-color: rgba(223, 210, 190, 0.78) !important;
+}
+
+*/
+
+/* Header bars become soft glass over the shared background */
+:is(
+  .minimal-top,
+  .app-topbar,
+  .chat-header,
+  .parent-app-header,
+  .info-header,
+  html[data-theme="curio-sand-light"] .minimal-top,
+  html[data-theme="curio-sand-light"] .app-topbar,
+  html[data-theme="curio-sand-light"] .chat-header,
+  html[data-theme="curio-sand-light"] .parent-app-header,
+  html[data-theme="curio-sand-light"] .info-header
+) {
+  background: rgba(255, 253, 248, 0.86) !important;
+  border-bottom: 1px solid var(--pratvim-soft-line) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Composer and bottom navigation glass treatment */
+:is(
+  .composer,
+  .chat-composer,
+  .bottom-nav,
+  .parent-bottom-nav,
+  .tab-bar,
+  .navigation-bar
+) {
+  background: rgba(255, 255, 255, 0.88) !important;
+  border-color: rgba(223, 210, 190, 0.72) !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 14px 34px rgba(82, 123, 131, 0.12);
+}
+
+/* Preserve chat readability while showing the background below */
+.message-area,
+.chat-messages,
+.chat-history-panel,
+.composer,
+.chat-composer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Ensure scrollable screens keep the supplied wave visible at the bottom */
+.screen-home,
+.screen-parent-dashboard,
+.screen-parent-analytics,
+.screen-info,
+.screen-support,
+.screen-legal {
+  background-attachment: local !important;
+}
+
+/* Mobile native mode */
+.native-app .app-screen {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.94) 0%, rgba(255, 253, 248, 0.86) 48%, rgba(255, 253, 248, 0.24) 68%, rgba(200, 225, 222, 0.18) 100%),
+    var(--pratvim-bg-image) center bottom / cover no-repeat !important;
+}
+
+/* Accessibility: no extra motion introduced */
+@media (prefers-reduced-motion: reduce) {
+  .chat-ocean,
+  .wave,
+  .wave-spark {
+    animation: none !important;
+  }
+}
+
+
+
+
+
+/* ========================================
+   CHAT BUBBLE WIDTH IMPROVEMENTS
+======================================== */
+.chat-message{
+  grid-template-columns: 28px minmax(0,1fr) !important;
+  gap: 6px !important;
+}
+
+.chat-message .bubble{
+  width: calc(100% - 4px) !important;
+  max-width: 100% !important;
+  padding: 16px 18px !important;
+  border-radius: 24px !important;
+}
+
+.chat-message.kid .bubble{
+  margin-left: auto !important;
+  width: 88% !important;
+}
+
+.chat-message:not(.kid) .bubble{
+  width: 92% !important;
+}
+
+.bubble p{
+  font-size: 14px !important;
+  line-height: 1.65 !important;
+}
+
+
+/* =========================================================
+   IPAD LANDSCAPE SPLASH SCREEN UI FIX
+   Keeps existing mobile layout intact and optimizes 1194 x 834.
+========================================================= */
+
+html[data-device-preset="ipad-landscape"] .phone-device {
+  border-width: 14px;
+  border-radius: 44px;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash.is-active {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+  grid-template-rows: 1fr;
+  align-items: center;
+  gap: clamp(32px, 5vw, 76px);
+  padding: clamp(34px, 4vw, 52px) clamp(56px, 7vw, 92px) clamp(40px, 5vw, 58px);
+  overflow: hidden;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 254, 250, 0.88) 0%, rgba(255, 254, 250, 0.12) 36%, transparent 70%);
+  z-index: 0;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash > * {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-center {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: start;
+  justify-items: center;
+  text-align: center;
+  min-width: 0;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-brand {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  margin: 0;
+  transform: translateY(-4px);
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-brand-logo-main {
+  width: clamp(230px, 26vw, 330px);
+  max-height: 92px;
+  object-fit: contain;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-tagline {
+  margin-top: 0;
+  color: #006f68;
+  font-size: clamp(10px, 1vw, 13px);
+  font-weight: 950;
+  letter-spacing: 0.01em;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-hero-stage {
+  width: min(560px, 100%);
+  height: min(560px, calc(var(--app-height) - 180px));
+  min-height: 430px;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  margin-top: -10px;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-reference-scene {
+  width: 100%;
+  height: 100%;
+  transform: scale(0.9);
+  transform-origin: center center;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-solo-kid {
+  left: 50%;
+  bottom: 8%;
+  transform: translateX(-50%) scale(1.04);
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-question-card {
+  box-shadow: 0 18px 40px rgba(47, 85, 91, 0.18);
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.sky {
+  left: 17%;
+  top: 22%;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.puzzle {
+  left: 13%;
+  top: 49%;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.orbit {
+  left: 45%;
+  top: 12%;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.leaf {
+  right: 14%;
+  top: 23%;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.kind {
+  right: 13%;
+  top: 50%;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-login-actions {
+  grid-column: 2;
+  grid-row: 1;
+  width: min(360px, 100%);
+  justify-self: end;
+  align-self: center;
+  margin: 0;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-story-panel {
+  width: 100%;
+  min-height: 190px;
+  display: grid;
+  align-content: center;
+  gap: 12px;
+  padding: 28px 28px 26px;
+  border-radius: 28px;
+  background: rgba(255, 254, 250, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  box-shadow: 0 22px 48px rgba(47, 85, 91, 0.08);
+  backdrop-filter: blur(10px);
+  text-align: left;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-story-panel h2 {
+  margin: 0;
+  color: #16494d;
+  font-size: clamp(24px, 2.2vw, 30px);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-story-panel p {
+  margin: 0;
+  max-width: none;
+  color: #355f63;
+  font-size: clamp(14px, 1.15vw, 16px);
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-story-panel small {
+  color: #527b83;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+html[data-device-preset="ipad-landscape"] .screen-splash .splash-get-started {
+  width: 100%;
+  min-height: 52px;
+  margin-top: 4px;
+  border-radius: 22px;
+  background: #00988f;
+  box-shadow: 0 18px 34px rgba(0, 152, 143, 0.2);
+}
+
+html[data-device-orientation="landscape"][data-device-preset="ipad-landscape"] .screen-splash.is-active {
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 380px);
+}
+
+/* June 21: phone-like, single-column iPad landscape experience. */
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] {
+  --ipad-reading-column: 620px;
+  --ipad-form-column: 520px;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .app-screen.is-active {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  padding: 44px 34px 24px !important;
+  scroll-padding-top: 72px;
+  scrollbar-width: none;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .app-screen.is-active::-webkit-scrollbar {
+  display: none;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .app-screen:not(.screen-splash):not(.screen-chat).is-active > header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 90 !important;
+  width: min(100%, var(--ipad-reading-column)) !important;
+  max-width: var(--ipad-reading-column) !important;
+  margin: 0 auto 14px !important;
+  padding: 8px 0 12px !important;
+  background: #fbfaf5 !important;
+  border-bottom: 1px solid rgba(226, 214, 195, 0.9) !important;
+  box-shadow: 0 10px 18px rgba(67, 78, 75, 0.04) !important;
+  isolation: isolate;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .login-panel,
+  .register-panel,
+  .onboarding-card,
+  .parent-dashboard-body,
+  .analytics-body,
+  .avatar-library-page,
+  .payment-plans-page,
+  .payment-confirmation-page,
+  .parent-alerts-body,
+  .welcome-panel,
+  .home-section,
+  .timer-demo-list,
+  .info-page,
+  .support-page,
+  .message-pane,
+  .composer,
+  .paused-banner,
+  .chat-feature-summary,
+  .chat-footnote
+) {
+  width: min(100%, var(--ipad-reading-column)) !important;
+  max-width: var(--ipad-reading-column) !important;
+  margin-inline: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .screen-login .login-mode-tabs,
+  .screen-parent-dashboard .parent-home-mode-tabs
+) {
+  width: min(100%, 320px) !important;
+  max-width: 320px !important;
+  margin-inline: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .form-stack,
+  .support-fields,
+  .parent-profile-fields
+) {
+  width: min(100%, var(--ipad-form-column)) !important;
+  max-width: var(--ipad-form-column) !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 12px !important;
+  margin-inline: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .split-fields {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 12px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .form-stack input,
+  .form-stack select,
+  .form-stack textarea,
+  .support-fields input,
+  .support-fields select,
+  .support-fields textarea,
+  .form-mini-label input
+) {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .parent-full-login-panel,
+  .screen-parent-register .register-panel,
+  .screen-parent-email-confirm .register-panel,
+  .kid-register-panel
+) {
+  justify-items: center !important;
+  text-align: center !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .parent-full-login-panel .login-intro,
+  .screen-parent-register .login-intro,
+  .screen-parent-email-confirm .email-confirm-panel > p,
+  .kid-register-panel .kid-register-heading
+) {
+  width: min(100%, var(--ipad-form-column)) !important;
+  margin-inline: auto !important;
+  text-align: center !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .kid-onboarding-card,
+  .parent-onboarding-card
+) {
+  width: min(100%, var(--ipad-form-column)) !important;
+  max-width: var(--ipad-form-column) !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto !important;
+  justify-items: center !important;
+  gap: 10px !important;
+  padding: 20px 24px !important;
+  text-align: center !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .kid-onboarding-card,
+  .parent-onboarding-card
+) > * {
+  grid-column: 1 !important;
+  grid-row: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .kid-onboarding-visual,
+  .parent-onboarding-visual
+) {
+  width: min(100%, 360px) !important;
+  min-height: 230px !important;
+  max-height: 250px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash.is-active {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto auto !important;
+  justify-items: center !important;
+  align-content: start !important;
+  gap: 0 !important;
+  padding: 18px 0 24px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  background: #fbfaf5 url("splash-wave-background.jpeg") center bottom / 420px auto no-repeat !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash.is-active::before,
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash.is-active::after {
+  content: none !important;
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-center {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  width: min(100%, 420px) !important;
+  height: 570px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: 88px minmax(0, 1fr) !important;
+  gap: 0 !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-brand {
+  transform: none !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-brand-logo-main {
+  width: 270px !important;
+  max-height: 64px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-hero-stage {
+  width: 420px !important;
+  height: 482px !important;
+  min-height: 482px !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-reference-scene {
+  width: 355px !important;
+  height: 460px !important;
+  min-height: 460px !important;
+  margin: 0 auto !important;
+  transform: none !important;
+  transform-origin: center top !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-question-card {
+  width: 98px !important;
+  min-width: 98px !important;
+  max-width: 98px !important;
+  height: 108px !important;
+  min-height: 108px !important;
+  max-height: 108px !important;
+  padding: 10px 8px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.orbit,
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.kind {
+  width: 98px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.sky {
+  left: 20px !important;
+  top: 88px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.orbit {
+  left: 50% !important;
+  top: 18px !important;
+  transform: translateX(-50%) !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.leaf {
+  right: 20px !important;
+  top: 92px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.puzzle {
+  left: 4px !important;
+  top: auto !important;
+  bottom: 132px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-question-card.kind {
+  right: 4px !important;
+  top: auto !important;
+  bottom: 132px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-login-actions {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  width: min(100%, 420px) !important;
+  justify-self: center !important;
+  align-self: start !important;
+  margin: 0 auto !important;
+  padding: 0 0 18px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-story-panel {
+  width: 100% !important;
+  min-height: 238px !important;
+  display: grid !important;
+  justify-items: center !important;
+  align-content: start !important;
+  gap: 10px !important;
+  padding: 44px 24px 20px !important;
+  border: 0 !important;
+  border-radius: 0 0 28px 28px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-align: center !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-story-panel::before,
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-story-panel::after {
+  display: none !important;
+  content: none !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-story-panel h2 {
+  width: 240px !important;
+  max-width: 240px !important;
+  margin: 0 auto !important;
+  font-size: 24px !important;
+  line-height: 1.12 !important;
+  text-align: center !important;
+  white-space: normal !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-splash .splash-story-panel p {
+  width: 280px !important;
+  max-width: 280px !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .parent-dashboard-body,
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .analytics-body,
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .avatar-library-page,
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .payment-plans-page {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 14px !important;
+  align-items: start !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] :is(
+  .parent-dashboard-body,
+  .analytics-body,
+  .avatar-library-page,
+  .payment-plans-page
+) > * {
+  grid-column: 1 !important;
+  grid-row: auto !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .family-plan-options {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 10px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-info .info-page,
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-team .team-page {
+  column-width: auto !important;
+  column-count: 1 !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-team .team-list {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 14px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-chat.is-active {
+  overflow: hidden !important;
+  padding: 42px 34px 16px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-chat .chat-top-line {
+  position: relative !important;
+  z-index: 90 !important;
+  width: min(100%, var(--ipad-reading-column)) !important;
+  max-width: var(--ipad-reading-column) !important;
+  margin: 0 auto 10px !important;
+  padding: 8px 0 12px !important;
+  background: #fbfaf5 !important;
+  border-bottom: 1px solid rgba(226, 214, 195, 0.9) !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-chat .conversation-pair {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 14px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-chat :is(
+  .kid-query-panel,
+  .app-response-panel
+) {
+  width: 100% !important;
+  justify-items: initial !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-chat .kid-query-panel {
+  justify-items: end !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-chat .app-response-panel {
+  justify-items: start !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-chat :is(
+  .kid-query-content,
+  .app-response-content
+) {
+  width: min(94%, 560px) !important;
+  max-width: 560px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-chat :is(
+  .kid-query-bubble,
+  .app-response-bubble
+) {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  max-width: 500px !important;
+}
+
+html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen-chat :is(
+  .message-pane,
+  .composer
+) {
+  width: min(100%, var(--ipad-reading-column)) !important;
+  max-width: var(--ipad-reading-column) !important;
+  margin-inline: auto !important;
+}
+
+
+/* Voice chat mic at the start of the chat input box */
+html[data-theme="curio-sand-light"] .screen-chat .composer-field {
+  grid-template-columns: 40px minmax(0, 1fr) 40px !important;
+  padding: 0 5px 0 6px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.mic {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.98) !important;
+  color: #008f88 !important;
+  border: 1px solid rgba(0, 143, 136, 0.42) !important;
+  box-shadow: 0 8px 16px rgba(0, 143, 136, 0.12) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.mic .mic-shape {
+  color: #008f88 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.mic.is-recording {
+  background: #008f88 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 8px rgba(0, 143, 136, 0.12), 0 8px 16px rgba(0, 143, 136, 0.18) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat #chatInput {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  padding-left: 2px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .tool-btn.send {
+  grid-column: 3 !important;
+  grid-row: 1 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer.is-paused .tool-btn.mic {
+  opacity: 0.62;
+  cursor: not-allowed;
 }

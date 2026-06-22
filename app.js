@@ -1340,8 +1340,6 @@ function positionStreakPopover() {
 
 function renderMessages() {
   const chat = activeChat();
-  const kid = kidProfiles[activeLoginKidIndex] || kidProfiles[0];
-  const kidSrc = kidAvatar(kid, activeLoginKidIndex);
   if (!chat.messages.length) {
     messageArea.innerHTML = `
       <div class="chat-empty-state">
@@ -1351,55 +1349,46 @@ function renderMessages() {
           <span class="ask-suggestion two">How?</span>
           <span class="ask-suggestion three">What?</span>
         </div>
-        <p>Type a question or add a picture. Piku will explain it in simple, protected language.</p>
+        <p>Type a question, use voice, or add a picture. Pratvim will explain it in simple, protected language.</p>
       </div>
     `;
     return;
   }
 
-  const conversationPairs = [];
-  for (let index = 0; index < chat.messages.length; index += 1) {
-    const message = chat.messages[index];
-    if (message.role === "kid") {
-      const response = chat.messages[index + 1] && chat.messages[index + 1].role !== "kid"
-        ? chat.messages[index + 1]
-        : null;
-      if (response) index += 1;
-      conversationPairs.push({ kid: message, response });
-    } else {
-      conversationPairs.push({ kid: null, response: message });
-    }
-  }
+  const renderPinButton = () => `
+    <button class="message-pin-btn ${chat.pinned ? "is-pinned" : ""}" type="button" data-pin-chat aria-label="${chat.pinned ? "Unpin chat" : "Pin chat"}" title="${chat.pinned ? "Pinned" : "Pin chat"}">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.2 4.2 19.8 9.8 16.8 11.1 14.4 17.2 12 14.8 7 19.8 5.8 18.6 10.8 13.6 8.8 11.6 14.9 9.2 14.2 4.2Z" />
+      </svg>
+      <span>${chat.pinned ? "Pinned" : "Pin chat"}</span>
+    </button>
+  `;
 
-  messageArea.innerHTML = conversationPairs
-    .map(({ kid: kidMessage, response }) => {
-      const responseRole = response?.role || "pending";
-      const responseLabel = responseRole === "blocked" ? "Safe reply" : responseRole === "loading" ? "Piku is thinking" : "Piku answered";
-      const responseIcon = responseRole === "blocked" ? "!" : `<span class="piku-logo-mark" aria-hidden="true"><img src="pratvim-icon-new.svg" alt="" /></span>`;
+  messageArea.innerHTML = chat.messages
+    .map((message, index) => {
+      const role = message.role || "ai";
+      const isKid = role === "kid";
+      const isBlocked = role === "blocked";
+      const isLoading = role === "loading";
+      const label = isBlocked ? "Safe reply" : isLoading ? "Pratvim is thinking" : "Pratvim";
+      const assistantBrand = !isKid
+        ? `<div class="assistant-label" aria-label="${label}">
+            <span class="assistant-brand-symbol" aria-hidden="true"></span>
+          </div>`
+        : "";
+      const shouldShowDivider = index > 0 && index === 2;
+      const metaRow = message.time && !isLoading ? `<div class="message-meta"><time>${message.time}</time>${renderPinButton()}</div>` : "";
 
       return `
-        <article class="conversation-pair ${responseRole}">
-          <section class="kid-query-panel">
-            <div class="conversation-label">Kid query</div>
-            <div class="kid-query-content">
-              <div class="avatar avatar-photo kid-query-avatar"><img src="${kidSrc}" alt="${kid?.name || "Kid"}" /></div>
-              <div class="bubble kid-query-bubble">
-                <p>${kidMessage?.text || ""}</p>
-                ${kidMessage?.time ? `<time>${kidMessage.time}</time>` : ""}
-              </div>
+        ${shouldShowDivider ? `<div class="chat-date-divider"><span>Today</span></div>` : ""}
+        <article class="chat-message-clean ${isKid ? "kid" : "ai"} ${isBlocked ? "blocked" : ""} ${isLoading ? "loading" : ""}">
+          ${assistantBrand}
+          <div class="clean-bubble-wrap">
+            <div class="bubble clean-bubble">
+              <p>${message.text || "Pratvim is getting the answer ready..."}</p>
+              ${metaRow}
             </div>
-          </section>
-
-          <section class="app-response-panel ${responseRole}">
-            <div class="conversation-label">${responseLabel}</div>
-            <div class="app-response-content">
-              <div class="avatar app-response-icon ${responseRole === "blocked" ? "blocked-icon" : ""}">${responseIcon}</div>
-              <div class="bubble app-response-bubble">
-                <p>${response?.text || "Piku is getting the answer ready..."}</p>
-                ${response && response.role !== "loading" ? `<time>${response.time}</time>` : ""}
-              </div>
-            </div>
-          </section>
+          </div>
         </article>
       `;
     })
@@ -1958,6 +1947,14 @@ pauseChatBtn?.addEventListener("click", () => {
 
 closeChatBtn?.addEventListener("click", () => {
   closeActiveChat();
+});
+
+messageArea?.addEventListener("click", (event) => {
+  const pinButton = event.target.closest("[data-pin-chat]");
+  if (!pinButton) return;
+  const chat = activeChat();
+  chat.pinned = !chat.pinned;
+  renderAll();
 });
 
 composer.addEventListener("submit", (event) => {

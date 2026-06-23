@@ -122,8 +122,6 @@
             </div>
             <div class="splash-login-actions">
               <div class="splash-story-panel">
-                <h2>A safe space to explore.</h2>
-                <p>Ask, learn and grow with AI you can trust.</p>
                 <button class="primary-btn splash-get-started" data-screen="parent-register" type="button">
                   <span>Get Started</span>
                   <i aria-hidden="true"></i>
@@ -653,9 +651,14 @@
               <input id="imageInput" type="file" accept="image/*" />
               <button class="tool-btn image" id="imageUploadBtn" type="button" aria-label="Upload image">+</button>
               <div class="composer-field">
-                <button class="tool-btn mic" id="voiceBtn" type="button" aria-label="Start voice chat" title="Voice chat">
-                  <span class="mic-shape" aria-hidden="true"></span>
-                </button>
+                <button class="tool-btn mic" id="micBtn" type="button" aria-label="Voice chat">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M12 14.5a4 4 0 0 0 4-4V6.8a4 4 0 1 0-8 0v3.7a4 4 0 0 0 4 4Z"></path>
+                      <path d="M6.5 10.5a5.5 5.5 0 0 0 11 0"></path>
+                      <path d="M12 16v4"></path>
+                      <path d="M9 20h6"></path>
+                    </svg>
+                  </button>
                 <input id="chatInput" autocomplete="off" placeholder="Type your question..." />
                 <button class="tool-btn send" type="submit" aria-label="Send">
                   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">

@@ -1,0 +1,233 @@
+// ============================================================
+// layout/_header.scss
+// Unified app header — used across all screens
+// ============================================================
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+// ── Unified app header ─────────────────────────────────────
+html[data-theme="curio-sand-light"] .unified-app-header {
+  // Edge-to-edge sticky header
+  position: sticky;
+  top: 0;
+  z-index: 150;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: calc(100% + 32px);   // break out of 16px screen padding
+  margin: -12px -16px 14px;   // -12px offsets app-screen padding-top
+  padding: 10px 16px;
+  min-height: #{v.$header-h};
+  background: rgba(255, 253, 248, 0.93);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(200, 195, 182, 0.28);
+  box-sizing: border-box;
+}
+
+// Splash screen has no header overlay
+html[data-theme="curio-sand-light"] .screen-splash .unified-app-header {
+  display: none;
+}
+
+// ── Left capsule (hamburger + logo) ───────────────────────
+html[data-theme="curio-sand-light"] .unified-header-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+// ── Hamburger / menu trigger ───────────────────────────────
+html[data-theme="curio-sand-light"] .app-menu-trigger,
+html[data-theme="curio-sand-light"] .global-menu-button {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3.5px;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(200, 195, 182, 0.35);
+  padding: 0;
+  cursor: pointer;
+
+  span {
+    display: block;
+    width: 13px;
+    height: 1.5px;
+    background: #4d737a;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+}
+
+// ── Internal brand logo ────────────────────────────────────
+html[data-theme="curio-sand-light"] {
+  .internal-brand,
+  .internal-brand-logo {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 22px;
+      width: auto;
+      object-fit: contain;
+    }
+  }
+
+  // Chat header brand (slightly wider wordmark)
+  .chat-header-brand {
+    height: 22px;
+    width: auto;
+    max-width: 62px;
+    object-fit: contain;
+  }
+}
+
+// ── Profile switch pill (right side) ──────────────────────
+html[data-theme="curio-sand-light"] .header-profile-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(200, 195, 182, 0.35);
+
+  .header-role-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    background: transparent;
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
+    transition: border-color 0.18s;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    &.is-active {
+      border-color: var(--app-teal);
+    }
+  }
+}
+
+// ── Parent home — transparent header ──────────────────────
+html[data-theme="curio-sand-light"] .screen-parent-dashboard .unified-app-header {
+  background: transparent;
+  border-bottom: none;
+  backdrop-filter: none;
+}
+
+html[data-theme="curio-sand-light"] .screen-parent-dashboard .unified-header-left {
+  background: transparent;
+  border: none;
+}
+
+html[data-theme="curio-sand-light"] .screen-parent-dashboard .app-menu-trigger {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(200, 195, 182, 0.35);
+}
+
+html[data-theme="curio-sand-light"] .screen-parent-dashboard .header-profile-switch {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(200, 195, 182, 0.35);
+}
+
+// ── Chat screen header ─────────────────────────────────────
+// Chat uses a custom two-capsule layout (history left, controls right)
+html[data-theme="curio-sand-light"] .screen-chat .chat-top-line {
+  position: sticky;
+  top: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 14px;
+  min-height: 64px;
+  background: rgba(255, 253, 248, 0.97);
+  border-bottom: 1px solid rgba(0, 143, 136, 0.12);
+  box-shadow: 0 2px 12px rgba(0, 143, 136, 0.06);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-left {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  height: 44px;
+  padding: 4px 10px 4px 4px;
+  border: 1px solid #dde9e7;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 14px rgba(0, 143, 136, 0.06);
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-right {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  height: 44px;
+  padding: 4px 8px;
+  border: 1px solid #dde9e7;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 14px rgba(0, 143, 136, 0.06);
+}
+
+// Chat hamburger (history button)
+html[data-theme="curio-sand-light"] .chat-history-button {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid rgba(102, 143, 150, 0.45);
+  border-radius: 50%;
+  background: transparent;
+
+  span {
+    position: static;
+    display: block;
+    height: 2px;
+    background: #4d737a;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin: 0;
+
+    &:nth-child(1) { width: 14px; }
+    &:nth-child(2) { width: 10px; }
+    &:nth-child(3) { width: 14px; }
+  }
+}

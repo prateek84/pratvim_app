@@ -1,0 +1,158 @@
+// ============================================================
+// components/_modal.scss
+// Overlay modals: voice, image upload, parent menu, alerts
+// ============================================================
+
+@use '../abstracts/variables' as v;
+
+// ── Modal backdrop ─────────────────────────────────────────
+html[data-theme="curio-sand-light"] .modal-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 24px;
+  background: rgba(20, 34, 38, 0.52);
+  backdrop-filter: blur(4px);
+
+  &.is-hidden { display: none; }
+}
+
+// ── Voice modal ────────────────────────────────────────────
+html[data-theme="curio-sand-light"] .voice-modal {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 34, 38, 0.88);
+  backdrop-filter: blur(8px);
+
+  &.is-hidden { display: none; }
+
+  .record-orb {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: v.$teal-primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: micBounce 1.2s ease-in-out infinite;
+    margin-bottom: 20px;
+
+    &.is-hidden { display: none; }
+
+    svg { width: 36px; height: 36px; stroke: #fff; fill: none; }
+  }
+
+  .wave {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 36px;
+    margin-bottom: 28px;
+
+    &.is-hidden { display: none; }
+
+    span {
+      display: block;
+      width: 4px;
+      border-radius: 2px;
+      background: rgba(0, 200, 192, 0.8);
+      animation: voiceWave 0.8s ease-in-out infinite;
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          height: #{10 + $i * 5}px;
+          animation-delay: #{($i - 1) * 0.12}s;
+        }
+      }
+    }
+  }
+
+  .voice-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+
+  .voice-text {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.72);
+    text-align: center;
+    max-width: 240px;
+    line-height: 1.5;
+  }
+}
+
+// ── Image upload modal ─────────────────────────────────────
+html[data-theme="curio-sand-light"] .image-modal {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(20, 34, 38, 0.52);
+  backdrop-filter: blur(4px);
+
+  &.is-hidden { display: none; }
+
+  .image-modal-card {
+    width: 100%;
+    background: var(--atlas-card);
+    border-radius: v.$radius-lg v.$radius-lg 0 0;
+    padding: 24px 20px;
+    box-shadow: 0 -12px 40px rgba(49, 55, 54, 0.14);
+  }
+}
+
+// ── Parent alert modal ─────────────────────────────────────
+html[data-theme="curio-sand-light"] .screen-parent-alert {
+  background: rgba(255, 253, 248, 0.97);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 32px 24px;
+}
+
+// ── Global menu panel ──────────────────────────────────────
+html[data-theme="curio-sand-light"] .global-menu-panel {
+  position: absolute;
+  top: 70px;
+  left: 12px;
+  right: 12px;
+  z-index: 400;
+  background: var(--atlas-card);
+  border: 1px solid var(--atlas-line);
+  border-radius: v.$radius-lg;
+  box-shadow: 0 18px 46px rgba(52, 58, 55, 0.14);
+  overflow: hidden;
+  animation: parentMenuIn 0.22s ease both;
+
+  &.is-hidden { display: none; }
+}
+
+// ── Animations ─────────────────────────────────────────────
+@keyframes micBounce {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.08); }
+}
+
+@keyframes voiceWave {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.6; }
+  50%       { transform: scaleY(1);   opacity: 1; }
+}
+
+@keyframes parentMenuIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}

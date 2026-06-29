@@ -1,0 +1,109 @@
+// ============================================================
+// themes/_curio-sand-light.scss
+// Curio Sand Light theme — the primary Pratvim visual language
+// Wave background, sand tones, teal accents
+// ============================================================
+
+// Theme root is applied via html[data-theme="curio-sand-light"]
+// All rules in this file carry that scope for free since they're
+// nested. They override base component styles.
+
+html[data-theme="curio-sand-light"] {
+
+  // ── Root theme colour overrides ──────────────────────────
+  color-scheme: light;
+
+  // Card / form surfaces become warm-white
+  .login-panel,
+  .register-panel,
+  .onboarding-card,
+  .welcome-panel,
+  .parent-card,
+  .modal-card {
+    background: var(--atlas-card);
+    border-color: var(--atlas-line);
+    box-shadow: var(--atlas-shadow);
+  }
+
+  // Form inputs — warm-white surfaces
+  .form-mini-label input,
+  #pinInput {
+    background: rgba(255, 255, 255, 0.94);
+    border-color: var(--atlas-line);
+    color: var(--atlas-ink);
+  }
+
+  // Kid-specific cards get sand border
+  .recent-card,
+  .category-card,
+  .parent-kid-card {
+    border-color: var(--sand-line);
+    background: rgba(255, 254, 250, 0.72);
+    backdrop-filter: blur(6px);
+  }
+
+  // ── Theme background — screens are transparent;
+  //    phone-device shows the wave image ─────────────────────
+  .phone-device {
+    background:
+      url("pratvim-screen-background.jpeg") center bottom / cover no-repeat;
+  }
+
+  .app-screen {
+    background: linear-gradient(
+      180deg,
+      rgba(255, 253, 248, 0.78) 0%,
+      rgba(255, 252, 245, 0.45) 42%,
+      rgba(240, 250, 248, 0.15) 68%,
+      transparent 100%
+    );
+
+    // Individual screen backgrounds are transparent —
+    // the wave shows through from .phone-device
+    &.screen-splash,
+    &.screen-chat,
+    &.screen-login,
+    &.screen-register-parent,
+    &.screen-email-confirm,
+    &.screen-parent-details,
+    &.screen-kid-register,
+    &.screen-onboarding,
+    &.screen-parent-onboarding,
+    &.screen-parent-dashboard,
+    &.screen-home,
+    &.screen-info,
+    &.screen-team {
+      background: transparent;
+    }
+  }
+
+  // ── Composer theme colours ───────────────────────────────
+  .screen-chat .composer {
+    background: rgba(255, 254, 250, 0.90);
+    border-color: rgba(234, 219, 196, 0.66);
+  }
+
+  .screen-chat .composer-field {
+    background: rgba(255, 255, 252, 0.96);
+    border-color: rgba(223, 237, 234, 0.90);
+  }
+
+  // ── Scrollbar theme ──────────────────────────────────────
+  .app-screen {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 143, 136, 0.22) transparent;
+
+    &::-webkit-scrollbar        { width: 3px; }
+    &::-webkit-scrollbar-thumb  { background: rgba(0, 143, 136, 0.22); border-radius: 2px; }
+    &::-webkit-scrollbar-track  { background: transparent; }
+  }
+
+  // ── Global transition (smooth interactions) ──────────────
+  button,
+  input,
+  .app-screen {
+    transition-property: background, border-color, color, opacity, transform;
+    transition-duration: 0.16s;
+    transition-timing-function: ease;
+  }
+}

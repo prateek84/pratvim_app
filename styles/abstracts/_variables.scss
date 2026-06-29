@@ -1,0 +1,118 @@
+// ============================================================
+// abstracts/_variables.scss
+// Design tokens — all CSS custom properties for Pratvim
+// ============================================================
+
+// These become a :root block in the compiled CSS.
+// SCSS variables ($) are for build-time only; CSS vars (--) are runtime.
+
+// ── Brand palette ──────────────────────────────────────────
+$teal-primary:    #008f88;
+$teal-deep:       #00746f;
+$teal-dark:       #1f5458;
+$teal-darker:     #006c67;
+$teal-hover:      #005f5b;
+$teal-pressed:    #004f4c;
+
+$ink-dark:        #143044;
+$ink-mid:         #263a3e;
+$ink-soft:        #27383b;
+$muted-blue:      #466676;
+$muted-teal:      #60777c;
+
+$sand-base:       #fbfaf5;
+$sand-light:      #f8efe1;
+$sand-soft:       #fcf7ef;
+$sand-line:       #eadbc4;
+
+$white-glass:     rgba(255, 255, 255, 0.90);
+$white-strong:    rgba(255, 255, 255, 0.96);
+
+// ── Spacing & geometry ─────────────────────────────────────
+$radius-sm:       14px;
+$radius-md:       20px;
+$radius-lg:       28px;
+$radius-pill:     999px;
+
+$screen-pad:      16px;        // standard inner screen padding
+$header-h:        56px;        // unified header height
+
+// ── Shadows ────────────────────────────────────────────────
+$shadow-island:      0 18px 42px rgba(68, 78, 68, 0.10);
+$shadow-island-soft: 0 10px 26px rgba(68, 78, 68, 0.075);
+$shadow-teal:        0 8px 18px rgba(0, 116, 111, 0.18);
+
+// ── CSS custom property output ─────────────────────────────
+// Emitted inside :root by main.scss
+:root {
+  // Device / layout
+  --device-width:    min(74vw, 620px);
+  --device-height:   min(92vh, 900px);
+  --app-width:       393px;
+  --app-height:      852px;
+  --app-gutter:      clamp(10px, 2.6vw, 16px);
+
+  // Brand
+  --app-teal:        #{$teal-primary};
+  --app-teal-deep:   #{$teal-deep};
+  --app-teal-dark:   #{$teal-dark};
+  --app-teal-line:   rgba(0, 143, 136, 0.34);
+  --app-teal-soft:   rgba(0, 143, 136, 0.09);
+
+  // Ink / text
+  --ink:             #{$ink-dark};
+  --app-ink:         #{$ink-mid};
+  --app-muted:       #{$muted-teal};
+  --text:            #36586a;
+  --muted:           #7c99a7;
+
+  // Surfaces
+  --paper:           #{$sand-base};
+  --paper-soft:      #f4f2ec;
+  --sand-line:       #{$sand-line};
+  --pratvim-bg-cream: #fffdf8;
+  --pratvim-bg-image: url("../pratvim-screen-background.jpeg");
+
+  // Cards / islands
+  --island-bg:           rgba(255, 255, 252, 0.82);
+  --island-bg-strong:    rgba(255, 255, 252, 0.95);
+  --island-border:       rgba(92, 132, 137, 0.18);
+  --island-border-strong:rgba(0, 127, 121, 0.36);
+  --island-radius:       #{$radius-lg};
+  --island-radius-sm:    #{$radius-md};
+  --island-gap:          clamp(14px, 3.6vw, 22px);
+  --island-pad:          clamp(16px, 4.5vw, 24px);
+  --island-shadow:       #{$shadow-island};
+  --island-shadow-soft:  #{$shadow-island-soft};
+  --island-surface:      rgba(248, 239, 225, 0.42);
+  --pratvim-soft-line:   rgba(223, 210, 190, 0.72);
+
+  // Atlas tokens (card/form surfaces)
+  --atlas-ink:    #20292c;
+  --atlas-muted:  #858b8c;
+  --atlas-card:   #fffefa;
+  --atlas-cream:  #f3e7d3;
+  --atlas-line:   #e7e2d9;
+  --atlas-teal:   #6b9299;
+  --atlas-shadow: 0 18px 42px rgba(52, 58, 55, 0.10);
+
+  // Screen chrome
+  --screen-cream:      #fffdf8;
+  --screen-shell:      #{$sand-base};
+  --screen-accent:     #1b4e56;
+  --screen-accent-soft:#5d8f96;
+
+  // Radii
+  --radius-sm:   #{$radius-sm};
+  --radius-md:   #{$radius-md};
+  --radius-lg:   #{$radius-lg};
+
+  // Header
+  --header-control-size: 36px;
+  --header-icon-size:    clamp(40px, calc(var(--app-width) / 9), 46px);
+
+  // iPad layout cols
+  --ipad-form-column:        520px;
+  --ipad-landscape-content:  860px;
+  --ipad-reading-column:     620px;
+}

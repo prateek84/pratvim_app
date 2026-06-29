@@ -15,7 +15,7 @@
   <body>
     <main class="prototype-shell">
       <aside class="spec-panel">
-        <p class="eyebrow">App layout</p>prat
+        <p class="eyebrow">App layout</p>
         <h1>Pratvim</h1>
         <p class="spec-copy">A protected AI learning space where children can ask, understand, and explore confidently.</p>
 
@@ -39,6 +39,7 @@
           <button class="nav-btn" data-screen="parent-full-login" type="button">Parent Full Login</button>
           <button class="nav-btn" data-screen="parent-register" type="button">Parent Register</button>
           <button class="nav-btn" data-screen="parent-email-confirm" type="button">Email Confirm</button>
+          <button class="nav-btn" data-screen="parent-details" type="button">Parent Details</button>
           <button class="nav-btn" data-screen="parent-onboarding" type="button">Parent Onboarding</button>
           <button class="nav-btn" data-screen="kid-register" type="button">Kid Setup</button>
           <button class="nav-btn" data-screen="onboarding" type="button">Onboarding</button>
@@ -78,7 +79,8 @@
             <span aria-hidden="true"></span>
           </button>
 
-          <section class="app-screen screen-splash is-active" data-view="splash">
+          <!-- Default launch screen: this illustrated Get Started experience is intentionally treated as the Splash screen. -->
+          <section class="app-screen screen-splash is-active" id="splashScreen" data-view="splash" aria-label="Splash screen">
             <div class="ambient one"></div>
             <div class="ambient two"></div>
             <div class="splash-center">
@@ -134,8 +136,10 @@
           <section class="app-screen screen-onboarding" data-view="onboarding">
             <header class="minimal-top branded-top">
               <button class="ghost-icon" data-screen="login" type="button" aria-label="Back">‹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="text-link" data-screen="home" type="button">Skip</button>
+              <img class="internal-screen-logo wordmark-logo" src="pratvim-wordmark.svg" alt="Pratvim" />
+              <button class="onboarding-skip-icon" data-screen="home" type="button" aria-label="Skip onboarding">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/><path d="M19 5v14"/></svg>
+              </button>
             </header>
             <div class="onboarding-card kid-onboarding-card">
               <div class="kid-onboarding-visual ask" id="kidOnboardingVisual" aria-label="Kid onboarding animation">
@@ -178,7 +182,7 @@
           <section class="app-screen screen-login" data-view="login">
             <header class="minimal-top login-topbar">
               <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
+              <img class="internal-screen-logo wordmark-logo" src="pratvim-wordmark.svg" alt="Pratvim" />
               <span class="header-balance" aria-hidden="true"></span>
             </header>
             <div class="login-mode-tabs icon-mode-tabs login-page-mode-tabs" aria-label="Login type">
@@ -188,8 +192,42 @@
             <div class="login-panel">
               <div class="login-intro">
                 <h2 id="loginTitle">Who is learning today?</h2>
-                <p id="loginSubtitle">Choose your profile to enter your private PIN.</p>
+                <p id="loginSubtitle"></p>
               </div>
+
+              <!-- ── Animated login scene ── -->
+              <div class="login-scene" aria-hidden="true">
+                <!-- Sparkles -->
+                <span class="login-sparkle">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#00b4aa" stroke-width="2.2" stroke-linecap="round"/></svg>
+                </span>
+                <span class="login-sparkle">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#008f88" stroke-width="2.2" stroke-linecap="round"/></svg>
+                </span>
+                <span class="login-sparkle">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#26c99e" stroke-width="2.4" stroke-linecap="round"/></svg>
+                </span>
+                <span class="login-sparkle">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#00b4aa" stroke-width="2" stroke-linecap="round"/></svg>
+                </span>
+                <span class="login-sparkle">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#008f88" stroke-width="2.4" stroke-linecap="round"/></svg>
+                </span>
+                <span class="login-sparkle">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke="#26c99e" stroke-width="2.2" stroke-linecap="round"/></svg>
+                </span>
+                <!-- Floating bubbles -->
+                <span class="login-bubble"></span>
+                <span class="login-bubble"></span>
+                <span class="login-bubble"></span>
+                <span class="login-bubble"></span>
+                <!-- Mascot -->
+                <div class="login-mascot" role="img" aria-label="Pratvim learning mascot">📚</div>
+                <!-- Labels -->
+                <p class="login-scene-label">Who is learning today?</p>
+                <p class="login-scene-sub">Choose your profile to continue</p>
+              </div>
+
               <div class="kid-login-picker" id="kidLoginPicker" aria-label="Choose child profile"></div>
               <div class="kid-pin-panel is-hidden" id="kidPinPanel">
                 <div class="selected-kid-login">
@@ -201,10 +239,6 @@
                 <input id="pinInput" maxlength="4" inputmode="numeric" value="" placeholder="Enter 4 digit PIN" />
               </div>
               <div class="parent-login-options is-hidden" id="parentLoginOptions">
-                <div class="parent-pin-card">
-                  <strong>Quick parent PIN</strong>
-                  <p>Use this on a trusted device after session timeout or when moving from a child profile back to parent controls.</p>
-                </div>
                 <div class="terms-check">
                   <input id="parentLoginTerms" type="checkbox" checked />
                   <span>I agree to the <button class="inline-legal-link" data-menu-screen="terms" type="button">Terms &amp; Conditions</button>.</span>
@@ -217,7 +251,7 @@
           <section class="app-screen screen-parent-full-login" data-view="parent-full-login">
             <header class="minimal-top branded-top">
               <button class="ghost-icon" data-screen="login" data-login-mode="parent" type="button" aria-label="Back">‹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
+              <img class="internal-screen-logo wordmark-logo" src="pratvim-wordmark.svg" alt="Pratvim" />
               <span class="header-balance" aria-hidden="true"></span>
             </header>
             <form class="register-panel parent-full-login-panel" id="parentFullLoginForm">
@@ -245,44 +279,29 @@
                 <button class="social-provider-btn facebook" data-screen="parent-dashboard" type="button" aria-label="Continue with Facebook"><span class="provider-mark">f</span><strong>Facebook</strong></button>
               </div>
               <button class="secondary-btn" data-screen="login" data-login-mode="parent" type="button">Use quick PIN instead</button>
-              <button class="text-link register-alt-link" data-screen="parent-register" type="button">New parent? Register first</button>
+              <button class="secondary-btn" data-screen="parent-register" type="button">New parent? Register first</button>
             </form>
           </section>
 
           <section class="app-screen screen-parent-register" data-view="parent-register">
             <header class="minimal-top branded-top">
-              <button class="ghost-icon" data-screen="splash" type="button" aria-label="Back">â€¹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
+              <button class="ghost-icon" data-screen="splash" type="button" aria-label="Back">‹</button>
+              <img class="internal-screen-logo wordmark-logo" src="pratvim-wordmark.svg" alt="Pratvim" />
               <span class="header-balance" aria-hidden="true"></span>
             </header>
             <form class="register-panel" id="parentRegisterForm">
               <div class="login-intro parent-register-intro">
                 <h2>Create parent account</h2>
-                <p>Set up your protected family space and manage up to four kid profiles.</p>
               </div>
 
+              <div class="info-hint-box">
+                <span class="info-hint-icon">✉️</span>
+                <p>Just your email to start — we'll collect the rest as you set up your family space in the next steps.</p>
+              </div>
               <div class="form-stack">
-                <div class="split-fields">
-                  <label>
-                    <span>First name</span>
-                    <input id="parentNameInput" autocomplete="given-name" value="Parent" placeholder="First name" />
-                  </label>
-                  <label>
-                    <span>Last name</span>
-                    <input id="parentLastNameInput" autocomplete="family-name" value="" placeholder="Last name" />
-                  </label>
-                </div>
                 <label>
-                  <span>Email</span>
+                  <span>Email address</span>
                   <input id="parentEmailInput" autocomplete="email" type="email" value="parent@example.com" placeholder="parent@example.com" />
-                </label>
-                <label>
-                  <span>Mobile number</span>
-                  <input id="parentMobileInput" autocomplete="tel" inputmode="tel" value="+1 555 010 2026" placeholder="Enter mobile number" />
-                </label>
-                <label>
-                  <span>Password</span>
-                  <input id="parentPasswordInput" autocomplete="new-password" type="password" value="safe1234" placeholder="Create password" />
                 </label>
               </div>
 
@@ -295,40 +314,80 @@
                 <input id="parentTermsInput" type="checkbox" checked />
                 <span>I agree to the <button class="inline-legal-link" data-menu-screen="terms" type="button">Terms &amp; Conditions</button> and <button class="inline-legal-link" data-menu-screen="privacy" type="button">Privacy Policy</button>.</span>
               </div>
-              <button class="primary-btn" type="submit">Create Parent Account</button>
-              <button class="text-link register-alt-link" data-screen="parent-full-login" type="button">Already registered? Login</button>
+              <button class="primary-btn" type="submit">Register Now</button>
+              <button class="secondary-btn" data-screen="parent-full-login" type="button">Already registered? Login</button>
             </form>
           </section>
 
           <section class="app-screen screen-parent-email-confirm" data-view="parent-email-confirm">
             <header class="minimal-top branded-top">
-              <button class="ghost-icon" data-screen="parent-register" type="button" aria-label="Back">â€¹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
+              <button class="ghost-icon" data-screen="parent-register" type="button" aria-label="Back">‹</button>
+              <img class="internal-screen-logo wordmark-logo" src="pratvim-wordmark.svg" alt="Pratvim" />
               <span class="header-balance" aria-hidden="true"></span>
             </header>
             <div class="register-panel email-confirm-panel">
               <img class="email-confirm-logo" src="pratvim-wordmark.svg" alt="Pratvim" />
-              <p class="step-label">Email confirmation</p>
               <h2>Confirm your email</h2>
-              <p>We sent a confirmation code to <strong id="confirmEmailText">parent@example.com</strong>. Enter it to complete parent registration.</p>
-
+              <p>We sent a confirmation code to <strong id="confirmEmailText">pa****@example.com</strong>. Enter it to complete parent registration.</p>
               <label class="form-mini-label confirmation-code-label">
                 <span>Confirmation code</span>
                 <input id="emailConfirmCode" inputmode="numeric" maxlength="6" value="246810" placeholder="Enter 6 digit code" />
               </label>
-
+            </div>
+            <div class="screen-action-bar">
               <button class="primary-btn" id="confirmEmailBtn" type="button">Confirm Email</button>
-              <button class="text-link" id="resendEmailBtn" type="button">Resend code</button>
+              <button class="secondary-btn" id="resendEmailBtn" type="button">Resend code</button>
+            </div>
+          </section>
+
+          <section class="app-screen screen-parent-details" data-view="parent-details">
+            <header class="minimal-top branded-top">
+              <button class="ghost-icon" data-screen="parent-email-confirm" type="button" aria-label="Back">‹</button>
+              <img class="internal-screen-logo wordmark-logo" src="pratvim-wordmark.svg" alt="Pratvim" />
+              <span class="header-balance" aria-hidden="true"></span>
+            </header>
+            <form class="register-panel parent-details-panel" id="parentDetailsForm">
+              <div class="login-intro parent-details-intro">
+                <img class="email-confirm-logo compact" src="pratvim-wordmark.svg" alt="Pratvim" />
+                <p class="step-label">Secure parent account</p>
+                <h2>Tell us who manages this family</h2>
+                <p>Create your private parent profile. These details help protect parent-only settings, billing, alerts, and child profile management.</p>
+              </div>
+              <div class="form-stack">
+                <div class="split-fields">
+                  <label>
+                    <span>First name <b class="required-mark">*</b></span>
+                    <input id="parentNameInput" autocomplete="given-name" value="" placeholder="First name" required />
+                  </label>
+                  <label>
+                    <span>Last name <b class="required-mark">*</b></span>
+                    <input id="parentLastNameInput" autocomplete="family-name" value="" placeholder="Last name" required />
+                  </label>
+                </div>
+                <label>
+                  <span>Password <b class="required-mark">*</b></span>
+                  <input id="parentPasswordInput" type="password" autocomplete="new-password" value="" placeholder="Min. 8 characters" required minlength="8" />
+                </label>
+                <label>
+                  <span>Confirm password <b class="required-mark">*</b></span>
+                  <input id="parentConfirmPasswordInput" type="password" autocomplete="new-password" value="" placeholder="Re-enter password" required minlength="8" />
+                </label>
+              </div>
+              <p class="parent-details-status is-hidden" id="parentDetailsStatus" role="alert"></p>
+            </form>
+            <div class="screen-action-bar">
+              <button class="primary-btn" form="parentDetailsForm" type="submit">Continue to Onboarding</button>
+              <button class="register-kid-link" data-screen="kid-register" type="button">+ Register a kid now</button>
             </div>
           </section>
 
           <section class="app-screen screen-parent-onboarding" data-view="parent-onboarding">
-            <header class="minimal-top branded-top">
-              <button class="ghost-icon" data-screen="parent-dashboard" type="button" aria-label="Back">â€¹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="text-link" data-screen="parent-dashboard" type="button">Skip</button>
+            <header class="minimal-top branded-top pob-header">
+              <span class="pob-header-left" aria-hidden="true"></span>
+              <img class="internal-screen-logo wordmark-logo" src="pratvim-wordmark.svg" alt="Pratvim" />
+              <button class="pob-skip-btn" data-screen="parent-dashboard" type="button">Skip</button>
             </header>
-            <div class="onboarding-card parent-onboarding-card">
+            <div class="onboarding-card parent-onboarding-card pob-card">
               <div class="parent-onboarding-visual setup" id="parentOnboardingVisual" aria-label="Parent onboarding animation">
                 <div class="setup-animation" aria-hidden="true">
                   <span class="setup-device"></span>
@@ -356,24 +415,67 @@
                 </div>
               </div>
               <p class="step-label" id="parentOnboardingStep">1 of 3</p>
-              <h2 id="parentOnboardingTitle">Set up safe profiles</h2>
-              <p id="parentOnboardingText">Create up to four child accounts with age, gender, and a private kid login PIN.</p>
+              <h2 id="parentOnboardingTitle">Welcome, Parents</h2>
+              <p id="parentOnboardingText">Create a safe space where each child can ask, learn, and explore with confidence.</p>
               <div class="parent-feature-grid" id="parentOnboardingFeatures">
-                <span>Child PINs</span>
-                <span>Screen timer</span>
+                <span><i class="feature-check" aria-hidden="true">✓</i>Kid profiles</span>
+                <span><i class="feature-check" aria-hidden="true">✓</i>Private PINs</span>
               </div>
               <div class="dots" id="parentOnboardingDots" aria-hidden="true">
                 <span class="is-active"></span><span></span><span></span>
               </div>
+              <div class="parent-pin-setup is-hidden" id="parentOnboardingPinSetup">
+                <div class="parent-pin-copy">
+                  <strong>Set your parent PIN</strong>
+                  <span>Your onboarding is complete. Choose a quick PIN for parent-only access.</span>
+                </div>
+                <label class="pob-field parent-pin-field">
+                  <span>Parent PIN</span>
+                  <input id="parentQuickPinInput" inputmode="numeric" maxlength="4" value="2468" aria-label="Parent PIN" />
+                </label>
+              </div>
+              <!-- Slide 3: Parent profile complete -->
+              <div class="pob-inline-form is-hidden removed-parent-details-from-onboarding" id="parentOnboardingFormSlide3" aria-hidden="true">
+                <div class="pob-inline-hint">
+                  <span>✨</span>
+                  <p><strong>Almost there!</strong> Set up your family dashboard.</p>
+                </div>
+                <div class="pob-name-fields">
+                  <label class="pob-field">
+                    <span>First name</span>
+                    <input id="legacyParentNameInput" autocomplete="given-name" value="" placeholder="Sarah" tabindex="-1" />
+                  </label>
+                  <label class="pob-field">
+                    <span>Last name</span>
+                    <input id="legacyParentLastNameInput" autocomplete="family-name" value="" placeholder="Johnson" tabindex="-1" />
+                  </label>
+                </div>
+                <label class="pob-field pob-pw-field">
+                  <span>Password</span>
+                  <input id="legacyParentPasswordInput" type="password" autocomplete="new-password" value="" placeholder="Min. 8 characters" tabindex="-1" />
+                </label>
+              </div>
             </div>
-            <button class="primary-btn bottom-action" id="parentOnboardingNext" type="button">Next</button>
+            <div class="pob-footer">
+              <button class="primary-btn bottom-action" id="parentOnboardingNext" type="button">Next</button>
+            </div>
           </section>
 
           <section class="app-screen screen-kid-register" data-view="kid-register">
-            <header class="minimal-top branded-top">
-              <button class="ghost-icon" data-screen="parent-dashboard" type="button" aria-label="Back">â€¹</button>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            <header class="chat-header parent-app-header unified-app-header unified-parent-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="parent" type="button" aria-label="Open parent menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
+              </div>
+              <div class="header-profile-switch" aria-label="Parent profile">
+                <button class="header-role-button is-active" data-avatar-scope="parent" type="button" aria-label="Parent profile active" title="Parent profile">
+                  <img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent" />
+                </button>
+              </div>
             </header>
 
             <form class="register-panel kid-register-panel" id="kidRegisterForm">
@@ -392,6 +494,9 @@
                   <small class="field-help">Pratvim never requires your child's real name. Please add a nickname instead.</small>
                   <input id="kidNameInput" autocomplete="off" value="Ravin" placeholder="Kid nickname" required />
                 </label>
+                <div class="kid-generated-avatar" id="kidGeneratedAvatar" aria-live="polite">
+                  <div class="kid-generated-avatar-preview" id="kidGeneratedAvatarPreview" aria-hidden="true">R</div>
+                </div>
                 <div class="split-fields">
                   <label>
                     <span>Age <b class="required-mark">*</b></span>
@@ -414,61 +519,124 @@
               </div>
 
               <button class="primary-btn" id="addKidBtn" type="submit">Add a kid</button>
-              <div class="added-kids-heading"><strong>Added children</strong><span>Manage profiles from Parent Home</span></div>
+              <div class="added-kids-heading"><strong>Added children</strong><span>Tap a profile on Parent Home to edit or remove it.</span></div>
               <div class="kid-profile-list" id="kidProfileList"></div>
             </form>
           </section>
 
-          <section class="app-screen screen-parent-dashboard" data-view="parent-dashboard">
-            <header class="chat-header parent-app-header">
-              <button class="ghost-icon" data-screen="login" type="button" aria-label="Back">â€¹</button>
-              <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
-              <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
-            </header>
-
-            <section class="parent-dashboard-body">
-              <div class="login-mode-tabs icon-mode-tabs parent-home-mode-tabs" aria-label="Experience type">
-                <button id="parentHomeChildSwitch" type="button" aria-label="Open kid login"><span class="role-icon kid-role-icon" aria-hidden="true">🧒</span><span>Kid</span></button>
-                <button class="is-active" type="button" aria-label="Parent view"><span class="role-icon parent-role-icon" aria-hidden="true"></span><span>Parent</span></button>
+          <section class="app-screen screen-parent-dashboard parent-home-v3-screen" data-view="parent-dashboard">
+            <header class="chat-header parent-app-header parent-home-v3-header unified-app-header unified-parent-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="parent" type="button" aria-label="Open parent menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
               </div>
-              <div class="parent-overview-heading">
-                <span>Family overview</span>
-                <button class="parent-analytics-icon" data-screen="parent-analytics" type="button" aria-label="Open activity dashboard" title="Activity dashboard">
-                  <i></i><i></i><i></i>
+              <div class="header-profile-switch" id="parentHeaderSwitch" aria-label="Switch profile">
+                <button class="header-role-button is-active" data-profile-switch="parent" type="button" aria-label="Parent profile active" title="Parent profile">
+                  <img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent" />
+                </button>
+                <button class="header-role-button" data-profile-switch="child" type="button" aria-label="Switch to child profile" title="Switch to child">
+                  <img class="mini-kid avatar-image" src="kid-ravin-avatar.png" alt="Child" />
                 </button>
               </div>
-              <div class="parent-overview-grid" aria-label="Family overview">
-                <article class="family-overview-item"><span class="family-overview-icon kids-icon" aria-hidden="true"></span><span><strong id="parentKidCount">0</strong><small>Kids registered</small></span></article>
-                <button class="family-overview-item family-alert-link" id="parentOverviewAlerts" type="button"><span class="family-overview-icon alert-icon" aria-hidden="true">!</span><span><strong id="parentOverviewAlertCount">0</strong><small>Alerts to review</small></span><b aria-hidden="true">›</b></button>
+            </header>
+
+            <section class="parent-dashboard-body parent-home-v3-body">
+              <div class="parent-home-v3-title">
+                <strong id="parentOverviewHeading">Sarah Johnson</strong>
+                <p>Your family's learning at a glance</p>
               </div>
-              <section class="parent-subscription-summary" aria-label="Family subscription">
-                <div class="subscription-summary-copy">
-                  <span class="subscription-status" id="subscriptionStatus">Active</span>
-                  <strong id="subscriptionPlanName">Family Monthly</strong>
-                  <p id="subscriptionUntil">Valid until 11 Jul 2026</p>
-                  <small>Includes up to 4 kids</small>
-                </div>
-                <div class="subscription-renewal">
-                  <div class="subscription-counter"><strong id="subscriptionDaysLeft">30</strong><span>days left</span></div>
-                  <button id="managePaymentsBtn" type="button">View plans</button>
-                </div>
-              </section>
-              <section class="parent-kids-section">
-                <div class="parent-card-head">
+
+              <div class="parent-home-v3-overview" aria-label="Family overview">
+                <article class="parent-home-v3-summary-card">
+                  <span class="v3-summary-icon kids" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3.2"/><circle cx="16" cy="8" r="3.2"/><circle cx="8" cy="16" r="3.2"/><circle cx="16" cy="16" r="3.2"/></svg>
+                  </span>
                   <div>
-                    <h2>Children</h2>
-                    <p>Profiles and activity</p>
+                    <strong id="parentKidCount">2</strong>
+                    <small>Kids registered</small>
                   </div>
-                  <button class="primary-btn compact-parent-btn" id="registerKidFromParent" type="button">Register Kid</button>
+                </article>
+                <button class="parent-home-v3-summary-card alert" id="parentOverviewAlerts" type="button">
+                  <span class="v3-summary-icon alerts" aria-hidden="true">!</span>
+                  <div>
+                    <strong id="parentOverviewAlertCount">1</strong>
+                    <small>Alerts to review</small>
+                  </div>
+                  <b aria-hidden="true">›</b>
+                </button>
+              </div>
+
+              <section class="parent-plan-v3-card" aria-label="Current plan">
+                <div class="parent-plan-v3-main">
+                  <div class="parent-plan-v3-title-row">
+                    <span class="subscription-status" id="subscriptionStatus">Active</span>
+                    <strong id="subscriptionPlanName">Family Monthly</strong>
+                  </div>
+                  <p id="subscriptionUntil">Valid until 6 Jul 2026</p>
+                  <div class="parent-plan-v3-meta">
+                    <span><i aria-hidden="true">▣</i><strong id="subscriptionDaysLeft">12</strong> days left</span>
+                    <span><i aria-hidden="true">●</i><strong id="planTokensLeft">1,200</strong> tokens left</span>
+                  </div>
                 </div>
-                <div class="parent-kids-list" id="parentKidsList"></div>
+                <button class="upgrade-plan-btn" id="managePaymentsBtn" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  Upgrade Plan
+                </button>
               </section>
+
+              <section class="parent-activity-v3-card" aria-label="Children and activity">
+                <div class="parent-activity-v3-head">
+                  <div>
+                    <h2>Children &amp; Activity</h2>
+                    <p>Select a child to view activity</p>
+                  </div>
+                  <button class="parent-activity-v3-add" id="registerKidFromParent" type="button" aria-label="Register child">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="8" r="4"/><path d="M2 20c0-3.6 3.1-6.5 7-6.5"/><path d="M19 11v6M16 14h6"/></svg>
+                  </button>
+                </div>
+
+                <div class="parent-kid-tabs-v3" id="parentHomeKidTabsV3" aria-label="Kid profiles"></div>
+
+                <article class="parent-kid-detail-v3" id="parentKidDetailV3">
+                  <div class="parent-kid-detail-v3-head">
+                    <div>
+                      <strong id="pkaKidName">Ravin's Activity Overview</strong>
+                      <span id="pkaKidMeta">9 yrs · Boy</span>
+                    </div>
+                    <button class="parent-analytics-icon" data-screen="parent-analytics" type="button" aria-label="Open activity dashboard" title="Activity dashboard" hidden>
+                      <i></i><i></i><i></i>
+                    </button>
+                  </div>
+                  <div class="parent-metrics-v3-grid">
+                    <article><span>Day streak</span><strong id="homeOverallStreak">4</strong><p>Learning days</p></article>
+                    <article><span>Daily time</span><strong id="homeDailyTime">1h 22m</strong><p>Today</p></article>
+                    <button class="parent-alert-stat" id="homeParentAlerts" type="button"><span>Alerts</span><strong id="homeAlertTotal">1</strong><p>View details</p></button>
+                  </div>
+                </article>
+
+                <div class="parent-empty-v3" id="pkaEmpty" style="display:none">
+                  <div class="parent-empty-icon" aria-hidden="true">
+                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="56" height="56"><circle cx="24" cy="24" r="22" fill="#e8f5f4" stroke="#2d8f8a" stroke-width="1.5"/><circle cx="24" cy="19" r="7" fill="#b2dedd"/><path d="M10 38c0-7.732 6.268-14 14-14s14 6.268 14 14" stroke="#2d8f8a" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
+                  </div>
+                  <h3>No children added yet</h3>
+                  <p>Add your child's profile to start their protected learning journey.</p>
+                  <button class="primary-btn" data-screen="kid-register" type="button">+ Add a child</button>
+                </div>
+              </section>
+
+              <div class="parent-kids-list is-hidden" id="parentKidsList" aria-hidden="true"></div>
+              <div class="pka-detail is-hidden" id="pkaKidDetail" aria-hidden="true"></div>
+              <div class="pka-tabs is-hidden" id="pkaKidTabs" aria-hidden="true"></div>
             </section>
           </section>
 
           <section class="app-screen screen-parent-analytics" data-view="parent-analytics">
             <header class="chat-header parent-app-header">
-              <button class="ghost-icon" data-screen="parent-dashboard" type="button" aria-label="Back">â€¹</button>
+              <button class="ghost-icon" data-screen="parent-dashboard" type="button" aria-label="Back">‹</button>
               <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
               <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
             </header>
@@ -491,7 +659,6 @@
               <article class="analytics-card">
                 <span>Quick links</span>
                 <div class="dashboard-link-grid">
-                  <button data-screen="parent-dashboard" type="button">Overview</button>
                   <button id="dashboardRegisterKid" type="button">Register Kid</button>
                 </div>
               </article>
@@ -519,10 +686,20 @@
           </section>
 
           <section class="app-screen screen-payment-plans" data-view="payment-plans">
-            <header class="chat-header info-header">
-              <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            <header class="chat-header info-header unified-app-header unified-parent-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="parent" type="button" aria-label="Open parent menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
+              </div>
+              <div class="header-profile-switch" aria-label="Parent profile">
+                <button class="header-role-button is-active parent-profile-trigger avatar-trigger" data-avatar-scope="parent" data-profile-switch="parent" type="button" aria-label="Parent profile" title="Parent profile">
+                  <img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" />
+                </button>
+              </div>
             </header>
             <section class="payment-plans-page">
               <div class="payment-page-intro">
@@ -542,10 +719,20 @@
           </section>
 
           <section class="app-screen screen-payment-confirmation" data-view="payment-confirmation">
-            <header class="chat-header info-header">
-              <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="profile-mini avatar-trigger parent-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open parent profile menu" aria-expanded="false"><img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            <header class="chat-header info-header unified-app-header unified-parent-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="parent" type="button" aria-label="Open parent menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
+              </div>
+              <div class="header-profile-switch" aria-label="Parent profile">
+                <button class="header-role-button is-active parent-profile-trigger avatar-trigger" data-avatar-scope="parent" data-profile-switch="parent" type="button" aria-label="Parent profile" title="Parent profile">
+                  <img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent profile" />
+                </button>
+              </div>
             </header>
             <section class="payment-confirmation-page">
               <div class="confirmation-check" aria-hidden="true">✓</div>
@@ -576,10 +763,23 @@
           </section>
 
           <section class="app-screen screen-home" data-view="home">
-            <header class="app-topbar">
-              <button class="home-mini" data-screen="home" type="button" aria-label="Home">⌂</button>
-              <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
-              <button class="profile-mini avatar-trigger" type="button" aria-label="Upload Ravin avatar"><img class="mini-kid avatar-image" src="ravin.jpg" alt="" /></button>
+            <header class="app-topbar kid-home-header unified-app-header unified-child-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="child" type="button" aria-label="Open child menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
+              </div>
+              <div class="header-profile-switch" id="kidHomeHeaderSwitch" aria-label="Switch profile">
+                <button class="header-role-button" data-profile-switch="parent" type="button" aria-label="Switch to parent profile" title="Switch to parent">
+                  <img class="parent-avatar-image" src="parent-profile.svg" alt="Parent" />
+                </button>
+                <button class="header-role-button is-active" data-profile-switch="child" type="button" aria-label="Child profile active" title="Child profile">
+                  <img class="mini-kid avatar-image" src="ravin.jpg" alt="Child" />
+                </button>
+              </div>
             </header>
 
             <section class="welcome-panel">
@@ -608,22 +808,33 @@
           </section>
 
           <section class="app-screen screen-chat" data-view="chat">
-            <header class="chat-top-line">
-              <div class="chat-header-capsule chat-header-left">
-                <button class="chat-history-button" id="chatHistoryButton" type="button" aria-label="Open previous chats" aria-expanded="false">
-                  <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+            <header class="chat-top-line unified-app-header unified-child-header" data-unified-header="true" style="display:flex!important;flex-direction:row;align-items:center;justify-content:space-between;gap:10px;padding:8px 14px;min-height:64px;position:sticky;top:0;z-index:120;background:rgba(255,253,248,0.97);border-bottom:1px solid rgba(0,143,136,0.12);box-shadow:0 2px 12px rgba(0,143,136,0.06);box-sizing:border-box;margin:0;">
+              <div class="chat-header-left" style="display:inline-flex!important;flex-direction:row;align-items:center;gap:8px;flex:0 0 auto;height:44px;padding:4px 14px 4px 5px;border:1px solid #dde9e7;border-radius:26px;background:rgba(255,255,255,0.92);box-shadow:0 4px 14px rgba(0,143,136,0.06);width:auto;overflow:hidden;">
+                <button class="chat-history-button" id="chatHistoryButton" type="button" aria-label="Open previous chats" aria-expanded="false" style="position:relative!important;display:inline-flex!important;flex:0 0 34px;width:34px;min-width:34px;height:34px;min-height:34px;max-width:34px;max-height:34px;padding:0;margin:0;align-items:center;justify-content:center;flex-direction:column;gap:4px;border:1px solid rgba(102,143,150,0.45);border-radius:50%;background:transparent;box-shadow:none;overflow:hidden;">
+                  <span aria-hidden="true" style="position:static;display:block;width:14px;height:2px;background:#4d737a;border-radius:2px;flex-shrink:0;margin:0;"></span>
+                  <span aria-hidden="true" style="position:static;display:block;width:10px;height:2px;background:#4d737a;border-radius:2px;flex-shrink:0;margin:0;"></span>
+                  <span aria-hidden="true" style="position:static;display:block;width:14px;height:2px;background:#4d737a;border-radius:2px;flex-shrink:0;margin:0;"></span>
                 </button>
-                <img class="chat-header-brand" src="pratvim-icon-new.svg" alt="Pratvim" />
+                <img class="chat-header-brand" src="pratvim-icon-new.svg" alt="Pratvim" style="position:static!important;display:block!important;flex:0 0 auto;width:56px;max-width:56px;height:30px;object-fit:contain;object-position:left center;margin:0;" />
               </div>
-              <div class="chat-header-capsule chat-header-right">
-              <button class="inline-timer chat-progress-status" id="chatProgressStatus" type="button" aria-label="Show 4-day learning streak and 4-hour timer" aria-expanded="false" title="4-day streak, 4-hour timer">
+              <div class="chat-header-right" style="display:inline-flex!important;flex-direction:row;align-items:center;gap:6px;flex:0 0 auto;height:44px;min-height:44px;padding:4px 8px;border:1px solid #dde9e7;border-radius:26px;background:rgba(255,255,255,0.92);box-shadow:0 4px 14px rgba(0,143,136,0.06);width:auto;min-width:0;max-width:none;">
+              <button class="chat-level-pin" id="pinCurrentBtn" type="button" aria-label="Pin this chat" title="Pin this chat" style="display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 30px;width:30px;min-width:30px;height:30px;min-height:30px;padding:5px;border:1px solid #b8cfca;border-radius:50%;background:#f5f8f4;box-shadow:none;">
+                <img src="icon-pin.svg" alt="" aria-hidden="true" style="width:14px;height:14px;opacity:0.72;" />
+              </button>
+              <button class="inline-timer chat-progress-status" id="chatProgressStatus" type="button" aria-label="Show 4-day learning streak and 4-hour timer" aria-expanded="false" title="4-day streak, 4-hour timer" style="display:inline-grid!important;place-items:center;flex:0 0 34px;width:34px;height:34px;min-width:34px;min-height:34px;padding:0;border-radius:50%;">
                 <span class="timer-ring chat-timer-ring" id="chatTimerRing" aria-hidden="true">4d</span>
-                <span class="timer-dot" aria-hidden="true">◷</span>
+                <span class="timer-dot" aria-hidden="true" style="display:none;">◷</span>
                 <strong id="chatTimer" class="is-hidden">00:00:30 / 4h</strong>
                 <span class="chat-streak-badge" aria-hidden="true">4h</span>
               </button>
-              <button class="profile-mini chat-avatar-button avatar-trigger" type="button" aria-label="Open kid profile"><img class="mini-kid avatar-image" src="kid-ravin-avatar.png" alt="" /></button>
-              <div class="chat-header-companion" aria-hidden="true"><img src="splash-kid-cutout.png" alt="" /></div>
+              <div class="header-profile-switch chat-profile-switch-group" id="chatHeaderSwitch" aria-label="Switch profile" style="display:inline-flex!important;flex-direction:row;align-items:center;gap:4px;height:auto;min-height:0;padding:0;border:0;background:transparent;box-shadow:none;flex:0 0 auto;overflow:visible;">
+                <button class="header-role-button" data-profile-switch="parent" type="button" aria-label="Switch to parent profile" title="Switch to parent" style="position:relative;display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 32px;width:32px;min-width:32px;height:32px;min-height:32px;padding:2px;border:2px solid transparent;border-radius:50%;background:#edf5f3;overflow:hidden;">
+                  <img class="parent-avatar-image" src="parent-profile.svg" alt="Parent" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" />
+                </button>
+                <button class="header-role-button is-active profile-mini chat-avatar-button avatar-trigger" data-profile-switch="child" type="button" aria-label="Child profile active" title="Child profile" style="position:relative;display:inline-flex!important;align-items:center;justify-content:center;flex:0 0 32px;width:32px;min-width:32px;height:32px;min-height:32px;padding:2px;border:2px solid #008f88;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(0,143,136,0.13);overflow:visible;">
+                  <img class="mini-kid avatar-image" src="kid-ravin-avatar.png" alt="Child" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;" />
+                </button>
+              </div>
               </div>
             </header>
 
@@ -649,16 +860,32 @@
 
             <form class="composer" id="composer">
               <input id="imageInput" type="file" accept="image/*" />
-              <button class="tool-btn image" id="imageUploadBtn" type="button" aria-label="Upload image">+</button>
-              <div class="composer-field">
-                <button class="tool-btn mic" id="micBtn" type="button" aria-label="Voice chat">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                      <path d="M12 14.5a4 4 0 0 0 4-4V6.8a4 4 0 1 0-8 0v3.7a4 4 0 0 0 4 4Z"></path>
-                      <path d="M6.5 10.5a5.5 5.5 0 0 0 11 0"></path>
-                      <path d="M12 16v4"></path>
-                      <path d="M9 20h6"></path>
+              <!-- + button wraps the expandable tools panel -->
+              <div class="composer-plus-wrap">
+                <button class="tool-btn composer-plus" id="composerPlusBtn" type="button" aria-label="More options" aria-expanded="false">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="18" height="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none">
+                    <path d="M12 5v14M5 12h14"/>
+                  </svg>
+                </button>
+                <div class="composer-extras" id="composerExtras" aria-hidden="true">
+                  <button class="tool-btn extra-btn image" id="imageUploadBtn" type="button" aria-label="Upload image">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="17" height="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none">
+                      <rect x="3" y="3" width="18" height="18" rx="3"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <path d="M21 15l-5-5L5 21"/>
                     </svg>
                   </button>
+                  <button class="tool-btn extra-btn mic" id="micBtn" type="button" aria-label="Voice chat">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" width="17" height="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none">
+                      <path d="M12 14.5a4 4 0 0 0 4-4V6.8a4 4 0 1 0-8 0v3.7a4 4 0 0 0 4 4Z"/>
+                      <path d="M6.5 10.5a5.5 5.5 0 0 0 11 0"/>
+                      <path d="M12 16v4"/>
+                      <path d="M9 20h6"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="composer-field">
                 <input id="chatInput" autocomplete="off" placeholder="Type your question..." />
                 <button class="tool-btn send" type="submit" aria-label="Send">
                   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -696,12 +923,66 @@
               </label>
               <div class="chat-history-list" id="historyList"></div>
               <button class="primary-btn chat-history-new" id="historyNewChatButton" type="button">Start New Chat</button>
+              <button class="drawer-logout-button" id="historyKidLogout" type="button">Log out of child profile</button>
+            </aside>
+          </div>
+
+          <div class="app-menu-layer is-hidden" id="parentAppMenuLayer">
+            <button class="app-menu-backdrop" id="parentAppMenuBackdrop" type="button" aria-label="Close parent menu"></button>
+            <aside class="app-menu-panel" aria-label="Parent navigation">
+              <div class="app-menu-heading">
+                <img src="pratvim-wordmark.svg" alt="Pratvim" />
+                <button id="parentAppMenuClose" type="button" aria-label="Close parent menu">&times;</button>
+              </div>
+              <nav class="app-menu-navigation" aria-label="Parent pages">
+                <button data-screen="parent-dashboard" type="button">
+                  <span class="amenu-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+                  <strong>Parent home</strong>
+                </button>
+                <button data-screen="parent-analytics" type="button">
+                  <span class="amenu-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+                  <strong>Activity reports</strong>
+                </button>
+                <button data-screen="kid-register" type="button">
+                  <span class="amenu-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></span>
+                  <strong>Add a child</strong>
+                </button>
+                <button data-screen="payment-plans" type="button">
+                  <span class="amenu-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+                  <strong>Family plans</strong>
+                </button>
+              </nav>
+              <p class="app-menu-section-label">Help &amp; Legal</p>
+              <nav class="app-menu-navigation app-menu-static-links" aria-label="Information pages">
+                <button data-screen="privacy" type="button">
+                  <span class="amenu-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+                  <strong>Privacy policy</strong>
+                </button>
+                <button data-screen="terms" type="button">
+                  <span class="amenu-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                  <strong>Terms &amp; conditions</strong>
+                </button>
+                <button data-screen="support" type="button">
+                  <span class="amenu-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>
+                  <strong>Help &amp; Support</strong>
+                </button>
+              </nav>
+              <div class="app-menu-account-actions">
+                <button id="parentMenuUpdateProfile" type="button">
+                  <span class="amenu-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                  Update profile
+                </button>
+                <button id="parentMenuLogout" type="button" class="amenu-logout">
+                  <span class="amenu-icon" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>
+                  Logout
+                </button>
+              </div>
             </aside>
           </div>
 
           <section class="app-screen screen-timer-demo" data-view="timer-demo">
             <header class="chat-header branded-content-header">
-              <button class="ghost-icon" data-screen="chat" type="button" aria-label="Back">â€¹</button>
+              <button class="ghost-icon" data-screen="chat" type="button" aria-label="Back">‹</button>
               <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
               <div class="chat-title">
                 <span>Choose style</span>
@@ -756,10 +1037,23 @@
           </section>
 
           <section class="app-screen screen-info" data-view="about">
-            <header class="chat-header info-header">
-              <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            <header class="unified-app-header info-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="parent" type="button" aria-label="Open parent menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
+              </div>
+              <div class="header-profile-switch" aria-label="Switch profile">
+                <button class="header-role-button is-active" data-profile-switch="parent" type="button" aria-label="Parent profile active" title="Parent profile">
+                  <img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent" />
+                </button>
+                <button class="header-role-button" data-profile-switch="child" type="button" aria-label="Switch to child profile" title="Switch to child">
+                  <img class="mini-kid avatar-image" src="kid-ravin-avatar.png" alt="Child" />
+                </button>
+              </div>
             </header>
             <article class="info-page">
               <p class="step-label">About Pratvim</p>
@@ -773,10 +1067,23 @@
           </section>
 
           <section class="app-screen screen-info" data-view="privacy">
-            <header class="chat-header info-header">
-              <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            <header class="unified-app-header info-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="parent" type="button" aria-label="Open parent menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
+              </div>
+              <div class="header-profile-switch" aria-label="Switch profile">
+                <button class="header-role-button is-active" data-profile-switch="parent" type="button" aria-label="Parent profile active" title="Parent profile">
+                  <img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent" />
+                </button>
+                <button class="header-role-button" data-profile-switch="child" type="button" aria-label="Switch to child profile" title="Switch to child">
+                  <img class="mini-kid avatar-image" src="kid-ravin-avatar.png" alt="Child" />
+                </button>
+              </div>
             </header>
             <article class="info-page">
               <p class="step-label">Privacy policy</p>
@@ -792,10 +1099,23 @@
           </section>
 
           <section class="app-screen screen-info" data-view="terms">
-            <header class="chat-header info-header">
-              <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            <header class="unified-app-header info-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="parent" type="button" aria-label="Open parent menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
+              </div>
+              <div class="header-profile-switch" aria-label="Switch profile">
+                <button class="header-role-button is-active" data-profile-switch="parent" type="button" aria-label="Parent profile active" title="Parent profile">
+                  <img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent" />
+                </button>
+                <button class="header-role-button" data-profile-switch="child" type="button" aria-label="Switch to child profile" title="Switch to child">
+                  <img class="mini-kid avatar-image" src="kid-ravin-avatar.png" alt="Child" />
+                </button>
+              </div>
             </header>
             <article class="info-page">
               <p class="step-label">Terms &amp; Conditions</p>
@@ -813,10 +1133,23 @@
           </section>
 
           <section class="app-screen screen-info screen-team" data-view="team">
-            <header class="chat-header info-header">
-              <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            <header class="unified-app-header info-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="parent" type="button" aria-label="Open parent menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
+              </div>
+              <div class="header-profile-switch" aria-label="Switch profile">
+                <button class="header-role-button is-active" data-profile-switch="parent" type="button" aria-label="Parent profile active" title="Parent profile">
+                  <img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent" />
+                </button>
+                <button class="header-role-button" data-profile-switch="child" type="button" aria-label="Switch to child profile" title="Switch to child">
+                  <img class="mini-kid avatar-image" src="kid-ravin-avatar.png" alt="Child" />
+                </button>
+              </div>
             </header>
             <article class="info-page team-page">
               <p class="step-label">Our team</p>
@@ -878,10 +1211,23 @@
           </section>
 
           <section class="app-screen screen-info" data-view="contact">
-            <header class="chat-header info-header">
-              <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            <header class="unified-app-header info-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="parent" type="button" aria-label="Open parent menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
+              </div>
+              <div class="header-profile-switch" aria-label="Switch profile">
+                <button class="header-role-button is-active" data-profile-switch="parent" type="button" aria-label="Parent profile active" title="Parent profile">
+                  <img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent" />
+                </button>
+                <button class="header-role-button" data-profile-switch="child" type="button" aria-label="Switch to child profile" title="Switch to child">
+                  <img class="mini-kid avatar-image" src="kid-ravin-avatar.png" alt="Child" />
+                </button>
+              </div>
             </header>
             <article class="info-page">
               <p class="step-label">Contact us</p>
@@ -895,10 +1241,23 @@
           </section>
 
           <section class="app-screen screen-support" data-view="support">
-            <header class="chat-header info-header">
-              <span class="header-menu-space" aria-hidden="true"></span>
-              <img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />
-              <button class="profile-mini avatar-trigger static-profile-trigger" data-avatar-scope="parent" type="button" aria-label="Open profile menu" aria-expanded="false"><img class="static-profile-image" src="parent-profile.svg" alt="Parent profile" /></button>
+            <header class="unified-app-header info-header" data-unified-header="true">
+              <div class="unified-header-left">
+                <button class="app-menu-trigger" data-menu-scope="parent" type="button" aria-label="Open parent menu" aria-expanded="false">
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                </button>
+                <div class="internal-brand"><img src="pratvim-icon-new.svg" alt="Pratvim" /></div>
+              </div>
+              <div class="header-profile-switch" aria-label="Switch profile">
+                <button class="header-role-button is-active" data-profile-switch="parent" type="button" aria-label="Parent profile active" title="Parent profile">
+                  <img class="mini-kid parent-avatar-image" src="parent-profile.svg" alt="Parent" />
+                </button>
+                <button class="header-role-button" data-profile-switch="child" type="button" aria-label="Switch to child profile" title="Switch to child">
+                  <img class="mini-kid avatar-image" src="kid-ravin-avatar.png" alt="Child" />
+                </button>
+              </div>
             </header>
             <form class="support-page" id="supportForm">
               <div class="support-intro">
@@ -969,7 +1328,7 @@
             </button>
             <button class="parent-logout-option parent-full-logout-option" id="parentFullLogout" type="button" role="menuitem">
               <span class="parent-menu-icon" aria-hidden="true">X</span>
-              <span><strong>Full logout</strong><small>Use email or social login next time</small></span>
+              <span><strong>Log out</strong><small>Use email or social login next time</small></span>
             </button>
           </div>
           <div class="parent-profile-menu kid-profile-menu is-hidden" id="kidProfileMenu" role="menu" aria-label="Kid profile options">
@@ -1136,6 +1495,18 @@
                 <span>Status</span>
                 <strong id="alertReason">Screen time limit reached</strong>
               </div>
+              <div class="alert-feedback" aria-label="Parent feedback">
+                <span>Was this alert helpful?</span>
+                <div class="alert-feedback-actions">
+                  <button id="alertThumbsUp" type="button" aria-label="Mark alert helpful">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11v10H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h3Zm0 0 5-8c1.3 0 2.1 1.2 1.8 2.4L13 9h5.2a2 2 0 0 1 2 2.3l-1.1 7A3.2 3.2 0 0 1 16 21H7V11Z"/></svg>
+                  </button>
+                  <button id="alertThumbsDown" type="button" aria-label="Mark alert not helpful">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 13V3h3a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-3Zm0 0-5 8c-1.3 0-2.1-1.2-1.8-2.4L11 15H5.8a2 2 0 0 1-2-2.3l1.1-7A3.2 3.2 0 0 1 8 3h9v10Z"/></svg>
+                  </button>
+                </div>
+                <small id="alertFeedbackStatus" aria-live="polite"></small>
+              </div>
               <div class="alert-actions-row">
                 <button class="primary-btn" id="alertReviewed" type="button">Back to Chat</button>
                 <button class="secondary-btn" id="alertCloseChatBtn" type="button">Close Chat</button>
@@ -1147,5 +1518,11 @@
     </main>
 
     <script src="app.js"></script>
-  </body>
-</html>
+    <script src="scroll-effects.js"></script>
+
+<script>
+(function(){
+  function bootScreen(){
+    var params = new URLSearchParams(location.search);
+    var requested = params.get('screen');
+    // Default app launch must open the illust

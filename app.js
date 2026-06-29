@@ -1,3 +1,23 @@
+// Detect native Capacitor environment and apply full-screen mode
+(function () {
+  function applyNativeMode() {
+    document.documentElement.classList.add("native-app");
+  }
+
+  // Capacitor sets window.Capacitor when running in a native WebView
+  if (
+    window.Capacitor?.isNativePlatform?.() ||
+    // Fallback: narrow viewport with no desktop pointer means we're on device
+    (window.matchMedia("(max-width: 480px) and (pointer: coarse)").matches &&
+      !window.Capacitor)
+  ) {
+    applyNativeMode();
+  }
+
+  // Also listen for Capacitor's deviceready in case it fires after script load
+  document.addEventListener("deviceready", applyNativeMode, { once: true });
+})();
+
 const chats = [
   {
     id: "sky",
@@ -105,23 +125,52 @@ const onboardingSlides = [
 const parentOnboardingSlides = [
   {
     title: "Welcome, Parents",
-    text: "Create a safe space where each child can ask, learn, and explore with confidence.",
+   // text: "Create a safe space where each child can ask, learn, and explore with confidence.",
     features: ["Kid profiles", "Private PINs"],
     visualType: "setup"
   },
   {
     title: "Protected AI conversations",
-    text: "Set up safe text and image questions with age-aware answers for your kids.",
+    //text: "Set up safe text and image questions with age-aware answers for your kids.",
     features: ["Protected chat", "Image questions"],
     visualType: "chat"
   },
   {
     title: "Stay informed",
-    text: "Review kid-wise reports, screen time, streaks, and safety activity from parent mode.",
+   // text: "Reports, screen time & safety alerts — all in one place.",
     features: ["Kid reports", "Safety alerts"],
     visualType: "reports"
   }
 ];
+
+// Inline kid list for onboarding slide 3
+let onboardingKids = [];
+
+function renderOnboardingKidList() {
+  const container = document.querySelector("#onboardingKidList");
+  if (!container) return;
+  container.innerHTML = onboardingKids.map((kid, i) => `
+    <div class="onboarding-kid-row">
+      <label>
+        <span>Child ${i + 1} name</span>
+        <input class="onboarding-kid-name" data-kid-index="${i}" value="${kid.name}" placeholder="e.g. Emma" autocomplete="off" />
+      </label>
+      <label class="onboarding-kid-age-label">
+        <span>Age</span>
+        <input class="onboarding-kid-age" data-kid-index="${i}" value="${kid.age}" placeholder="8" inputmode="numeric" maxlength="2" />
+      </label>
+    </div>
+  `).join("");
+  // wire up live updates
+  container.querySelectorAll(".onboarding-kid-name").forEach(input => {
+    input.addEventListener("input", e => { onboardingKids[+e.target.dataset.kidIndex].name = e.target.value; });
+  });
+  container.querySelectorAll(".onboarding-kid-age").forEach(input => {
+    input.addEventListener("input", e => { onboardingKids[+e.target.dataset.kidIndex].age = e.target.value; });
+  });
+  const skipHint = document.querySelector(".onboarding-skip-hint");
+  if (skipHint) skipHint.style.display = onboardingKids.length === 0 ? "block" : "none";
+}
 
 let activeChatId = "sky";
 let onboardingIndex = 0;
@@ -269,12 +318,19 @@ const chatHistoryBackdrop = document.querySelector("#chatHistoryBackdrop");
 const chatHistoryClose = document.querySelector("#chatHistoryClose");
 const chatHistoryFilterButtons = document.querySelectorAll("[data-history-filter]");
 const historyNewChatButton = document.querySelector("#historyNewChatButton");
+const historyKidLogout = document.querySelector("#historyKidLogout");
 const historySearchInput = document.querySelector("#historySearchInput");
 const chatProgressStatus = document.querySelector("#chatProgressStatus");
 const streakPopover = document.querySelector("#streakPopover");
 const messageArea = document.querySelector("#messageArea");
 const chatNameTop = document.querySelector("#chatNameTop");
 const pinCurrentBtn = document.querySelector("#pinCurrentBtn");
+const parentAppMenuLayer = document.querySelector("#parentAppMenuLayer");
+const parentAppMenuBackdrop = document.querySelector("#parentAppMenuBackdrop");
+const parentAppMenuClose = document.querySelector("#parentAppMenuClose");
+const parentMenuUpdateProfile = document.querySelector("#parentMenuUpdateProfile");
+const parentMenuLogout = document.querySelector("#parentMenuLogout");
+const parentMenuFullLogout = document.querySelector("#parentMenuFullLogout");
 const pauseChatBtn = document.querySelector("#pauseChatBtn");
 const closeChatBtn = document.querySelector("#closeChatBtn");
 const pausedBanner = document.querySelector("#pausedBanner");
@@ -342,6 +398,9 @@ const alertReviewed = document.querySelector("#alertReviewed");
 const alertCloseChatBtn = document.querySelector("#alertCloseChatBtn");
 const alertQuestion = document.querySelector("#alertQuestion");
 const alertReason = document.querySelector("#alertReason");
+const alertThumbsUp = document.querySelector("#alertThumbsUp");
+const alertThumbsDown = document.querySelector("#alertThumbsDown");
+const alertFeedbackStatus = document.querySelector("#alertFeedbackStatus");
 const chatTimer = document.querySelector("#chatTimer");
 const chatTimerRing = document.querySelector("#chatTimerRing");
 const chatTopicLine = document.querySelector("#chatTopicLine");
@@ -362,13 +421,19 @@ const floatingBackButton = document.querySelector("#floatingBackButton");
 const legalScreenButtons = document.querySelectorAll("[data-menu-screen]");
 const parentFullLoginForm = document.querySelector("#parentFullLoginForm");
 const parentRegisterForm = document.querySelector("#parentRegisterForm");
+const parentDetailsForm = document.querySelector("#parentDetailsForm");
+const parentNameInput = document.querySelector("#parentNameInput");
 const parentLastNameInput = document.querySelector("#parentLastNameInput");
+const parentPasswordInput = document.querySelector("#parentPasswordInput");
+const parentConfirmPasswordInput = document.querySelector("#parentConfirmPasswordInput");
+const parentDetailsStatus = document.querySelector("#parentDetailsStatus");
 const parentEmailInput = document.querySelector("#parentEmailInput");
 const confirmEmailText = document.querySelector("#confirmEmailText");
 const confirmEmailBtn = document.querySelector("#confirmEmailBtn");
 const resendEmailBtn = document.querySelector("#resendEmailBtn");
 const kidRegisterForm = document.querySelector("#kidRegisterForm");
 const kidNameInput = document.querySelector("#kidNameInput");
+const kidGeneratedAvatarPreview = document.querySelector("#kidGeneratedAvatarPreview");
 const kidAgeInput = document.querySelector("#kidAgeInput");
 const kidGenderInput = document.querySelector("#kidGenderInput");
 const kidPinInput = document.querySelector("#kidPinInput");
@@ -462,6 +527,23 @@ function kidAvatar(kid, index = 0) {
 }
 
 const cartoonCharacters = ["🧑‍🚀", "🧙", "🦸", "🧑‍🔬", "🧑‍🎨", "🧑‍🚒", "🧚", "🥷", "🤠", "🧑‍🍳"];
+function generatedInitialAvatar(name = "Kid") {
+  const initial = (name.trim().charAt(0) || "K").toUpperCase();
+  const hue = (initial.charCodeAt(0) * 17) % 360;
+  const bg = `hsl(${hue} 48% 88%)`;
+  const fg = `hsl(${hue} 46% 32%)`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><defs><linearGradient id="g" x1="24" y1="16" x2="136" y2="146"><stop stop-color="#fffefa"/><stop offset="1" stop-color="${bg}"/></linearGradient></defs><rect width="160" height="160" rx="80" fill="url(#g)"/><circle cx="80" cy="80" r="69" fill="none" stroke="#fffefa" stroke-width="7"/><text x="80" y="101" text-anchor="middle" font-family="Nunito Sans, Arial, sans-serif" font-size="64" font-weight="900" fill="${fg}">${initial}</text></svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
+function syncGeneratedKidAvatar() {
+  if (!kidGeneratedAvatarPreview || !kidNameInput) return;
+  const name = kidNameInput.value.trim() || "Kid";
+  kidGeneratedAvatarPreview.textContent = (name.charAt(0) || "K").toUpperCase();
+  pendingSetupAvatarSrc = generatedInitialAvatar(name);
+  kidGeneratedAvatarPreview.style.setProperty("--generated-avatar", `url("${pendingSetupAvatarSrc}")`);
+}
+
 const cartoonColors = ["#dcefed", "#f2e2ef", "#e9e5fb", "#dceafa", "#f8e5d9", "#e5efe0", "#f6ebcf", "#e2e7eb", "#f2dfcf", "#e9ead8"];
 const cartoonDisplayNames = ["Astro", "Merlin", "Bolt", "Nova", "Pixel", "Blaze", "Twinkle", "Shadow", "Ranger", "Sprout"];
 
@@ -523,6 +605,7 @@ function selectKidForLogin(index) {
   const kid = kidProfiles[index];
   if (!kid) return;
   activeLoginKidIndex = index;
+  document.querySelector(".screen-login")?.classList.add("kid-pin-active");
   avatarImages.forEach((image) => {
     image.src = kidAvatar(kid, index);
   });
@@ -532,22 +615,94 @@ function selectKidForLogin(index) {
   selectedKidLoginAvatar.alt = `${kid.name} profile`;
   selectedKidLoginAvatar.closest(".selected-kid-login")?.style.setProperty("--selected-kid-art", `url("${selectedAvatar}")`);
   pinInput.value = "";
-  kidLoginPicker.classList.add("is-hidden");
-  kidPinPanel.classList.remove("is-hidden");
-  loginContinueBtn.classList.remove("is-hidden");
-  loginTitle.textContent = `Hi, ${kid.name}`;
-  loginSubtitle.textContent = "Enter your private PIN to continue.";
-  pinInput.focus();
+
+  // Animate mascot → kid avatar transition
+  const mascot = document.querySelector(".login-mascot");
+  const scene = document.querySelector(".login-scene");
+  const sceneLabel = document.querySelector(".login-scene-label");
+  const sceneSub = document.querySelector(".login-scene-sub");
+
+  if (mascot) {
+    // Phase 1: mascot zooms out and transforms into kid's avatar
+    mascot.style.transition = "transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.2s ease";
+    mascot.style.transform = "scale(1.3) rotate(8deg)";
+    mascot.style.opacity = "0";
+
+    setTimeout(() => {
+      // Swap to avatar image
+      mascot.innerHTML = `<img src="${selectedAvatar}" alt="${kid.name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;" />`;
+      mascot.style.transition = "transform 0.5s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease, box-shadow 0.3s ease";
+      mascot.style.transform = "scale(0.6) rotate(-8deg)";
+      mascot.style.opacity = "0";
+      mascot.style.boxShadow = "0 16px 48px rgba(0,143,136,0.28), 0 0 0 6px rgba(0,143,136,0.15)";
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        mascot.style.transform = "scale(1.05) rotate(0deg)";
+        mascot.style.opacity = "1";
+        setTimeout(() => {
+          mascot.style.transform = "scale(1) rotate(0deg)";
+        }, 160);
+      }));
+    }, 220);
+
+    if (sceneLabel) {
+      sceneLabel.style.transition = "opacity 0.25s, transform 0.3s";
+      sceneLabel.style.opacity = "0";
+      sceneLabel.style.transform = "translateY(8px)";
+      setTimeout(() => {
+        sceneLabel.textContent = `Hi, ${kid.name}! 👋`;
+        sceneLabel.style.transform = "translateY(0)";
+        sceneLabel.style.opacity = "1";
+      }, 280);
+    }
+    if (sceneSub) {
+      sceneSub.style.transition = "opacity 0.25s";
+      sceneSub.style.opacity = "0";
+      setTimeout(() => {
+        sceneSub.textContent = "Enter your private PIN to continue.";
+        sceneSub.style.opacity = "1";
+      }, 380);
+    }
+  }
+
+  setTimeout(() => {
+    kidLoginPicker.classList.add("is-hidden");
+    kidPinPanel.classList.remove("is-hidden");
+    loginContinueBtn.classList.remove("is-hidden");
+    loginTitle.textContent = `Hi, ${kid.name}`;
+    loginSubtitle.textContent = "Enter your private PIN to continue.";
+    pinInput.focus();
+  }, 420);
 }
 
 function resetKidLoginSelection() {
+  document.querySelector(".screen-login")?.classList.remove("kid-pin-active");
   renderKidLoginPicker();
   kidLoginPicker?.classList.remove("is-hidden");
   kidPinPanel?.classList.add("is-hidden");
   loginContinueBtn?.classList.add("is-hidden");
   if (pinInput) pinInput.value = "";
   if (loginTitle) loginTitle.textContent = "Who is learning today?";
-  if (loginSubtitle) loginSubtitle.textContent = "Choose your profile to enter your private PIN.";
+  //if (loginSubtitle) loginSubtitle.textContent = "Choose your profile to enter your private PIN.";
+
+  // Restore mascot to original state
+  const mascot = document.querySelector(".login-mascot");
+  const sceneLabel = document.querySelector(".login-scene-label");
+  const sceneSub = document.querySelector(".login-scene-sub");
+  if (mascot) {
+    mascot.style.transition = "transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease, box-shadow 0.3s ease";
+    mascot.style.opacity = "0";
+    mascot.style.transform = "scale(0.7)";
+    setTimeout(() => {
+      mascot.innerHTML = "📚";
+      mascot.style.boxShadow = "";
+      mascot.style.transform = "scale(1.1)";
+      mascot.style.opacity = "1";
+      setTimeout(() => { mascot.style.transform = ""; mascot.style.transition = ""; }, 150);
+    }, 200);
+  }
+  if (sceneLabel) { sceneLabel.textContent = "Who is learning today?"; sceneLabel.style.opacity = "1"; sceneLabel.style.transform = ""; }
+  if (sceneSub)   { sceneSub.textContent = "Choose your profile to continue"; sceneSub.style.opacity = "1"; }
 }
 
 function setLoginMode(mode, openLogin = false, action = "login") {
@@ -567,8 +722,8 @@ function setLoginMode(mode, openLogin = false, action = "login") {
   loginSubtitle.textContent = isParentRegister
     ? "Create a parent PIN to manage safety settings, alerts, and screen time."
     : isParent
-    ? "Enter your parent PIN after a session timeout or when returning from a child profile."
-    : "Choose your profile to enter your private PIN.";
+    ? ""
+    : "";
   loginProfileName.textContent = isParent ? "Parent account" : "";
   pinInput.value = isParentRegister ? "" : isParent ? "0000" : "";
   parentLoginOptions?.classList.toggle("is-hidden", !isParent);
@@ -576,8 +731,8 @@ function setLoginMode(mode, openLogin = false, action = "login") {
   kidPinPanel?.classList.toggle("is-hidden", !isParent);
   kidPinPanel?.querySelector(".selected-kid-login")?.classList.toggle("is-hidden", isParent);
   const pinLabel = kidPinPanel?.querySelector(".input-label");
-  if (pinLabel) pinLabel.textContent = isParent ? "Parent PIN" : "Private PIN";
-  loginContinueBtn.textContent = isParentRegister ? "Create Parent Account" : isParent ? "Open Parent Home" : "Start Learning";
+  if (pinLabel) pinLabel.textContent = isParent ? "" : "Private PIN";
+  loginContinueBtn.textContent = isParentRegister ? "Create Parent Account" : isParent ? "Open Home Screen" : "Start Learning";
   loginContinueBtn.classList.toggle("is-hidden", !isParent);
   if (!isParent) resetKidLoginSelection();
   if (openLogin) showScreen("login");
@@ -615,6 +770,7 @@ function resetKidForm() {
   kidAgeInput.value = "";
   kidGenderInput.value = "Boy";
   kidPinInput.value = "";
+  syncGeneratedKidAvatar();
   renderKidProfiles();
 }
 
@@ -625,7 +781,7 @@ function openKidRegister(index = null) {
     kidAgeInput.value = "";
     kidGenderInput.value = "Boy";
     kidPinInput.value = "";
-    pendingSetupAvatarSrc = cartoonAvatar(kidProfiles.length % cartoonCharacters.length);
+    syncGeneratedKidAvatar();
   } else {
     const kid = kidProfiles[index];
     kidNameInput.value = kid.name;
@@ -633,6 +789,10 @@ function openKidRegister(index = null) {
     kidGenderInput.value = kid.gender;
     kidPinInput.value = kid.pin;
     pendingSetupAvatarSrc = kidAvatar(kid, index);
+    if (kidGeneratedAvatarPreview) {
+      kidGeneratedAvatarPreview.textContent = kid.name.charAt(0).toUpperCase() || "K";
+      kidGeneratedAvatarPreview.style.setProperty("--generated-avatar", `url("${pendingSetupAvatarSrc}")`);
+    }
   }
   renderKidProfiles();
   showScreen("kid-register");
@@ -641,6 +801,9 @@ function openKidRegister(index = null) {
 function addKidProfile() {
   if (kidProfiles.length >= 4 && editingKidIndex === null) return;
   const name = kidNameInput.value.trim() || `Kid ${kidProfiles.length + 1}`;
+  if (!pendingSetupAvatarSrc || pendingSetupAvatarSrc.includes("kid-ravin-avatar") || pendingSetupAvatarSrc.includes("kid-maya-avatar")) {
+    pendingSetupAvatarSrc = generatedInitialAvatar(name);
+  }
   const age = kidAgeInput.value.trim() || "8";
   const gender = kidGenderInput.value || "Not specified";
   const pin = kidPinInput.value.trim() || "1234";
@@ -685,6 +848,26 @@ function renderParentKids() {
   if (parentOverviewAlertCount) {
     parentOverviewAlertCount.textContent = String(kidProfiles.reduce((total, kid) => total + (kid.alerts || 0), 0));
   }
+  // Update overview heading with parent's full name
+  const overviewHeading = document.querySelector("#parentOverviewHeading");
+  const overviewSubtitle = document.querySelector(".parent-overview-subtitle");
+  if (overviewHeading) {
+    const firstName = document.querySelector("#parentNameInput")?.value.trim();
+    const lastName = document.querySelector("#parentLastNameInput")?.value.trim();
+    const fullName = [firstName, lastName].filter(Boolean).join(" ");
+    overviewHeading.textContent = fullName ? `${fullName}'s Family` : "Family overview";
+    if (overviewSubtitle) {
+      overviewSubtitle.textContent = fullName ? `Welcome back, ${firstName}! Here's your family overview.` : "Your family's learning at a glance";
+    }
+  }
+  // Point 7: Sync activity stats into home dashboard
+  const activeKid = kidProfiles[0];
+  const homeStreak = document.querySelector("#homeOverallStreak");
+  const homeDailyTime = document.querySelector("#homeDailyTime");
+  const homeAlertTotalEl = document.querySelector("#homeAlertTotal");
+  if (homeStreak) homeStreak.textContent = activeKid ? `${activeKid.streak || 0}d` : "0";
+  if (homeDailyTime) homeDailyTime.textContent = activeKid ? minutesLabel(activeKid.dailyMinutes || 0) : "0m";
+  if (homeAlertTotalEl) homeAlertTotalEl.textContent = String(kidProfiles.reduce((t, k) => t + (k.alerts || 0), 0));
   renderSubscriptionSummary();
   parentKidsList.innerHTML = kidProfiles.length
     ? kidProfiles
@@ -733,6 +916,109 @@ function renderParentKids() {
       parentKidDeleteModal?.classList.remove("is-hidden");
     });
   });
+}
+
+let pkaActiveIndex = 0;
+
+function renderParentHomeKids() {
+  const tabsEl = document.querySelector("#parentHomeKidTabsV3");
+  const legacyTabsEl = document.querySelector("#pkaKidTabs");
+  const detailEl = document.querySelector("#parentKidDetailV3");
+  const legacyDetailEl = document.querySelector("#pkaKidDetail");
+  const emptyEl = document.querySelector("#pkaEmpty");
+
+  const hasKids = kidProfiles.length > 0;
+  document.querySelector(".screen-parent-dashboard")?.classList.toggle("is-empty-family", !hasKids);
+  if (emptyEl) emptyEl.style.display = hasKids ? "none" : "block";
+  if (detailEl) detailEl.classList.toggle("is-hidden", !hasKids);
+  if (legacyDetailEl) legacyDetailEl.classList.add("is-hidden");
+
+  const countEl = document.querySelector("#parentKidCount");
+  const overviewAlertEl = document.querySelector("#parentOverviewAlertCount");
+  const headingEl = document.querySelector("#parentOverviewHeading");
+  if (countEl) countEl.textContent = String(kidProfiles.length);
+  if (overviewAlertEl) overviewAlertEl.textContent = String(kidProfiles.reduce((sum, kid) => sum + (kid.alerts || 0), 0));
+  if (headingEl) {
+    const first = document.querySelector("#parentNameInput")?.value?.trim() || "Sarah";
+    const last = document.querySelector("#parentLastNameInput")?.value?.trim() || "Johnson";
+    headingEl.textContent = `${first} ${last}`.trim();
+  }
+
+  if (!tabsEl && !legacyTabsEl) return;
+
+  if (!hasKids) {
+    if (tabsEl) tabsEl.innerHTML = "";
+    if (legacyTabsEl) legacyTabsEl.innerHTML = "";
+    return;
+  }
+
+  if (pkaActiveIndex >= kidProfiles.length) pkaActiveIndex = 0;
+  const kid = kidProfiles[pkaActiveIndex];
+
+  const markup = kidProfiles.map((profile, index) => `
+    <div class="kid-tab-v3 ${index === pkaActiveIndex ? "is-active" : ""}" data-home-kid-v3="${index}" role="button" tabindex="0" aria-label="${profile.name}">
+      <div class="kid-tab-v3-avatar-wrap">
+        <img src="${kidAvatar(profile, index)}" alt="${profile.name}" />
+        ${index === pkaActiveIndex ? `<span class="kid-tab-v3-active-dot" aria-hidden="true"></span>` : ""}
+      </div>
+      <span class="kid-tab-v3-name">${profile.name}</span>
+      <div class="kid-tab-v3-actions">
+        <button type="button" data-home-edit-kid="${index}" aria-label="Edit ${profile.name}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5Z"/></svg>
+        </button>
+        <button type="button" data-home-delete-kid="${index}" aria-label="Delete ${profile.name}">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="m19 6-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+        </button>
+      </div>
+    </div>
+  `).join("");
+
+  if (tabsEl) tabsEl.innerHTML = markup;
+  if (legacyTabsEl) legacyTabsEl.innerHTML = "";
+
+  const nameEl = document.querySelector("#pkaKidName");
+  const metaEl = document.querySelector("#pkaKidMeta");
+  const streakEl = document.querySelector("#homeOverallStreak");
+  const timeEl = document.querySelector("#homeDailyTime");
+  const alertEl = document.querySelector("#homeAlertTotal");
+
+  if (nameEl) nameEl.textContent = `${kid.name}'s Activity Overview`;
+  if (metaEl) metaEl.textContent = `${kid.age || "?"} yrs · ${kid.gender || "—"}`;
+  if (streakEl) streakEl.textContent = String(kid.streak || 0);
+  if (timeEl) timeEl.textContent = minutesLabel(kid.dailyMinutes || 0);
+  if (alertEl) alertEl.textContent = String(kid.alerts || 0);
+
+  document.querySelectorAll("[data-home-kid-v3]").forEach((card) => {
+    card.addEventListener("click", (event) => {
+      if (event.target.closest("[data-home-edit-kid], [data-home-delete-kid]")) return;
+      pkaActiveIndex = Number(card.dataset.homeKidV3);
+      renderParentHomeKids();
+    });
+  });
+
+  document.querySelectorAll("[data-home-edit-kid]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      openKidRegister(Number(button.dataset.homeEditKid));
+    });
+  });
+
+  document.querySelectorAll("[data-home-delete-kid]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      pendingDeleteKidIndex = Number(button.dataset.homeDeleteKid);
+      const profile = kidProfiles[pendingDeleteKidIndex];
+      if (parentKidDeleteMessage && profile) {
+        parentKidDeleteMessage.textContent = `Deleting ${profile.name}'s profile will permanently remove all learning activity, reports, safety alerts, and saved chats.`;
+      }
+      parentKidDeleteModal?.classList.remove("is-hidden");
+    });
+  });
+
+  document.querySelector("#registerKidFromTabs")?.addEventListener("click", () => openKidRegister());
+  document.querySelector("#registerKidFromParent")?.addEventListener("click", () => openKidRegister());
+  document.querySelector("#homeParentAlerts")?.addEventListener("click", () => showScreen("parent-alert"));
+  document.querySelector("#parentOverviewAlerts")?.addEventListener("click", () => showScreen("parent-alert"));
 }
 
 function hasActiveSubscription() {
@@ -797,7 +1083,10 @@ function renderSubscriptionSummary() {
     ? `Valid until ${formatSubscriptionDate(subscriptionExpiresAt)}`
     : "Subscription expired";
   subscriptionDaysLeft.textContent = String(subscriptionDaysRemaining());
-  managePaymentsBtn.textContent = isActive ? "View plans" : "Choose plan";
+  if (managePaymentsBtn) {
+    const label = isActive ? "Upgrade Plan" : "Choose Plan";
+    managePaymentsBtn.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>${label}`;
+  }
 }
 
 function renderPaymentModal() {
@@ -924,6 +1213,15 @@ function renderParentAlerts() {
                 <strong>${alertQuestions[item.label] || "This question needs a parent review."}</strong>
                 <p>${item.value} ${item.value === 1 ? "alert" : "related alerts"} recorded for ${kid.name}.</p>
                 <small>${index === 0 ? "Today, 6:42 PM" : "This week"}</small>
+                <div class="inline-alert-feedback" data-alert-feedback-state="${item.feedback || ""}">
+                  <span>Parent feedback</span>
+                  <button type="button" data-alert-feedback="${kid.alertBreakdown.indexOf(item)}" data-alert-feedback-value="up" aria-label="Helpful alert">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 11v10H4a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2h3Zm0 0 5-8c1.3 0 2.1 1.2 1.8 2.4L13 9h5.2a2 2 0 0 1 2 2.3l-1.1 7A3.2 3.2 0 0 1 16 21H7V11Z"/></svg>
+                  </button>
+                  <button type="button" data-alert-feedback="${kid.alertBreakdown.indexOf(item)}" data-alert-feedback-value="down" aria-label="Not helpful alert">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 13V3h3a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-3Zm0 0-5 8c-1.3 0-2.1-1.2-1.8-2.4L11 15H5.8a2 2 0 0 1-2-2.3l1.1-7A3.2 3.2 0 0 1 8 3h9v10Z"/></svg>
+                  </button>
+                </div>
               </div>
               <button type="button" data-close-alert="${kid.alertBreakdown.indexOf(item)}">Close alert</button>
             </article>
@@ -940,21 +1238,48 @@ function renderParentAlerts() {
       renderParentKids();
     });
   });
+  document.querySelectorAll("[data-alert-feedback]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const alertIndex = Number(button.dataset.alertFeedback);
+      if (kid.alertBreakdown?.[alertIndex]) kid.alertBreakdown[alertIndex].feedback = button.dataset.alertFeedbackValue;
+      renderParentAlerts();
+    });
+  });
 }
 
 let currentScreenName = document.querySelector(".app-screen.is-active")?.dataset.view || "splash";
 const screenHistory = [];
 
+const ISLAND_ROLE_SELECTORS = [
+  [".login-panel, .register-panel, .email-confirm-panel, .parent-details-panel, .onboarding-card, .welcome-panel, .support-page, .info-page", "main"],
+  [".payment-plans-page, .payment-confirmation-page, .avatar-library-page, .parent-alerts-body, .parent-card, .parent-summary-card, .parent-plan-v3-card, .parent-activity-v3-card, .parent-kid-detail-v3, .analytics-card, .analytics-tabs-card", "panel"],
+  [".parent-kid-card, .kid-tab-v3, .recent-card, .category-chat-card, .history-card, .parent-alert-item, .team-member, .timer-demo-card", "card"],
+  [".modal-card, .app-menu-panel, .chat-history-panel, .parent-profile-menu, .kid-profile-menu", "overlay"],
+  [".composer, .composer-field, .bubble, .clean-bubble", "chat"]
+];
+
+function applyIslandSemantics(root = document) {
+  root.querySelectorAll(".app-screen[data-view]").forEach((screen) => {
+    screen.dataset.islandScreen = screen.dataset.view || "";
+  });
+  ISLAND_ROLE_SELECTORS.forEach(([selector, role]) => {
+    root.querySelectorAll(selector).forEach((element) => {
+      if (!element.dataset.islandRole) element.dataset.islandRole = role;
+    });
+  });
+}
+
 function showScreen(name, options = {}) {
   if (!options.fromBack && name !== currentScreenName) screenHistory.push(currentScreenName);
   currentScreenName = name;
-  if (name === "parent-dashboard" || name === "parent-analytics" || name === "parent-alerts" || name === "parent-full-login" || name === "parent-register") loginMode = "parent";
+  if (name === "parent-dashboard" || name === "parent-analytics" || name === "parent-alerts" || name === "parent-full-login" || name === "parent-register" || name === "parent-details" || name === "parent-email-confirm" || name === "parent-onboarding" || name === "kid-register") loginMode = "parent";
   if (name === "home" || name === "chat" || name === "onboarding") loginMode = "child";
   closeParentProfileModal();
   closeParentProfileMenu();
   closeKidProfileMenu();
   closeStreakPopover();
   closeChatHistory();
+  closeParentAppMenu();
   closeImageModal();
   closeVoiceModal();
   closeAvatarModal();
@@ -965,11 +1290,17 @@ function showScreen(name, options = {}) {
   floatingBackButton?.classList.toggle("is-hidden", name === "splash" || name === "login");
   if (name === "home") renderHome();
   if (name === "chat") renderChat();
-  if (name === "parent-dashboard") renderParentKids();
+  if (name === "parent-dashboard") {
+    renderParentKids();
+    renderParentHomeKids();
+  }
   if (name === "parent-analytics") renderParentAnalytics();
   if (name === "parent-alerts") renderParentAlerts();
   if (name === "parent-onboarding") renderParentOnboarding();
-  if (name === "kid-register") renderKidProfiles();
+  if (name === "kid-register") {
+    syncGeneratedKidAvatar();
+    renderKidProfiles();
+  }
   if (name === "payment-plans") {
     renderPaymentPlans();
     renderPaymentModal();
@@ -984,6 +1315,7 @@ function showScreen(name, options = {}) {
     alertReason.textContent = alertReason.textContent || "Screen time limit reached";
   }
   decorateBrandLocks();
+  applyIslandSemantics();
 }
 
 function showPreviousScreen() {
@@ -1015,6 +1347,8 @@ function decorateBrandLocks() {
   const brandImages = document.querySelectorAll(".internal-screen-logo, .chat-header-brand, .internal-brand img");
   brandImages.forEach((image) => {
     if (!(image instanceof HTMLImageElement)) return;
+    // Skip images inside chat-header-left — CSS/inline styles handle these directly
+    if (image.closest(".chat-header-left, .unified-header-left")) return;
     let wrapper = image.parentElement;
     if (!wrapper?.classList.contains("brand-lock")) {
       wrapper = document.createElement("span");
@@ -1036,6 +1370,93 @@ function decorateBrandLocks() {
     wrapper.classList.toggle("is-compact", isCompact);
     wrapper.classList.toggle("is-full", !isCompact);
   });
+}
+
+const parentHeaderViews = new Set([
+  "parent-analytics",
+  "payment-plans",
+  "payment-confirmation",
+  "parent-alerts",
+  "parent-alert",
+  "kid-register",
+  "about",
+  "privacy",
+  "terms",
+  "team",
+  "contact",
+  "support",
+]);
+const childHeaderViews = new Set(["onboarding", "avatar-library", "home", "chat", "timer-demo", "login"]);
+
+function profileSwitchButton(scope, active) {
+  const kid = kidProfiles[activeLoginKidIndex] || kidProfiles[0];
+  const isParent = scope === "parent";
+  const source = isParent ? parentAvatarImages[0]?.src || "parent-profile.svg" : kidAvatar(kid, activeLoginKidIndex);
+  const label = isParent ? "Switch to parent" : "Switch to child";
+  return `
+    <button class="header-role-button ${active ? "is-active" : ""}" data-profile-switch="${scope}" type="button" aria-label="${active ? `${isParent ? "Parent" : "Child"} profile active` : label}" title="${active ? `${isParent ? "Parent" : "Child"} profile` : label}">
+      <img class="${isParent ? "parent-avatar-image" : "avatar-image"}" src="${source}" alt="" />
+    </button>`;
+}
+
+function enhanceUnifiedHeaders() {
+  document.querySelectorAll(".app-screen[data-view]").forEach((screen) => {
+    const view = screen.dataset.view;
+    const scope = parentHeaderViews.has(view) ? "parent" : childHeaderViews.has(view) ? "child" : "";
+    if (!scope) return;
+    const header = screen.querySelector(":scope > header");
+    if (!header || header.dataset.unifiedHeader === "true") return;
+    header.dataset.unifiedHeader = "true";
+    header.classList.add("unified-app-header", `unified-${scope}-header`);
+
+    if (view === "chat") {
+      // Insert parent switch button INTO the profile-switch-group, before the kid avatar
+      // Order: pin → streak → [parent-avatar, kid-avatar]
+      const switchGroup = header.querySelector(".chat-profile-switch-group");
+      if (switchGroup && !switchGroup.querySelector('[data-profile-switch="parent"]')) {
+        switchGroup.insertAdjacentHTML("afterbegin", profileSwitchButton("parent", false));
+      }
+      // Mark kid avatar as the active profile
+      header.querySelector(".chat-avatar-button")?.classList.add("header-role-button", "is-active");
+      return;
+    }
+
+    const brand = header.querySelector(".internal-brand, .internal-screen-logo");
+    const left = document.createElement("div");
+    left.className = "unified-header-left";
+    left.innerHTML = `
+      <button class="app-menu-trigger" data-menu-scope="${scope}" type="button" aria-label="Open ${scope} menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>`;
+    if (brand) left.appendChild(brand);
+    else left.insertAdjacentHTML("beforeend", '<img class="internal-screen-logo" src="pratvim-icon-new.svg" alt="Pratvim" />');
+    header.prepend(left);
+
+    let activeProfile = header.querySelector(scope === "parent" ? ".parent-profile-trigger, .static-profile-trigger[data-avatar-scope='parent']" : ".avatar-trigger:not(.parent-profile-trigger)");
+    const switcher = document.createElement("div");
+    switcher.className = "header-profile-switch";
+    switcher.innerHTML = profileSwitchButton(scope === "parent" ? "child" : "parent", false);
+    if (activeProfile) {
+      activeProfile.classList.add("header-role-button", "is-active");
+      activeProfile.dataset.profileSwitch = scope;
+      activeProfile.dataset.headerProfile = scope;
+      switcher.appendChild(activeProfile);
+    } else {
+      switcher.insertAdjacentHTML("beforeend", profileSwitchButton(scope, true));
+      switcher.lastElementChild.dataset.headerProfile = scope;
+    }
+    header.appendChild(switcher);
+  });
+}
+
+function openParentAppMenu() {
+  parentAppMenuLayer?.classList.remove("is-hidden");
+  document.querySelectorAll('[data-menu-scope="parent"]').forEach((button) => button.setAttribute("aria-expanded", "true"));
+}
+
+function closeParentAppMenu() {
+  parentAppMenuLayer?.classList.add("is-hidden");
+  document.querySelectorAll('[data-menu-scope="parent"]').forEach((button) => button.setAttribute("aria-expanded", "false"));
 }
 
 function setActiveDemoButton(demoName) {
@@ -1198,14 +1619,19 @@ function renderParentOnboarding() {
   parentOnboardingTitle.textContent = slide.title;
   parentOnboardingText.textContent = slide.text;
   parentOnboardingFeatures.innerHTML = slide.features
-    .map((feature) => `<span><i aria-hidden="true">✓</i>${feature}</span>`)
+    .map((feature) => `<span><i class="feature-check" aria-hidden="true">✓</i>${feature}</span>`)
     .join("");
   if (parentOnboardingVisual) {
     parentOnboardingVisual.classList.remove("setup", "chat", "reports");
     parentOnboardingVisual.classList.add(slide.visualType);
   }
-  parentOnboardingNext.textContent = parentOnboardingIndex === parentOnboardingSlides.length - 1 ? "Open dashboard" : "Next";
+  parentOnboardingNext.textContent = parentOnboardingIndex === parentOnboardingSlides.length - 1 ? "Save & Go Home" : "Next";
   parentOnboardingDots.forEach((dot, index) => dot.classList.toggle("is-active", index === parentOnboardingIndex));
+  document.querySelector("#parentOnboardingPinSetup")?.classList.toggle("is-hidden", parentOnboardingIndex !== parentOnboardingSlides.length - 1);
+
+  document.querySelectorAll(".removed-parent-details-from-onboarding").forEach((element) => {
+    element.classList.add("is-hidden");
+  });
 }
 
 let chatHistoryFilter = "pinned";
@@ -1273,6 +1699,7 @@ function renderHistory() {
         .map(
           (chat) => `
         <button class="history-card ${chat.id === activeChatId ? "is-active" : ""} ${chat.pinned ? "is-pinned" : ""}" data-history-chat="${chat.id}" type="button">
+          ${chat.pinned ? `<span class="history-pin-icon" aria-label="Pinned chat"><img src="icon-pin.svg" alt="" aria-hidden="true" /></span>` : ""}
           <strong>${truncate(chat.title || "Learning Chat", 23)}</strong>
           <p>${chat.preview}</p>
           <small>${chat.date} | ${chatStatus(chat)}</small>
@@ -1286,15 +1713,6 @@ function renderHistory() {
     const isActive = button.dataset.historyFilter === chatHistoryFilter;
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-selected", String(isActive));
-    if (isActive) {
-      button.style.setProperty("background-color", "#006c67", "important");
-      button.style.setProperty("border-color", "#006c67", "important");
-      button.style.setProperty("color", "#ffffff", "important");
-    } else {
-      button.style.removeProperty("background-color");
-      button.style.removeProperty("border-color");
-      button.style.removeProperty("color");
-    }
   });
 
   document.querySelectorAll("[data-history-chat]").forEach((button) => {
@@ -1355,15 +1773,6 @@ function renderMessages() {
     return;
   }
 
-  const renderPinButton = () => `
-    <button class="message-pin-btn ${chat.pinned ? "is-pinned" : ""}" type="button" data-pin-chat aria-label="${chat.pinned ? "Unpin chat" : "Pin chat"}" title="${chat.pinned ? "Pinned" : "Pin chat"}">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M14.2 4.2 19.8 9.8 16.8 11.1 14.4 17.2 12 14.8 7 19.8 5.8 18.6 10.8 13.6 8.8 11.6 14.9 9.2 14.2 4.2Z" />
-      </svg>
-      <span>${chat.pinned ? "Pinned" : "Pin chat"}</span>
-    </button>
-  `;
-
   messageArea.innerHTML = chat.messages
     .map((message, index) => {
       const role = message.role || "ai";
@@ -1371,19 +1780,26 @@ function renderMessages() {
       const isBlocked = role === "blocked";
       const isLoading = role === "loading";
       const label = isBlocked ? "Safe reply" : isLoading ? "Pratvim is thinking" : "Pratvim";
-      const assistantBrand = !isKid
-        ? `<div class="assistant-label" aria-label="${label}">
-            <span class="assistant-brand-symbol" aria-hidden="true"></span>
+      const shouldShowDivider = index > 0 && index === 2;
+      const metaRow = message.time && !isLoading ? `<div class="message-meta"><time>${message.time}</time></div>` : "";
+
+      // Avatar badges shown at top corner of each bubble
+      const aiBadge = !isKid
+        ? `<div class="bubble-avatar ai-badge" aria-label="${label}">
+            <img src="pratvim-icon-new.svg" alt="Pratvim" />
           </div>`
         : "";
-      const shouldShowDivider = index > 0 && index === 2;
-      const metaRow = message.time && !isLoading ? `<div class="message-meta"><time>${message.time}</time>${renderPinButton()}</div>` : "";
+      const kidBadge = isKid
+        ? `<div class="bubble-avatar kid-badge" aria-hidden="true">
+            <img src="kid-ravin-avatar.png" alt="" />
+          </div>`
+        : "";
 
       return `
         ${shouldShowDivider ? `<div class="chat-date-divider"><span>Today</span></div>` : ""}
         <article class="chat-message-clean ${isKid ? "kid" : "ai"} ${isBlocked ? "blocked" : ""} ${isLoading ? "loading" : ""}">
-          ${assistantBrand}
           <div class="clean-bubble-wrap">
+            ${aiBadge}${kidBadge}
             <div class="bubble clean-bubble">
               <p>${message.text || "Pratvim is getting the answer ready..."}</p>
               ${metaRow}
@@ -1402,8 +1818,10 @@ function renderChat() {
   document.querySelector(".chat-feature-summary")?.classList.toggle("is-hidden", chat.messages.length > 0);
   if (chatNameTop) chatNameTop.textContent = chat.title === "New Chat" ? "" : chat.title;
   if (pinCurrentBtn) {
-    pinCurrentBtn.textContent = chat.pinned ? "Pinned" : "Pin Chat";
     pinCurrentBtn.classList.toggle("is-on", chat.pinned);
+    pinCurrentBtn.setAttribute("aria-label", chat.pinned ? "Unpin this chat" : "Pin this chat");
+    pinCurrentBtn.setAttribute("title", chat.pinned ? "Pinned chat" : "Pin this chat");
+    pinCurrentBtn.setAttribute("aria-pressed", String(chat.pinned));
   }
   if (pauseChatBtn) {
     pauseChatBtn.textContent = chat.paused ? "▶" : "Ⅱ";
@@ -1627,7 +2045,7 @@ function closeParentProfileModal() {
 }
 
 function applyAvatar(src) {
-  const targets = activeAvatarScope === "parent" ? parentAvatarImages : avatarImages;
+  const targets = document.querySelectorAll(activeAvatarScope === "parent" ? ".parent-avatar-image" : ".avatar-image");
   targets.forEach((image) => {
     image.src = src;
   });
@@ -1751,9 +2169,18 @@ loginContinueBtn?.addEventListener("click", () => {
   showScreen("onboarding");
 });
 
+function maskEmail(email) {
+  if (!email || !email.includes("@")) return email;
+  const [local, domain] = email.split("@");
+  const visible = local.slice(0, 2);
+  const masked = local.length > 2 ? "*".repeat(Math.min(local.length - 2, 4)) : "**";
+  return visible + masked + "@" + domain;
+}
+
 parentRegisterForm?.addEventListener("submit", (event) => {
   event.preventDefault();
-  if (confirmEmailText) confirmEmailText.textContent = parentEmailInput?.value || "parent@example.com";
+  // Only email is collected on register; name/mobile/password collected during onboarding
+  if (confirmEmailText) confirmEmailText.textContent = maskEmail(parentEmailInput?.value || "parent@example.com");
   showScreen("parent-email-confirm");
 });
 
@@ -1763,19 +2190,40 @@ parentFullLoginForm?.addEventListener("submit", (event) => {
 });
 
 confirmEmailBtn?.addEventListener("click", () => {
+  showScreen("parent-details");
+});
+
+parentDetailsForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const password = parentPasswordInput?.value.trim() || "";
+  const confirmPassword = parentConfirmPasswordInput?.value.trim() || "";
+  if (parentDetailsStatus) {
+    parentDetailsStatus.classList.add("is-hidden");
+    parentDetailsStatus.textContent = "";
+  }
+  if (password !== confirmPassword) {
+    if (parentDetailsStatus) {
+      parentDetailsStatus.textContent = "Password and confirm password must match.";
+      parentDetailsStatus.classList.remove("is-hidden");
+    }
+    parentConfirmPasswordInput?.focus();
+    return;
+  }
   parentOnboardingIndex = 0;
   renderParentOnboarding();
   showScreen("parent-onboarding");
 });
 
 resendEmailBtn?.addEventListener("click", () => {
-  if (confirmEmailText) confirmEmailText.textContent = parentEmailInput?.value || "parent@example.com";
+  if (confirmEmailText) confirmEmailText.textContent = maskEmail(parentEmailInput?.value || "parent@example.com");
 });
 
 kidRegisterForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   addKidProfile();
 });
+
+kidNameInput?.addEventListener("input", syncGeneratedKidAvatar);
 
 finishKidSetupBtn?.addEventListener("click", () => {
   editingKidIndex = null;
@@ -1856,11 +2304,17 @@ sizeButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const width = Number(button.dataset.width);
     const height = Number(button.dataset.height);
-    document.documentElement.style.setProperty("--app-width", `${button.dataset.width}px`);
-    document.documentElement.style.setProperty("--app-height", `${button.dataset.height}px`);
+    // Set both variable names — --app-width (legacy) and --device-width (current CSS)
+    // Must set on phoneDevice directly so it wins over the media-query rule on .phone-device
+    document.documentElement.style.setProperty("--app-width", `${width}px`);
+    document.documentElement.style.setProperty("--app-height", `${height}px`);
+    if (phoneDevice) {
+      phoneDevice.style.setProperty("--device-width", `${width}px`);
+      phoneDevice.style.setProperty("--device-height", `${height}px`);
+    }
     document.documentElement.dataset.deviceOrientation = width > height ? "landscape" : "portrait";
     document.documentElement.dataset.devicePreset = button.dataset.devicePreset || (width >= 768 ? "ipad-portrait" : "iphone-portrait");
-    currentSize.textContent = `${button.dataset.width} x ${button.dataset.height}`;
+    currentSize.textContent = `${width} x ${height}`;
     sizeButtons.forEach((item) => item.classList.toggle("is-active", item === button));
   });
 });
@@ -1876,9 +2330,20 @@ function syncNativeOrientation() {
     : width >= 768 ? "ipad-portrait" : "iphone-portrait";
 }
 
+// Initialise --device-width/height on the phone element from the default --app-width/height
+// so the phone starts at the right size without the media-query vw-based override winning
+if (phoneDevice) {
+  const style = getComputedStyle(document.documentElement);
+  const initW = style.getPropertyValue("--app-width").trim() || "393px";
+  const initH = style.getPropertyValue("--app-height").trim() || "852px";
+  phoneDevice.style.setProperty("--device-width", initW);
+  phoneDevice.style.setProperty("--device-height", initH);
+}
+
 syncNativeOrientation();
 window.addEventListener("resize", syncNativeOrientation);
 
+enhanceUnifiedHeaders();
 decorateBrandLocks();
 
 onboardingNext.addEventListener("click", () => {
@@ -1892,11 +2357,44 @@ onboardingNext.addEventListener("click", () => {
 
 parentOnboardingNext?.addEventListener("click", () => {
   if (parentOnboardingIndex === parentOnboardingSlides.length - 1) {
+    // If kids were added during onboarding, push them into kidProfiles
+    onboardingKids.forEach(kid => {
+      if (kid.name.trim()) {
+        kidProfiles.push({
+          name: kid.name.trim(),
+          avatar: "kid-ravin-avatar.png",
+          age: kid.age || "?",
+          gender: "",
+          pin: "1234",
+          streak: 0,
+          lastLogin: "New",
+          dailyMinutes: 0,
+          alerts: 0,
+          weeklyMinutes: [0,0,0,0,0,0,0],
+          alertBreakdown: [],
+          topics: [],
+          modes: []
+        });
+      }
+    });
     showScreen("parent-dashboard");
     return;
   }
   parentOnboardingIndex += 1;
   renderParentOnboarding();
+});
+
+// Add kid row on slide 3
+document.addEventListener("click", (e) => {
+  if (e.target && e.target.id === "onboardingAddKidBtn") {
+    if (onboardingKids.length < 4) {
+      onboardingKids.push({ name: "", age: "" });
+      renderOnboardingKidList();
+      const addBtn = document.querySelector("#onboardingAddKidBtn");
+      if (addBtn) addBtn.textContent = onboardingKids.length >= 4 ? "Max 4 children reached" : `+ Add another child`;
+      if (onboardingKids.length >= 4 && addBtn) addBtn.disabled = true;
+    }
+  }
 });
 
 homeNewChat.addEventListener("click", createNewChat);
@@ -1914,6 +2412,10 @@ historySearchInput?.addEventListener("input", () => {
   renderHistory();
 });
 historyNewChatButton?.addEventListener("click", createNewChat);
+historyKidLogout?.addEventListener("click", () => {
+  closeChatHistory();
+  setLoginMode("child", true);
+});
 chatProgressStatus?.addEventListener("click", (event) => {
   event.stopPropagation();
   const willOpen = streakPopover?.classList.contains("is-hidden");
@@ -1947,14 +2449,6 @@ pauseChatBtn?.addEventListener("click", () => {
 
 closeChatBtn?.addEventListener("click", () => {
   closeActiveChat();
-});
-
-messageArea?.addEventListener("click", (event) => {
-  const pinButton = event.target.closest("[data-pin-chat]");
-  if (!pinButton) return;
-  const chat = activeChat();
-  chat.pinned = !chat.pinned;
-  renderAll();
 });
 
 composer.addEventListener("submit", (event) => {
@@ -2033,6 +2527,38 @@ parentFullLogout?.addEventListener("click", () => {
   closeParentProfileMenu();
   showScreen("parent-full-login");
 });
+parentAppMenuBackdrop?.addEventListener("click", closeParentAppMenu);
+parentAppMenuClose?.addEventListener("click", closeParentAppMenu);
+parentMenuUpdateProfile?.addEventListener("click", () => {
+  closeParentAppMenu();
+  openParentProfileModal();
+});
+parentMenuLogout?.addEventListener("click", () => {
+  closeParentAppMenu();
+  setLoginMode("parent", true);
+});
+parentMenuFullLogout?.addEventListener("click", () => {
+  closeParentAppMenu();
+  showScreen("parent-full-login");
+});
+document.addEventListener("click", (event) => {
+  const menuTrigger = event.target.closest(".app-menu-trigger");
+  if (menuTrigger) {
+    event.stopPropagation();
+    if (menuTrigger.dataset.menuScope === "parent") openParentAppMenu();
+    else openChatHistory();
+    return;
+  }
+  const roleButton = event.target.closest("[data-profile-switch]");
+  if (!roleButton) return;
+  const role = roleButton.dataset.profileSwitch;
+  if (roleButton.classList.contains("is-active") || roleButton.dataset.headerProfile) {
+    if (role === "parent") openParentProfileMenu(event);
+    else openKidProfileMenu(event);
+    return;
+  }
+  setLoginMode(role, true);
+});
 document.addEventListener("click", (event) => {
   if (!parentProfileMenu?.contains(event.target)) closeParentProfileMenu();
   if (!kidProfileMenu?.contains(event.target) && !event.target.closest(".avatar-trigger:not(.parent-profile-trigger)")) {
@@ -2073,10 +2599,24 @@ kidProfileForm?.addEventListener("submit", (event) => {
   closeAvatarModal();
 });
 
+function setAlertFeedback(value) {
+  const activeButton = value === "up" ? alertThumbsUp : alertThumbsDown;
+  const inactiveButton = value === "up" ? alertThumbsDown : alertThumbsUp;
+  activeButton?.classList.add("is-selected");
+  inactiveButton?.classList.remove("is-selected");
+  if (alertFeedbackStatus) {
+    alertFeedbackStatus.textContent = value === "up"
+      ? "Thanks. This alert was marked helpful."
+      : "Thanks. This alert was marked for review.";
+  }
+}
+
 alertBackBtn.addEventListener("click", () => closeParentAlert(false));
 alertClose.addEventListener("click", () => closeParentAlert(false));
 alertReviewed.addEventListener("click", () => closeParentAlert(true));
 alertCloseChatBtn.addEventListener("click", closeActiveChat);
+alertThumbsUp?.addEventListener("click", () => setAlertFeedback("up"));
+alertThumbsDown?.addEventListener("click", () => setAlertFeedback("down"));
 
 setInterval(() => {
   elapsedSeconds += 1;
@@ -2096,6 +2636,7 @@ renderPaymentModal();
 renderHome();
 renderChat();
 updateTimer();
+applyIslandSemantics();
 
 globalThis.kidsSafeDemo = {
   showScreen,
@@ -2105,3 +2646,61 @@ globalThis.kidsSafeDemo = {
     updateTimer();
   }
 };
+/* === Parent home final reviewed patch === */
+(function parentHomeFinalReviewedPatch() {
+  function run() {
+    const view = document.querySelector(".app-screen.is-active")?.dataset?.view;
+    if (view === "parent-dashboard" && typeof renderParentHomeKids === "function") {
+      renderParentHomeKids();
+    }
+  }
+  document.addEventListener("DOMContentLoaded", run);
+  document.addEventListener("click", () => setTimeout(run, 0));
+  document.addEventListener("input", run);
+  setTimeout(run, 0);
+})();
+/* === Kid parent switch/header update patch === */
+(function kidParentSwitchHeaderPatch() {
+  function syncHeaderRoleActive() {
+    const mode = (typeof loginMode !== "undefined") ? loginMode : "child";
+    document.querySelectorAll(".header-role-button[data-profile-switch]").forEach(function(btn) {
+      btn.classList.toggle("is-active", btn.dataset.profileSwitch === mode);
+    });
+  }
+  document.addEventListener("click", function() { setTimeout(syncHeaderRoleActive, 0); });
+  document.addEventListener("DOMContentLoaded", syncHeaderRoleActive);
+  setTimeout(syncHeaderRoleActive, 0);
+})();
+
+/* === Composer + button toggle (mic & image panel) === */
+(function composerPlusPatch() {
+  const plusBtn = document.getElementById("composerPlusBtn");
+  const extrasPanel = document.getElementById("composerExtras");
+  if (!plusBtn || !extrasPanel) return;
+
+  function toggleExtras(open) {
+    extrasPanel.classList.toggle("is-open", open);
+    extrasPanel.setAttribute("aria-hidden", String(!open));
+    plusBtn.setAttribute("aria-expanded", String(open));
+    plusBtn.classList.toggle("is-open", open);
+  }
+
+  plusBtn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    const isOpen = extrasPanel.classList.contains("is-open");
+    toggleExtras(!isOpen);
+  });
+
+  // Close panel when clicking outside
+  document.addEventListener("click", function(e) {
+    if (!extrasPanel.contains(e.target) && e.target !== plusBtn) {
+      toggleExtras(false);
+    }
+  });
+
+  // Close panel when user starts typing
+  const chatInputEl = document.getElementById("chatInput");
+  chatInputEl?.addEventListener("focus", function() { toggleExtras(false); });
+})();
+
+/* === Fade-out-on-scroll for hero sections === */

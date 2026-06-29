@@ -1,0 +1,123 @@
+// ============================================================
+// components/_cards.scss
+// Auth panels, parent cards, onboarding cards
+// ============================================================
+
+@use '../abstracts/variables' as v;
+
+// ── Base panel surface (shared by login/register/onboarding) ─
+html[data-theme="curio-sand-light"] {
+  .login-panel,
+  .register-panel,
+  .onboarding-card,
+  .welcome-panel,
+  .parent-card {
+    background: var(--atlas-card);
+    border: 1px solid var(--atlas-line);
+    border-radius: v.$radius-lg;
+    box-shadow: var(--atlas-shadow);
+    padding: 24px 20px 20px;
+    padding-top: 18px;    // space below sticky header
+    width: 100%;
+  }
+
+  // Email confirm panel
+  .email-confirm-panel {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+// ── Parent dashboard cards ─────────────────────────────────
+html[data-theme="curio-sand-light"] .screen-parent-dashboard {
+  .parent-home-v3-summary-card,
+  .parent-plan-v3-card,
+  .parent-activity-v3-card {
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(200, 195, 182, 0.35);
+    border-radius: 18px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+
+  // Empty state — transparent so wave background shows through
+  .parent-empty-v3 {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    padding: 32px 16px;
+
+    .parent-empty-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(200, 195, 182, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg { opacity: 0.5; }
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    p {
+      font-size: 14px;
+      color: var(--app-muted);
+      line-height: 1.5;
+    }
+  }
+}
+
+// ── Recent / history cards ─────────────────────────────────
+html[data-theme="curio-sand-light"] .recent-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--sand-line);
+  border-radius: v.$radius-md;
+  background: rgba(255, 254, 250, 0.72);
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: rgba(255, 254, 250, 0.92); }
+}
+
+// ── Category cards ─────────────────────────────────────────
+html[data-theme="curio-sand-light"] .category-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 10px;
+  border: 1px solid var(--sand-line);
+  border-radius: v.$radius-md;
+  background: rgba(255, 254, 250, 0.72);
+  text-align: center;
+  cursor: pointer;
+
+  &:hover { background: rgba(255, 254, 250, 0.94); }
+}
+
+// ── Modal card ─────────────────────────────────────────────
+html[data-theme="curio-sand-light"] .modal-card {
+  background: var(--atlas-card);
+  border: 1px solid var(--atlas-line);
+  border-radius: v.$radius-lg;
+  box-shadow: 0 24px 56px rgba(52, 58, 55, 0.14);
+  padding: 24px 20px;
+  width: min(100%, 340px);
+}

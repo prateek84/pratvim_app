@@ -1,0 +1,60 @@
+// ============================================================
+// pages/_info.scss
+// Terms, Privacy, About screens
+// ============================================================
+
+@use '../abstracts/variables' as v;
+
+html[data-theme="curio-sand-light"] {
+
+  .screen-info,
+  .screen-team {
+
+    // Header is handled by layout/_header.scss via .unified-app-header
+    // No extra header rules needed here
+
+    // ── Content area ─────────────────────────────────────
+    .info-page {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 0 0 32px;
+      width: 100%;
+      overflow-y: auto;
+
+      h1 {
+        font-size: 24px;
+        font-weight: 800;
+        font-family: Georgia, 'Times New Roman', serif;
+        color: var(--ink);
+        margin: 8px 0 14px;
+        line-height: 1.15;
+      }
+
+      h2 {
+        font-size: 16px;
+        font-weight: 800;
+        color: #356c74;
+        margin: 22px 0 6px;
+      }
+
+      p {
+        font-size: 13px;
+        font-weight: 700;
+        color: #5f6d70;
+        line-height: 1.65;
+        margin: 0 0 10px;
+      }
+
+      .step-label {
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--screen-accent-soft);
+        margin-bottom: 4px;
+      }
+    }
+  }
+}

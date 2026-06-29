@@ -1,0 +1,154 @@
+// ============================================================
+// pages/_onboarding.scss
+// Onboarding flow, kid home screen, avatar library
+// ============================================================
+
+@use '../abstracts/variables' as v;
+
+html[data-theme="curio-sand-light"] {
+
+  // ── Onboarding card ──────────────────────────────────────
+  .screen-onboarding .onboarding-card,
+  .screen-parent-onboarding .onboarding-card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  // ── Progress dots ────────────────────────────────────────
+  .onboarding-progress {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 8px;
+
+    span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sand-line);
+      transition: background 0.2s, width 0.2s;
+
+      &.is-active {
+        width: 20px;
+        border-radius: 3px;
+        background: var(--app-teal);
+      }
+    }
+  }
+
+  // ── Kid home screen ──────────────────────────────────────
+  .screen-home {
+    .home-greeting {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .home-sub {
+      font-size: 14px;
+      color: var(--app-muted);
+      margin-bottom: 16px;
+    }
+
+    // Category grid
+    .home-categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    // Recent questions
+    .home-recent {
+      margin-top: 16px;
+    }
+  }
+
+  // ── Avatar library ───────────────────────────────────────
+  .screen-avatar-library {
+    .avatar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 8px 0;
+    }
+
+    .avatar-option {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.16s, transform 0.14s;
+
+      &:hover  { transform: scale(1.06); }
+      &.is-selected { border-color: var(--app-teal); }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  // ── Timer / screen time display ───────────────────────────
+  .timer-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 12px 0;
+
+    .timer-value {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timer-label {
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--app-muted);
+    }
+  }
+
+  // ── Bottom navigation (kid screen) ───────────────────────
+  .bottom-nav,
+  .tab-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-shrink: 0;
+    height: 60px;
+    padding: 0 8px;
+    border-top: 1px solid var(--sand-line);
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(18px);
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--app-muted);
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 12px;
+      transition: color 0.16s, background 0.16s;
+
+      svg { width: 20px; height: 20px; stroke: currentColor; fill: none; }
+
+      &.is-active {
+        color: var(--app-teal);
+        background: rgba(0, 143, 136, 0.08);
+      }
+    }
+  }
+}

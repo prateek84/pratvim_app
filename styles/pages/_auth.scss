@@ -1,0 +1,203 @@
+// ============================================================
+// pages/_auth.scss
+// Login, register, email confirm, parent details screens
+// ============================================================
+
+@use '../abstracts/variables' as v;
+
+html[data-theme="curio-sand-light"] {
+
+  // ── Shared screen wrapper ───────────────────────────────
+  .screen-login,
+  .screen-register-parent,
+  .screen-email-confirm,
+  .screen-parent-details,
+  .screen-kid-register {
+
+    // Main panel
+    .login-panel,
+    .register-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+  }
+
+  // ── Login mode tabs (kid / parent toggle) ───────────────
+  .login-mode-tabs {
+    display: flex;
+    border: 1px solid var(--atlas-line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    padding: 3px;
+    gap: 3px;
+
+    button {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--app-muted);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.16s, color 0.16s;
+
+      &.is-active {
+        background: var(--app-teal);
+        color: #fff;
+      }
+    }
+  }
+
+  // ── Form fields ─────────────────────────────────────────
+  .form-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .form-mini-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--app-muted);
+    }
+
+    input {
+      height: 48px;
+      padding: 0 14px;
+      border: 1px solid var(--atlas-line);
+      border-radius: v.$radius-sm;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--atlas-ink);
+      font-size: 15px;
+      font-weight: 600;
+      transition: border-color 0.16s;
+
+      &:focus { border-color: var(--app-teal); }
+    }
+  }
+
+  // ── Social auth buttons ─────────────────────────────────
+  .social-auth-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 44px;
+    border: 1px solid var(--atlas-line);
+    border-radius: v.$radius-sm;
+    background: rgba(255, 255, 255, 0.94);
+    font-size: 13px;
+    font-weight: 750;
+    color: var(--atlas-ink);
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:hover { background: rgba(255, 255, 255, 1); }
+
+    img { width: 18px; height: 18px; }
+  }
+
+  // ── Divider ─────────────────────────────────────────────
+  .form-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 900;
+    color: var(--app-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--atlas-line);
+    }
+  }
+
+  // ── Terms checkbox ──────────────────────────────────────
+  .parent-register-terms {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+
+    label {
+      font-size: 12px;
+      color: var(--app-muted);
+      line-height: 1.4;
+
+      a {
+        color: var(--app-teal);
+        font-weight: 750;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+    }
+
+    input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--app-teal);
+      cursor: pointer;
+    }
+  }
+
+  // ── Email confirm OTP input ─────────────────────────────
+  #pinInput,
+  .otp-input {
+    height: 56px;
+    border: 2px solid var(--atlas-line);
+    border-radius: v.$radius-md;
+    background: rgba(255, 255, 255, 0.94);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-align: center;
+    width: 100%;
+    color: var(--atlas-ink);
+    transition: border-color 0.16s;
+
+    &:focus { border-color: var(--app-teal); }
+  }
+
+  // ── Kid register — generated avatar preview ─────────────
+  .kid-generated-avatar {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0;
+  }
+
+  .kid-generated-avatar-preview {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: var(--app-teal);
+    color: #fff;
+    font-size: 28px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid rgba(0, 143, 136, 0.24);
+  }
+}

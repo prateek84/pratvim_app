@@ -1,0 +1,214 @@
+// ============================================================
+// components/_chat-messages.scss
+// Message bubbles, bubble-avatar badges, date dividers
+// ============================================================
+
+@use '../abstracts/variables' as v;
+
+html[data-theme="curio-sand-light"] .screen-chat {
+
+  // ── Message pane scroll container ──────────────────────
+  .message-pane {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 16px 14px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar { display: none; }
+    scrollbar-width: none;
+  }
+
+  // ── Chat empty state (hero before first message) ───────
+  .chat-feature-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 24px 16px;
+    text-align: center;
+    transition: opacity 0.2s;
+
+    h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    &.is-hidden { display: none; }
+  }
+
+  .chat-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 24px 16px;
+    text-align: center;
+
+    .ask-anything-graphic {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      margin-bottom: 6px;
+
+      img {
+        width: 48px;
+        height: 48px;
+        object-fit: contain;
+        margin: 0 auto;
+      }
+    }
+
+    p {
+      font-size: 14px;
+      color: var(--app-muted);
+      line-height: 1.55;
+      max-width: 260px;
+    }
+  }
+
+  // ── Message row ────────────────────────────────────────
+  .chat-message-clean {
+    display: block;
+    width: 100%;
+    margin: 0;   // gap on .message-pane handles spacing
+
+    &.kid   { text-align: right; }
+    &.ai    { text-align: left; }
+  }
+
+  // ── Bubble wrap (positions the avatar badge) ───────────
+  .clean-bubble-wrap {
+    position: relative;
+    display: inline-block;
+
+    .chat-message-clean.ai  & { display: block; }
+    .chat-message-clean.kid & { max-width: 82%; }
+  }
+
+  // ── Avatar badges at top corners ───────────────────────
+  .bubble-avatar {
+    position: absolute;
+    top: -12px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 254, 250, 0.97);
+    box-shadow: 0 2px 8px rgba(49, 55, 54, 0.14);
+    background: #fff;
+    overflow: hidden;
+    z-index: 2;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    &.ai-badge {
+      left: 6px;
+      padding: 2px;
+      background: rgba(255, 254, 250, 0.97);
+    }
+
+    &.kid-badge {
+      right: 6px;
+      left: auto;
+      img { object-fit: cover; }
+    }
+  }
+
+  // ── Bubble surfaces ────────────────────────────────────
+  .bubble.clean-bubble {
+    display: block;
+    border-radius: 20px;
+    background: rgba(255, 255, 252, 0.88);
+    border: 1px solid rgba(231, 203, 170, 0.86);
+    box-shadow: 0 10px 26px rgba(49, 55, 54, 0.055);
+    overflow: visible;
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.55;
+      letter-spacing: 0.4px;
+      color: #263a3e;
+    }
+  }
+
+  // AI bubble: full width, left teal border, top padding for avatar
+  .chat-message-clean.ai .bubble.clean-bubble {
+    width: 100%;
+    padding: 22px 18px 14px 18px;
+    margin-top: 14px;
+    border-left: 4px solid v.$teal-primary;
+    border-radius: 6px 20px 20px 6px;
+    background: rgba(255, 254, 250, 0.96);
+  }
+
+  // Kid (user) bubble: right-aligned, warm background
+  .chat-message-clean.kid .bubble.clean-bubble {
+    display: inline-block;
+    padding: 22px 16px 14px 16px;
+    margin-top: 14px;
+    background: rgba(248, 239, 225, 0.72);
+    border-color: rgba(234, 203, 171, 0.92);
+    border-radius: 18px 18px 6px 18px;
+  }
+
+  // Blocked / safe-filter message
+  .chat-message-clean.blocked .bubble.clean-bubble {
+    background: rgba(255, 248, 242, 0.92);
+    border-color: rgba(210, 160, 120, 0.5);
+
+    p { color: #7a4e28; }
+  }
+
+  // Loading state
+  .chat-message-clean.loading .bubble.clean-bubble {
+    opacity: 0.7;
+  }
+
+  // ── Timestamp ──────────────────────────────────────────
+  .message-meta {
+    margin-top: 6px;
+
+    time {
+      font-size: 11px;
+      font-weight: 800;
+      color: #64777c;
+    }
+  }
+
+  // ── Date divider ───────────────────────────────────────
+  .chat-date-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 4px 0;
+    color: var(--app-muted);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    &::before,
+    &::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--sand-line);
+    }
+  }
+}
+
+// ── Hidden utility ─────────────────────────────────────────
+.is-hidden {
+  display: none !important;  // Used by JS toggles — must win over display rules
+}

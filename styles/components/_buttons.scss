@@ -1,0 +1,180 @@
+// ============================================================
+// components/_buttons.scss
+// Primary, secondary, and icon button styles
+// ============================================================
+
+@use '../abstracts/variables' as v;
+
+// ── Primary button ─────────────────────────────────────────
+html[data-theme="curio-sand-light"] .primary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: v.$teal-darker;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  border: none;
+  cursor: pointer;
+  transition: background 0.16s, transform 0.1s;
+
+  &:hover  { background: v.$teal-hover; }
+  &:active { background: v.$teal-pressed; transform: scale(0.98); }
+
+  // Arrow icon inside splash Get Started
+  i::after {
+    content: '›';
+    font-style: normal;
+    font-size: 18px;
+    line-height: 1;
+  }
+}
+
+// ── Secondary button ───────────────────────────────────────
+html[data-theme="curio-sand-light"] .secondary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: transparent;
+  color: v.$teal-primary;
+  font-size: 14px;
+  font-weight: 750;
+  border: 1px solid rgba(0, 143, 136, 0.38);
+  cursor: pointer;
+  transition: background 0.16s, border-color 0.16s;
+
+  &:hover {
+    background: rgba(0, 143, 136, 0.06);
+    border-color: rgba(0, 143, 136, 0.6);
+  }
+}
+
+// ── Upgrade plan button (prominent teal filled) ─────────────
+html[data-theme="curio-sand-light"] .upgrade-plan-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: v.$teal-primary;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background 0.16s;
+
+  &:hover { background: v.$teal-deep; }
+}
+
+// ── Text link buttons ──────────────────────────────────────
+html[data-theme="curio-sand-light"] {
+  .register-kid-link,
+  .already-registered-link {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 750;
+    color: v.$teal-primary;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+// ── Tool buttons (chat composer, header controls) ──────────
+html[data-theme="curio-sand-light"] .tool-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid rgba(102, 143, 150, 0.45);
+  color: v.$teal-primary;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
+  &:hover { background: rgba(0, 143, 136, 0.06); }
+
+  // Send button — filled teal
+  &.send {
+    background: v.$teal-primary;
+    border-color: v.$teal-primary;
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(0, 116, 111, 0.18);
+
+    svg { stroke: #fff; }
+    &:hover { background: v.$teal-deep; }
+  }
+
+  // Mic / image upload — when in extras panel
+  &.extra-btn {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(0, 143, 136, 0.30);
+    box-shadow: 0 3px 8px rgba(0, 143, 136, 0.10);
+  }
+}
+
+// ── Composer + toggle button ───────────────────────────────
+html[data-theme="curio-sand-light"] .tool-btn.composer-plus {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 143, 136, 0.38);
+  box-shadow: 0 4px 10px rgba(0, 143, 136, 0.10);
+  transition: transform 0.22s ease, background 0.18s;
+
+  &.is-open {
+    transform: rotate(45deg);
+    background: v.$teal-primary;
+    color: #fff;
+  }
+}
+
+// ── Header control buttons (pin, pause etc) ────────────────
+html[data-theme="curio-sand-light"] .chat-level-pin,
+html[data-theme="curio-sand-light"] .pause-chat-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  padding: 5px;
+  border: 1px solid #b8cfca;
+  border-radius: 50%;
+  background: #f5f8f4;
+
+  img { width: 14px; height: 14px; opacity: 0.72; }
+}

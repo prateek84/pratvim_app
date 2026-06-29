@@ -1,0 +1,41 @@
+// ============================================================
+// main.scss — Pratvim stylesheet orchestrator
+//
+// Load order matters for cascade:
+//   1. abstracts (no output — helpers only)
+//   2. base      (reset + typography)
+//   3. layout    (app shell + header)
+//   4. components (buttons, cards, modals, composer, messages)
+//   5. pages     (screen-specific styles)
+//   6. themes    (skin / colour overrides)
+// ============================================================
+
+// ── 1. Abstracts ───────────────────────────────────────────
+@use 'abstracts/variables';   // :root CSS custom properties
+@use 'abstracts/mixins';      // SCSS helpers (no CSS output)
+
+// ── 2. Base ────────────────────────────────────────────────
+@use 'base/reset';
+@use 'base/typography';
+
+// ── 3. Layout ──────────────────────────────────────────────
+@use 'layout/app-shell';
+@use 'layout/header';
+
+// ── 4. Components ──────────────────────────────────────────
+@use 'components/buttons';
+@use 'components/cards';
+@use 'components/modal';
+@use 'components/composer';
+@use 'components/chat-messages';
+
+// ── 5. Pages ───────────────────────────────────────────────
+@use 'pages/splash';
+@use 'pages/auth';
+@use 'pages/chat';
+@use 'pages/parent-home';
+@use 'pages/onboarding';
+@use 'pages/info';
+
+// ── 6. Themes ──────────────────────────────────────────────
+@use 'themes/curio-sand-light';

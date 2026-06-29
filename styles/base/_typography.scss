@@ -1,0 +1,102 @@
+// ============================================================
+// base/_typography.scss
+// Global heading, body, and font rules
+// ============================================================
+
+@use '../abstracts/variables' as v;
+
+// ── Font face ──────────────────────────────────────────────
+@font-face {
+  font-family: 'Pratvim';
+  src: url('../pratvim-font.woff2') format('woff2');
+  font-display: swap;
+}
+
+// ── Global heading scale ───────────────────────────────────
+h1 {
+  font-size: clamp(26px, 5vw, 34px);
+  font-weight: 800;
+  line-height: 1.08;
+  color: var(--ink);
+}
+
+h2 {
+  font-size: clamp(22px, 4.5vw, 29px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: 750;
+  color: var(--ink);
+}
+
+// ── App-screen type scale ──────────────────────────────────
+html[data-theme="curio-sand-light"] {
+  // Screen titles
+  .register-panel h2,
+  .login-panel h2,
+  .onboarding-card h2,
+  .welcome-panel h2,
+  .parent-card h2 {
+    font-size: 29px;
+    font-weight: 800;
+    font-family: Georgia, 'Times New Roman', serif;
+    color: var(--atlas-ink);
+    line-height: 1.08;
+    letter-spacing: 0;
+    margin: 0 0 8px;
+  }
+
+  // Supporting body copy
+  .register-panel p,
+  .login-panel p,
+  .onboarding-card p,
+  .parent-card p {
+    font-size: 15px;
+    font-weight: 650;
+    color: #606a6c;
+    line-height: 1.48;
+    margin: 6px 0 0;
+  }
+
+  // Step / screen labels
+  .step-label {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--screen-accent-soft);
+    margin: 0 0 4px;
+  }
+
+  // Links inside copy
+  .copy-link {
+    color: var(--app-teal);
+    font-weight: 750;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  // Form field labels
+  .form-label,
+  .mini-label {
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--app-muted);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  // Tagline / subtitle
+  .splash-tagline {
+    font-size: 13px;
+    font-weight: 700;
+    color: #5d8a90;
+    letter-spacing: 0.01em;
+  }
+}

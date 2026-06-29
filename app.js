@@ -136,7 +136,7 @@ const parentOnboardingSlides = [
     visualType: "chat"
   },
   {
-    title: "Stay informed",
+    title: "Secure parent access",
    // text: "Reports, screen time & safety alerts — all in one place.",
     features: ["Kid reports", "Safety alerts"],
     visualType: "reports"

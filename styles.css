@@ -490,7 +490,7 @@ body {
   min-height: 100vh;
   overflow: hidden;
   color: var(--piku-ink);
-  font-family: "Arial Rounded MT Bold", "Nunito", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Nunito Sans", Arial, sans-serif;
   background: radial-gradient(circle at 15% 12%, rgba(255, 255, 255, 0.82), transparent 18rem), radial-gradient(circle at 86% 18%, rgba(220, 210, 250, 0.72), transparent 16rem), radial-gradient(circle at 72% 84%, rgba(244, 237, 255, 0.78), transparent 18rem), linear-gradient(135deg, #eee9ff 0%, #f7f3ff 50%, #e9e2fb 100%);
 }
 
@@ -1013,6 +1013,7 @@ img.kid-picture.medium {
 
 .screen-parent-register .register-panel p {
   font-size: 12px;
+  margin : 0;
 }
 
 .screen-parent-register .register-panel .info-hint-box {
@@ -1070,7 +1071,7 @@ img.kid-picture.medium {
 }
 
 .register-panel p {
-  margin: 0;
+  margin: 40px 0;
   color: #606a6c;
   font-size: 14px;
   font-weight: 650;
@@ -3596,7 +3597,7 @@ img.kid-picture.medium {
 
 .splash-center h2, .onboarding-card h2, .login-panel h2, .register-panel h2, .welcome-panel h2, .parent-card h2, .chat-feature-summary h2, .analytics-hero strong, .spec-panel h1 {
   color: var(--piku-ink);
-  font-family: "Arial Rounded MT Bold", "Nunito", Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: "Nunito Sans", Arial, sans-serif;
   font-weight: 950;
   letter-spacing: 0;
 }
@@ -3921,7 +3922,7 @@ html[data-theme="curio-sand-light"] {
 
 html[data-theme="curio-sand-light"] body {
   color: var(--atlas-ink);
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Nunito Sans", Arial, sans-serif;
   background: linear-gradient(145deg, #fbfaf5 0%, #f8efe1 58%, #f3e7d3 100%);
   overflow: hidden;
 }
@@ -5167,7 +5168,7 @@ html[data-theme="curio-sand-light"] .safe-bubble.parent {
 }
 
 html[data-theme="curio-sand-light"] body, html[data-theme="curio-sand-light"] button, html[data-theme="curio-sand-light"] input, html[data-theme="curio-sand-light"] select, html[data-theme="curio-sand-light"] textarea, html[data-theme="curio-sand-light"] .spec-panel h1, html[data-theme="curio-sand-light"] .splash-center h2, html[data-theme="curio-sand-light"] .onboarding-card h2, html[data-theme="curio-sand-light"] .login-panel h2, html[data-theme="curio-sand-light"] .welcome-panel h2, html[data-theme="curio-sand-light"] .parent-card h2, html[data-theme="curio-sand-light"] .register-panel h2, html[data-theme="curio-sand-light"] .chat-feature-summary h2, html[data-theme="curio-sand-light"] .section-title h3, html[data-theme="curio-sand-light"] .category-title strong {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Nunito Sans", Arial, sans-serif;
   letter-spacing: 0;
 }
 
@@ -5502,7 +5503,7 @@ html[data-theme="curio-sand-light"] .internal-brand img {
 }
 
 html[data-theme="curio-sand-light"] .internal-brand strong {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Nunito Sans", Arial, sans-serif;
   font-size: 16px;
   font-weight: 800;
 }
@@ -5582,7 +5583,7 @@ html[data-theme="curio-sand-light"] .login-intro h2 {
 }
 
 html[data-theme="curio-sand-light"] .login-intro p {
-  margin-top: 8px;
+  margin : 40px 0;
   font-size: 14px;
 }
 
@@ -7017,7 +7018,7 @@ html[data-theme="curio-sand-light"] :is( .primary-btn, .secondary-btn, .danger-b
   background: #fffefa;
   color: #527b83;
   box-shadow: none;
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Nunito Sans", Arial, sans-serif;
   font-size: 14px;
   font-weight: 850;
   line-height: 1.2;
@@ -7121,7 +7122,7 @@ html[data-theme="curio-sand-light"] :is( .primary-btn, .secondary-btn, .danger-b
 }
 
 html[data-theme="curio-sand-light"] body, html[data-theme="curio-sand-light"] body * {
-  font-family: "Nunito Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Nunito Sans", Arial, sans-serif;
   letter-spacing: 0;
 }
 
@@ -7593,13 +7594,6 @@ html[data-theme="curio-sand-light"] .parent-register-intro h2 {
   color: #27383b;
   font-size: 28px;
   line-height: 1.12;
-}
-
-html[data-theme="curio-sand-light"] .parent-register-intro p {
-  margin-top: 8px;
-  color: #5f6d70;
-  font-size: 13px;
-  line-height: 1.45;
 }
 
 html[data-theme="curio-sand-light"] .screen-parent-register .form-stack {
@@ -11356,23 +11350,23 @@ html[data-theme="curio-sand-light"] .splash-hero-stage::before {
 }
 
 html[data-theme="curio-sand-light"] #phoneDevice#phoneDevice button.primary-btn {
-  border-color: #00746f;
-  background: #00746f;
+  border-color: #628b93;
+  background: #628b93;
   color: #fff;
   letter-spacing: 1px;
   box-shadow: 0 9px 20px rgba(0, 116, 111, 0.2);
 }
 
 html[data-theme="curio-sand-light"] #phoneDevice#phoneDevice button.primary-btn:hover {
-  border-color: #00746f;
-  background: #00746f;
+  border-color: #537a82;
+  background: #537a82;
   color: #fff;
   box-shadow: 0 10px 22px rgba(0, 116, 111, 0.25);
 }
 
 html[data-theme="curio-sand-light"] #phoneDevice#phoneDevice button.primary-btn:active, html[data-theme="curio-sand-light"] #phoneDevice#phoneDevice button.primary-btn.is-clicked {
-  border-color: #00645f;
-  background: #00645f;
+  border-color: #45676e;
+  background: #45676e;
   color: #fff;
   box-shadow: inset 0 2px 5px rgba(20, 61, 60, 0.24), 0 5px 12px rgba(0, 100, 95, 0.18);
 }
@@ -11385,13 +11379,13 @@ html[data-theme="curio-sand-light"] #phoneDevice#phoneDevice button.primary-btn:
 }
 
 html[data-theme="curio-sand-light"] #phoneDevice#phoneDevice#phoneDevice button.primary-btn:hover {
-  border-color: #00746f;
-  background: #00746f;
+  border-color: #537a82;
+  background: #537a82;
 }
 
 html[data-theme="curio-sand-light"] #phoneDevice#phoneDevice#phoneDevice button.primary-btn:active, html[data-theme="curio-sand-light"] #phoneDevice#phoneDevice#phoneDevice button.primary-btn.is-clicked {
-  border-color: #00645f;
-  background: #00645f;
+    border-color: #45676e;
+  background: #45676e;
 }
 
 html[data-theme="curio-sand-light"] #paymentModal .payment-back-button {
@@ -12445,12 +12439,6 @@ html[data-theme="curio-sand-light"] .app-screen:not(.screen-splash):not(.screen-
 
 html[data-theme="curio-sand-light"] .screen-parent-register img.internal-screen-logo, html[data-theme="curio-sand-light"] .screen-parent-email-confirm img.email-confirm-logo {
   width: 150px !Important;
-  height: auto;
-}
-
-html[data-theme="curio-sand-light"] body .screen-parent-register .branded-top .brand-lock .internal-screen-logo,
-html[data-theme="curio-sand-light"] body .screen-parent-email-confirm   .branded-top .brand-lock .email-confirm-logo {
-  width: 150px;
   height: auto;
 }
 
@@ -13959,10 +13947,10 @@ html[data-theme="curio-sand-light"][data-device-preset="ipad-landscape"] .screen
 }
 
 :is( .minimal-top, .app-topbar, .chat-header, .parent-app-header, .info-header, html[data-theme="curio-sand-light"] .minimal-top, html[data-theme="curio-sand-light"] .app-topbar, html[data-theme="curio-sand-light"] .chat-header, html[data-theme="curio-sand-light"] .parent-app-header, html[data-theme="curio-sand-light"] .info-header ) {
-  background: rgba(255, 253, 248, 0.86);
-  border-bottom: 1px solid var(--pratvim-soft-line);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: transparent;
+  border-bottom: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 :is( .composer, .chat-composer, .bottom-nav, .parent-bottom-nav, .tab-bar, .navigation-bar ) {
@@ -16571,15 +16559,15 @@ html[data-theme="curio-sand-light"] .secondary-btn, html[data-theme="curio-sand-
   min-height: unset;
   height: auto;
   margin-inline: 0;
-  padding: 4px 0;
-  border: none;
-  border-radius: 0;
-  background: transparent;
-  color: #2d7d87;
+  padding: 10px;
+  border: 1px solid #dde8e7;
+  border-radius: 999px;
+  background: #dde8e7;
+  color: #24323a;
   font-size: 13px;
   font-weight: 700;
   line-height: 1.4;
-  letter-spacing: 0;
+  letter-spacing: 1px;
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: rgba(45, 125, 135, 0.4);
@@ -16593,9 +16581,7 @@ html[data-theme="curio-sand-light"] .secondary-btn, html[data-theme="curio-sand-
 
 html[data-theme="curio-sand-light"] .secondary-btn:hover, html[data-theme="curio-sand-light"] #phoneDevice .secondary-btn:hover {
   background: transparent;
-  border: none;
-  box-shadow: none;
-  text-decoration-color: rgba(45, 125, 135, 0.9);
+  text-decoration-color: rgba(98, 139, 147, 0.08);
   opacity: 1;
 }
 
@@ -18872,7 +18858,7 @@ html[data-theme="curio-sand-light"] .screen-login .login-intro {
 
 html[data-theme="curio-sand-light"] .unified-app-header,
 html[data-theme="curio-sand-light"] .chat-top-line.unified-app-header {
-  background: rgba(255,253,248,0.97);
+  background: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -20025,9 +20011,9 @@ html[data-theme="curio-sand-light"] .screen-chat .bubble-avatar {
 }
 
 html[data-theme="curio-sand-light"] :is(.unified-app-header, .minimal-top, .app-topbar, .chat-top-line) {
-  background: rgba(255, 253, 248, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
 html[data-theme="curio-sand-light"] .register-kid-link {
@@ -20089,11 +20075,11 @@ html[data-theme="curio-sand-light"] :is(
   height: 42px;
   min-height: 42px;
   padding: 4px 10px;
-  background: rgba(255, 252, 245, 0.92);
-  border: 1px solid rgba(200, 195, 182, 0.45);
-  box-shadow: 0 2px 6px rgba(60, 70, 60, 0.06);
-  backdrop-filter: blur(8px);
-  border-radius: 999px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  border-radius: 0;
   gap: 6px;
 }
 
@@ -20194,15 +20180,12 @@ html[data-theme="curio-sand-light"] :is(
   position: sticky;
   top: 0;
   z-index: 120;
-  background: rgba(255, 253, 248, 0.90);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(200, 195, 182, 0.35);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
   border-radius: 0;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  box-shadow: 0 1px 8px rgba(60, 70, 60, 0.06);
+  box-shadow: none;
 }
 
 html[data-theme="curio-sand-light"] .unified-app-header,
@@ -20280,20 +20263,17 @@ html[data-theme="curio-sand-light"] .unified-app-header {
   position: sticky;
   top: 0;
   z-index: 150;
-  background: rgba(255, 253, 248, 0.93);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border: none;
-  border-bottom: 1px solid rgba(195, 188, 172, 0.40);
-  border-radius: 0;
-  box-shadow: 0 1px 10px rgba(50, 60, 50, 0.07);
+  box-shadow: none;
   padding: 10px 16px;
   min-height: 52px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: -16px -16px 12px;
-  width: calc(100% + 32px);
+  margin: 0 0 12px;
 }
 
 html[data-theme="curio-sand-light"] .parent-register-terms {
@@ -20698,7 +20678,6 @@ html[data-theme="curio-sand-light"] .app-screen:not(.screen-splash) :is(
   .support-page h1
 ) {
   font-size: clamp(24px, 6vw, 30px);
-  background-image: linear-gradient(180deg, rgba(255, 253, 248, 0.94) 0%, rgba(251, 250, 245, 0.94) 58%, rgba(213, 234, 230, 0.8) 100%);
   }
 
 html[data-theme="curio-sand-light"] :is(.internal-brand img, .brand-lock img, img.internal-screen-logo) {
@@ -20751,10 +20730,6 @@ html[data-theme="curio-sand-light"] .screen-parent-register .register-panel > .s
   margin-bottom: 0;
   }
 
-html[data-theme="curio-sand-light"] .screen-parent-email-confirm .register-panel,
-html[data-theme="curio-sand-light"] .screen-parent-details .register-panel {
-  padding-top: clamp(22px, 5vh, 48px);
-  }
 
 html[data-theme="curio-sand-light"] .parent-pin-setup {
   display: grid;
@@ -20940,6 +20915,12 @@ html[data-theme="curio-sand-light"] .branded-top .internal-screen-logo.wordmark-
   max-width: 140px;
 }
 
+html[data-theme="curio-sand-light"] .screen-parent-email-confirm .branded-top .internal-screen-logo.wordmark-logo,
+html[data-theme="curio-sand-light"] .screen-parent-details .branded-top .internal-screen-logo.wordmark-logo {
+  width: 150px !important;
+  height: auto !important;
+}
+
 html[data-theme="curio-sand-light"] .login-topbar .internal-screen-logo.wordmark-logo {
   flex: 1;
   height: 26px;
@@ -21034,14 +21015,586 @@ html[data-theme="curio-sand-light"] .splash-question-card strong {
    Inner screen background — applied to every app-screen
    except splash (has its own wave image) and chat (transparent)
    ============================================================ */
+html[data-theme="curio-sand-light"] .app-screen:not(.screen-splash) {
+  background:
+    linear-gradient(180deg, rgba(255,253,248,0.94) 0%, rgba(251,250,245,0.94) 58%, rgba(213,234,230,0.80) 100%),
+    #fbfaf5;
+}
+/* ══════════════════════════════════════════════════════════════
+   PRATVIM FINAL PATCH — enforces all visual requirements
+   ══════════════════════════════════════════════════════════════ */
+
+/* 1. Gradient on ALL inner screens */
 html[data-theme="curio-sand-light"] .app-screen:not(.screen-splash):not(.screen-chat) {
   background:
-    linear-gradient(
-      180deg,
-      rgba(255, 253, 248, 0.94) 0%,
-      rgba(251, 250, 245, 0.94) 58%,
-      rgba(213, 234, 230, 0.80) 100%
-    ),
+    linear-gradient(180deg, rgba(255,253,248,0.94) 0%, rgba(251,250,245,0.94) 58%, rgba(213,234,230,0.80) 100%),
+    #fbfaf5 !important;
+}
+
+/* 2. Global menu gradient */
+html[data-theme="curio-sand-light"] .app-menu-panel {
+  background:
+    linear-gradient(180deg, rgba(255,253,248,0.98) 0%, rgba(251,250,245,0.98) 58%, rgba(213,234,230,0.94) 100%),
+    #fbfaf5 !important;
+  border: none !important;
+}
+
+/* 3. ALL inner screen headers — fully transparent, no border */
+html[data-theme="curio-sand-light"] .app-screen:not(.screen-chat) :is(
+  .minimal-top, .app-topbar, .unified-app-header,
+  .chat-header, .parent-app-header, .login-topbar,
+  .pob-header, .info-header
+) {
+  background: transparent !important;
+  background-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* 4. Pill wrapping around unified-header-left / profile-switch — remove */
+html[data-theme="curio-sand-light"] .app-screen:not(.screen-chat) :is(
+  .unified-header-left,
+  .header-profile-switch,
+  .chat-header-left,
+  .chat-header-right
+) {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  border-radius: 0 !important;
+}
+
+/* 5. Chat screen header — keep a very subtle separator */
+html[data-theme="curio-sand-light"] .screen-chat .chat-top-line {
+  background: rgba(255, 253, 248, 0.94) !important;
+  border-bottom: 1px solid rgba(213, 234, 230, 0.5) !important;
+  box-shadow: none !important;
+}
+
+/* 6. Parent onboarding PIN box — no border/background */
+html[data-theme="curio-sand-light"] .parent-pin-setup {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  margin-top: 16px;
+}
+
+/* 7. Login topbar — transparent */
+html[data-theme="curio-sand-light"] .login-topbar {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 8. Login hamburger button */
+html[data-theme="curio-sand-light"] .login-menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+html[data-theme="curio-sand-light"] .login-menu-btn span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #3d6068;
+  border-radius: 2px;
+}
+html[data-theme="curio-sand-light"] .login-menu-btn span:nth-child(2) {
+  width: 13px;
+  align-self: flex-start;
+}
+
+/* 9. Composer — send button on the right */
+html[data-theme="curio-sand-light"] .composer {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 12px 12px !important;
+}
+html[data-theme="curio-sand-light"] .composer-plus-wrap {
+  flex: 0 0 auto !important;
+  position: relative;
+}
+html[data-theme="curio-sand-light"] .composer-field {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  display: flex !important;
+}
+html[data-theme="curio-sand-light"] .composer-field input {
+  width: 100% !important;
+  border-radius: 999px !important;
+  padding: 10px 16px !important;
+}
+html[data-theme="curio-sand-light"] .composer .tool-btn.send {
+  flex: 0 0 auto !important;
+  order: 10 !important;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  border-radius: 50% !important;
+  background: #008f88 !important;
+  border: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+html[data-theme="curio-sand-light"] .composer .tool-btn.send svg {
+  width: 18px !important;
+  height: 18px !important;
+  fill: #fff !important;
+  stroke: none !important;
+}
+
+/* 10. email-confirm-logo hidden */
+html[data-theme="curio-sand-light"] .email-confirm-logo {
+  display: none !important;
+}
+
+/* 11. Unified screen titles — consistent */
+html[data-theme="curio-sand-light"] .app-screen:not(.screen-splash) :is(
+  .login-intro h2, .parent-register-intro h2, .email-confirm-panel h2,
+  .parent-details-intro h2, .pob-card h2, .kid-register-intro h2
+) {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: #27383b !important;
+  margin: 20px 0 10px !important;
+  background: none !important;
+  background-image: none !important;
+  border: none !important;
+  text-align: left;
+}
+
+html[data-theme="curio-sand-light"] .screen-parent-onboarding .onboarding-card h2#parentOnboardingTitle{
+  text-align: center !important;
+
+}
+
+/* ============================================================
+   Request correction layer - 2026-06-29
+   Keeps the cleaned UI, fixes current highlighted regressions.
+   ============================================================ */
+html[data-theme="curio-sand-light"] {
+  --pratvim-inner-bg:
+    linear-gradient(180deg, rgba(255,253,248,0.94) 0%, rgba(251,250,245,0.94) 58%, rgba(213,234,230,0.80) 100%),
     #fbfaf5;
-  background-attachment: local;
+  --pratvim-action: #00847d;
+  --pratvim-ink: #1e363b;
+  --pratvim-muted: #5e7b82;
+  --pratvim-header-icon: 38px;
+}
+
+html[data-theme="curio-sand-light"] .app-screen:not(.screen-splash) {
+  background: var(--pratvim-inner-bg) !important;
+}
+
+html[data-theme="curio-sand-light"] .app-screen:not(.screen-splash) :is(
+  .minimal-top,
+  .app-topbar,
+  .unified-app-header,
+  .chat-header,
+  .chat-top-line,
+  .parent-app-header,
+  .login-topbar,
+  .pob-header,
+  .info-header
+) {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html[data-theme="curio-sand-light"] .app-screen:not(.screen-splash) :is(
+  .unified-header-left,
+  .chat-header-left,
+  .chat-header-right,
+  .header-profile-switch
+) {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="curio-sand-light"] :is(.unified-app-header, .chat-top-line) {
+  min-height: 48px !important;
+  padding: 8px clamp(18px, 5vw, 24px) 6px !important;
+  align-items: center !important;
+}
+
+html[data-theme="curio-sand-light"] :is(.unified-app-header, .chat-top-line) .unified-header-left {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] :is(.unified-app-header, .chat-top-line) :is(
+  .app-menu-trigger,
+  .chat-history-button,
+  .internal-brand,
+  .brand-lock,
+  .header-role-button,
+  .parent-profile-trigger,
+  .static-profile-trigger,
+  .avatar-trigger
+) {
+  width: var(--pratvim-header-icon) !important;
+  height: var(--pratvim-header-icon) !important;
+  min-width: var(--pratvim-header-icon) !important;
+  min-height: var(--pratvim-header-icon) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 var(--pratvim-header-icon) !important;
+}
+
+html[data-theme="curio-sand-light"] :is(.unified-app-header, .chat-top-line) :is(
+  .internal-brand img,
+  .internal-screen-logo,
+  .chat-header-brand,
+  .brand-lock img,
+  .header-role-button img,
+  .parent-profile-trigger img,
+  .static-profile-trigger img,
+  .avatar-trigger img
+) {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+
+html[data-theme="curio-sand-light"] :is(.unified-app-header, .chat-top-line) .app-menu-trigger span {
+  width: 16px !important;
+  height: 1.8px !important;
+  margin: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] :is(.unified-app-header, .chat-top-line) .app-menu-trigger {
+  gap: 4px !important;
+  padding: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-top-line {
+  padding-left: clamp(20px, 6vw, 28px) !important;
+  padding-right: clamp(20px, 6vw, 28px) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .chat-header-right {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-parent-email-confirm.is-active {
+  gap: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-parent-email-confirm > header,
+html[data-theme="curio-sand-light"] .screen-parent-details > header,
+html[data-theme="curio-sand-light"] .screen-parent-register > header {
+  margin-bottom: 0 !important;
+  min-height: 46px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-parent-email-confirm .email-confirm-panel {
+  align-self: start !important;
+  padding-top: 10px !important;
+  margin-top: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-setup {
+  width: min(100%, 292px) !important;
+  margin: 10px auto 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  text-align: left !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-copy {
+  display: grid !important;
+  gap: 2px !important;
+  text-align: center !important;
+  margin-bottom: 8px !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-copy strong {
+  color: var(--pratvim-ink) !important;
+  font-size: 15px !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-copy span {
+  color: var(--pratvim-muted) !important;
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-field input {
+  height: 46px !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(0, 132, 125, 0.24) !important;
+  background: rgba(255,255,255,0.82) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.75) !important;
+  letter-spacing: 0.24em !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-home .kid-home-header {
+  margin-bottom: 2px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-home .welcome-panel,
+html[data-theme="curio-sand-light"] .screen-home .chat-feature-summary,
+html[data-theme="curio-sand-light"] .screen-home .home-hero,
+html[data-theme="curio-sand-light"] .screen-home .discover-panel {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding-inline: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-home .welcome-panel::before,
+html[data-theme="curio-sand-light"] .screen-home .welcome-panel::after {
+  content: none !important;
+  display: none !important;
+}
+
+html[data-theme="curio-sand-light"] .chat-history-panel {
+  background: var(--pratvim-inner-bg) !important;
+  border: 0 !important;
+  box-shadow: 0 28px 64px rgba(38, 57, 62, 0.16) !important;
+  padding-top: clamp(18px, 5vh, 28px) !important;
+}
+
+html[data-theme="curio-sand-light"] .chat-history-heading {
+  align-items: flex-start !important;
+  gap: 14px !important;
+}
+
+html[data-theme="curio-sand-light"] .chat-history-logo.chat-history-full-logo {
+  max-width: 146px !important;
+  height: auto !important;
+  margin-bottom: 6px !important;
+  object-fit: contain !important;
+}
+
+html[data-theme="curio-sand-light"] .chat-history-tabs button:not(.is-active) img {
+  opacity: 0.82 !important;
+  filter: none !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-login.kid-pin-active .selected-kid-login > img,
+html[data-theme="curio-sand-light"] .screen-login.kid-pin-active .selected-kid-login::after {
+  display: none !important;
+  content: none !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-login.kid-pin-active .selected-kid-login {
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 8px auto 4px !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer {
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 80 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 9px clamp(18px, 5vw, 24px) max(12px, env(safe-area-inset-bottom)) !important;
+  background: rgba(255, 243, 232, 0.72) !important;
+  border-radius: 30px 30px 0 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer-plus-wrap {
+  position: relative !important;
+  flex: 0 0 48px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer .tool-btn.composer-plus {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  border-radius: 18px !important;
+  background: rgba(255,255,255,0.96) !important;
+  color: var(--pratvim-action) !important;
+  border: 0 !important;
+  box-shadow: 0 14px 26px rgba(43, 71, 72, 0.09) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer .tool-btn.composer-plus svg {
+  width: 19px !important;
+  height: 19px !important;
+  stroke: currentColor !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer-field {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,0.94) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.85), 0 14px 28px rgba(43, 71, 72, 0.07) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer-field input {
+  height: 100% !important;
+  padding: 0 18px !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-size: 14px !important;
+  letter-spacing: 0.4px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer .tool-btn.send {
+  flex: 0 0 48px !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  order: 10 !important;
+  margin-left: 0 !important;
+  border-radius: 50% !important;
+  background: var(--pratvim-action) !important;
+  border: 0 !important;
+  box-shadow: 0 14px 30px rgba(0, 132, 125, 0.22) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer .tool-btn.send svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer-extras {
+  position: absolute !important;
+  left: 2px !important;
+  bottom: 58px !important;
+  z-index: 95 !important;
+  display: grid !important;
+  gap: 8px !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(8px) scale(0.98) !important;
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer-extras.is-open {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateY(0) scale(1) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .composer-extras .extra-btn {
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px !important;
+  min-height: 42px !important;
+  border-radius: 16px !important;
+  background: rgba(255,255,255,0.98) !important;
+  color: var(--pratvim-action) !important;
+  border: 1px solid rgba(0,132,125,0.12) !important;
+  box-shadow: 0 14px 26px rgba(43, 71, 72, 0.12) !important;
+}
+
+html[data-theme="curio-sand-light"] .screen-chat .message-pane {
+  padding-inline: clamp(18px, 5vw, 24px) !important;
+}
+
+/* Parent onboarding PIN step - compact security card */
+html[data-theme="curio-sand-light"] .parent-pin-setup {
+  width: min(100%, 300px) !important;
+  margin: 12px auto 0 !important;
+  padding: 12px 12px 10px !important;
+  background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(255,255,255,0.46)) !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  box-shadow: 0 16px 34px rgba(40, 67, 70, 0.08), inset 0 1px 0 rgba(255,255,255,0.72) !important;
+  text-align: left !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-copy {
+  display: grid !important;
+  grid-template-columns: 34px minmax(0, 1fr) !important;
+  column-gap: 10px !important;
+  row-gap: 1px !important;
+  align-items: center !important;
+  text-align: left !important;
+  margin-bottom: 10px !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-copy::before {
+  content: "";
+  grid-row: 1 / span 2;
+  width: 34px;
+  height: 34px;
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 50% 40%, rgba(255,255,255,0.98) 0 16%, transparent 17%),
+    radial-gradient(circle at 50% 64%, rgba(255,255,255,0.98) 0 23%, transparent 24%),
+    linear-gradient(180deg, rgba(0,132,125,0.19), rgba(0,132,125,0.08));
+  box-shadow: inset 0 0 0 1px rgba(0,132,125,0.14);
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-copy strong {
+  color: var(--pratvim-ink) !important;
+  font-size: 14px !important;
+  line-height: 1.15 !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-copy span {
+  color: var(--pratvim-muted) !important;
+  font-size: 12px !important;
+  line-height: 1.28 !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-field {
+  margin: 0 !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-field > span {
+  margin-left: 4px !important;
+  margin-bottom: 5px !important;
+  color: #526c73 !important;
+  font-size: 10px !important;
+}
+
+html[data-theme="curio-sand-light"] .parent-pin-field input {
+  height: 44px !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(0,132,125,0.24) !important;
+  background: rgba(255,255,255,0.92) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.75) !important;
+  letter-spacing: 0.24em !important;
 }
